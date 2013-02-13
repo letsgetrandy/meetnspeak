@@ -6,6 +6,11 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^$', 'mns.views.index', name='index'),
+    url(r'search/?$', 'mns.views.search', name='search'),
+    url(r'user/?$', 'mns.views.my_profile', name='my-profile'),
+    url(r'user/(?P<userid>\d+)/?$', 'mns.views.user', name='user'),
+    url(r'user/(?P<userid>\d+)/messages/?$', 'mns.views.messages',
+        name='messages'),
     # Examples:
     # url(r'^$', 'mns.views.home', name='home'),
     # url(r'^mns/', include('mns.foo.urls')),

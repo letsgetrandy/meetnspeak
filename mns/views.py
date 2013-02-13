@@ -15,6 +15,22 @@ def index(request):
     return render(request, 'index.html', {})
 
 
+def search(request):
+    return render(request, 'search.html', {})
+
+
+def my_profile(request):
+    return render(request, 'profile.html', {})
+
+
+def user(request, userid):
+    return render(request, 'user.html', {})
+
+
+def messages(request, userid):
+    return render(request, 'messages.html', {})
+
+
 def logout(request):
     auth.logout(request)
     return render(request, 'logout.html', {})
