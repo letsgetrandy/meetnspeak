@@ -40,6 +40,19 @@ footer {
 .split.flip > :first-child {
     float:right;
 }
+@media screen and (max-width:480px) {
+    #wrapper {
+        margin:5px;
+    }
+    .split,
+    .split > * {
+        overflow:visible;
+    }
+    .split > :first-child,
+    .split.flip > :first-child {
+        float:none;
+    }
+}
 </style>
 {% endblock %}
 </head>
