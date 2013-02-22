@@ -100,8 +100,28 @@ main {
 .mapdiv {
     text-align:right;
 }
-label {
+.field {
+    margin:0 0 15px;
+    position:relative;
+    width:280px;
+}
+.field label {
     display:block;
+}
+.field input[type=text],
+.field input[type=password] {
+    font-size:14px;
+    padding:3px;
+    width:100%;
+}
+ul.languages {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+ul.languages li {
+    margin:0;
+    padding:0;
 }
 @media screen and (max-width:480px) {
     .mapdiv {
@@ -129,21 +149,21 @@ label {
 <main>
 <div class="split">
     <div>
-        <div>
+        <div class="field">
             <label>Name</label>
             <input type="text">
         </div>
-        <div>
+        <div class="field">
             <label>Date of Birth</label>
             <input type="text">
         </div>
-        <div>
+        <div class="field">
             <label>Hometown</label>
             <input type="text">
         </div>
 
         <strong>Speaks:</strong>
-        <ul>
+        <ul class="languages">
             <li>English 
                 <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
             </li>
@@ -171,5 +191,3 @@ label {
 <footer>
 </footer>
 {% endblock %}
-
-
