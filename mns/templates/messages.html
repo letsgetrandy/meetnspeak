@@ -1,5 +1,102 @@
 {% extends "base.html" %}
 
-{% block body %}
-<strong>messages</strong>
+{% block styles %}
+{{ block.super }}
+<style>
+header .stuff {
+    color:#fc5;
+    display:none;
+}
+header .stuff::before {
+    border-radius:50%;
+    background:#59c;
+    content:' ';
+    display:inline-block;
+    height:1em;
+    margin-right:10px;
+    width:1em;
+}
+header .other {
+    color:#cc5;
+}
+header .other::before {
+    background:#cc5;
+}
+.head {
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
+.head .content {
+    color:#fff;
+    left:0px;
+    line-height:2em;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+}
+.message {
+    margin:10px;
+    min-height:100px;
+    padding:0 110px;
+    position:relative;
+}
+.message .image {
+    border:1px solid #000;
+    border-radius:50%;
+    box-shadow:0 0 10px #333;
+    height:100px;
+    left:0px;
+    position:absolute;
+    top:0px;
+    width:100px;
+}
+.message.me .image {
+    left:auto;
+    right:0px;
+}
+.message .image img {
+    border-radius:50%;
+    height:100px;
+    width:100px;
+}
+main {
+    padding:10px;
+}
+.mapdiv {
+    text-align:right;
+}
+</style>
 {% endblock %}
+
+{% block body %}
+<header>
+<div class="head">
+    <div class="content">Messages</div>
+</div>
+</header>
+<main>
+<div class="message">
+    <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+</div>
+<div class="message me">
+    <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+    <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat</p>
+</div>
+<div class="message">
+    <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+    <p>non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+<p><a href="/user/">My Profile</a></p>
+<p><a href="/user/4/">User</a></p>
+<p><a href="/user/4/messages">Messages</a></p>
+</main>
+<footer>
+</footer>
+{% endblock %}
+
+

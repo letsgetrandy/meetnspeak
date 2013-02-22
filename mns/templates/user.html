@@ -1,5 +1,143 @@
 {% extends "base.html" %}
 
-{% block body %}
-<strong>user</strong>
+{% block styles %}
+{{ block.super }}
+<style>
+header .stuff {
+    color:#fc5;
+    display:none;
+}
+header .stuff::before {
+    border-radius:50%;
+    background:#59c;
+    content:' ';
+    display:inline-block;
+    height:1em;
+    margin-right:10px;
+    width:1em;
+}
+header .other {
+    color:#cc5;
+}
+header .other::before {
+    background:#cc5;
+}
+.head {
+    border-radius:10px;
+    height:8em;
+    overflow:hidden;
+    position:relative;
+}
+.head .blur {
+    background:url({{ STATIC_URL }}pattern6.jpg);
+    -webkit-filter:blur(15px);
+    -moz-filter:blur(15px);
+    filter:blur(15px);
+    left:0px;
+    min-height:8em;
+    padding:10px;
+    pointer-events:none;
+    position:absolute;
+    top:0px;
+    width:100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.head .content {
+    color:#fff;
+    left:0px;
+    line-height:2em;
+    position:absolute;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+    width:100%;
+}
+.head .image {
+    border:1px solid #000;
+    border-radius:50%;
+    box-shadow:0 0 10px #333;
+    height:100px;
+    left:50%;
+    margin-left:-50px;
+    position:absolute;
+    top:2em;
+    width:100px;
+}
+.head .image img {
+    border-radius:50%;
+    height:100px;
+    width:100px;
+}
+.head .band {
+    background:rgba(0,0,0,.5);
+    border:1px solid #333;
+    border-width:1px 0;
+    bottom:0em;
+    box-shadow:0px 0px 10px #333;
+    font-size:.7em;
+    height:2em;
+    position:absolute;
+    text-align:center;
+    width:100%;
+}
+.head .band .left {
+    float:left;
+    padding:5px;
+    text-align:left;
+}
+.head .band .right {
+    padding:5px;
+    text-align:right;
+}
+main {
+    padding:10px;
+}
+.mapdiv {
+    text-align:right;
+}
+</style>
 {% endblock %}
+
+{% block body %}
+<header>
+<div class="head">
+    <div class="blur">
+    </div>
+    <div class="content">Donald Trump</div>
+    <div class="band">
+        <div class="left">70 years old</div>
+        <div class="right">New York City</div>
+    </div>
+    <div class="image">
+        <img src="{{ STATIC_URL }}trump.jpg">
+    </div>
+</div>
+</header>
+<main>
+<div class="split">
+    <div>
+        <strong>Speaks:</strong>
+        <ul>
+            <li>English <em>Native</em></li>
+            <li>Spanish <em>Fluent</em></li>
+            <li>Italian <em>Intermediate</em></li>
+            <li>French <em>Beginner</em></li>
+        </ul>
+    </div>
+    <div class="mapdiv">
+        <img src="{{ STATIC_URL }}gmap.gif">
+    </div>
+</div>
+<p><a href="/user/">My Profile</a></p>
+<p><a href="/user/4/">User</a></p>
+<p><a href="/user/4/messages">Messages</a></p>
+</main>
+<footer>
+</footer>
+{% endblock %}
+

@@ -1,9 +1,50 @@
 <html>
 <head>
 <title>{% block title% %}title{% endblock %}</title>
+{% block styles %}
+<style>
+body {
+    background:#222;
+    color:#aaa;
+    font-family:sans-serif;
+}
+#wrapper {
+    background:#000;
+    border:1px solid #000;
+    border-radius: 10px 10px 0 0;
+    box-shadow:0px 0px 15px #555;
+    margin:1em;
+}
+header {
+    font-size:1.3em;
+}
+main {
+    background:url({{ STATIC_URL }}black-tile.jpg);
+    border: 1px solid #222;
+    border-width: 1px 0;
+    box-shadow: 0px 0px 10px #333;
+    display:block;
+    min-height:280px;
+}
+footer {
+}
+.split,
+.split > * {
+    overflow:hidden;
+}
+.split > :first-child {
+    float:left;
+}
+.split.flip > :first-child {
+    float:right;
+}
+</style>
+{% endblock %}
 </head>
 
 <body>
+<div id="wrapper">
 {% block body %}{% endblock %}
+</div>
 </body>
 </html>
