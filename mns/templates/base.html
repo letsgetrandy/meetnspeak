@@ -16,6 +16,7 @@ body {
     border-radius: 10px 10px 0 0;
     box-shadow:0px 0px 15px #555;
     margin:1em;
+    min-height:100%;
 }
 header {
     font-size:1.3em;
@@ -55,7 +56,7 @@ footer {
     }
     #sidenav {
         display:block;
-        height:100%;
+        height:90%;
         left:0;
         overflow:scroll;
         padding:10px;
@@ -104,7 +105,10 @@ footer {
     body.navopen {
         height:100%;
         overflow:hidden;
-        width:100%;
+        width:100vw;
+    }
+    .navopen #sidenav {
+        height:100%;
     }
     .navopen #wrapper {
         margin-left:260px;
@@ -161,6 +165,7 @@ footer {
 <script>
 $('#draghandle').click( function(event){
     event.preventDefault();
+    $('#sidenav').scrollTop(0);
     $('body').toggleClass('navopen');
 });
 $('#sidenav a.nav').click( function(event){
