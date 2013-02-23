@@ -94,7 +94,7 @@ footer {
     #sidenav #navsettings .image {background-position:-36px -36px;}
 
     #wrapper {
-        margin:5px;
+        margin:0;
         position:relative;
         -webkit-transition:margin 200ms;
         -moz-transition:margin 200ms;
@@ -144,10 +144,10 @@ footer {
 <body>
 <div id="sidenav">
     <nav>
-    <a id="navsearch" class="nav" href="#"><span class="image"></span><span class="label">Search</span></a>
-    <a id="navprofile" class="nav" href="#"><span class="image"></span><span class="label">Profile</span></a>
-    <a id="navcontacts" class="nav" href="#"><span class="image"></span><span class="label">Contacts</span></a>
-    <a id="navsettings" class="nav" href="#"><span class="image"></span><span class="label">Settings</span></a>
+    <a id="navsearch" class="nav" href="{% url search %}"><span class="image"></span><span class="label">Search</span></a>
+    <a id="navprofile" class="nav" href="{% url profile %}"><span class="image"></span><span class="label">Profile</span></a>
+    <a id="navcontacts" class="nav" href="{% url contacts %}"><span class="image"></span><span class="label">Contacts</span></a>
+    <a id="navsettings" class="nav" href="{% url settings %}"><span class="image"></span><span class="label">Settings</span></a>
     </nav>
     <h3 class="notify_heading">Notifications</h3>
     <ul id="notifications">
@@ -162,6 +162,9 @@ footer {
 $('#draghandle').click( function(event){
     event.preventDefault();
     $('body').toggleClass('navopen');
+});
+$('#sidenav a.nav').click( function(event){
+    $('body').removeClass('navopen');
 });
 </script>
 {% block body %}{% endblock %}

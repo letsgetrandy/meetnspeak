@@ -19,8 +19,12 @@ def search(request):
     return render(request, 'search.html', {})
 
 
-def my_profile(request):
+def profile(request):
     return render(request, 'profile.html', {})
+
+
+def contacts(request):
+    return render(request, 'contacts.html', {})
 
 
 def user(request, userid):
@@ -29,6 +33,10 @@ def user(request, userid):
 
 def messages(request, userid):
     return render(request, 'messages.html', {})
+
+
+def settings(request):
+    return render(request, 'settings.html', {})
 
 
 def logout(request):
