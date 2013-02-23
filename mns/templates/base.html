@@ -44,6 +44,15 @@ footer {
     display:none;
 }
 @media screen and (max-width:640px) {
+    #draghandle {
+        background:url({{ STATIC_URL }}uisprite.png) -72px 0 no-repeat;
+        height:36px;
+        left:5px;
+        position:absolute;
+        top:0;
+        width:36px;
+        z-index:2;
+    }
     #sidenav {
         display:block;
         height:100%;
@@ -72,18 +81,17 @@ footer {
         display:block;
     }
     #sidenav a.nav .image {
-        background:url() 20px center no-repeat;
-        border:1px solid #fff;
+        background:url({{ STATIC_URL }}uisprite.png) 0 0 no-repeat;
         height:36px;
         left:39px;
         position:absolute;
         top:25px;
         width:36px;
     }
-    #sidenav #navsearch   {background-position:0 0;     }
-    #sidenav #navprofile  {background-position:0 -40px; }
-    #sidenav #navcontacts {background-position:0 -80px; }
-    #sidenav #navsettings {background-position:0 -120px;}
+    #sidenav #navsearch   .image {background-position:0 0;     }
+    #sidenav #navprofile  .image {background-position:0 -36px; }
+    #sidenav #navcontacts .image {background-position:-36px 0; }
+    #sidenav #navsettings .image {background-position:-36px -36px;}
 
     #wrapper {
         margin:5px;
@@ -148,6 +156,13 @@ footer {
     </ul>
 </div>
 <div id="wrapper">
+    <a id="draghandle" href="#"></a>
+<script>
+$('#draghandle').click( function(event){
+    event.preventDefault();
+    $('body').toggleClass('navopen');
+});
+</script>
 {% block body %}{% endblock %}
 </div>
 </body>
