@@ -7,12 +7,12 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     url(r'^$', 'mns.views.index', name='index'),
-    url(r'(?i)search/?$', 'mns.views.search', name='search'),
-    url(r'(?i)user/?$', 'mns.views.profile', name='profile'),
-    url(r'(?i)user/contacts/?$', 'mns.views.contacts', name='contacts'),
-    url(r'(?i)user/settings/?$', 'mns.views.settings', name='settings'),
-    url(r'(?i)user/(?P<userid>\d+)/?$', 'mns.views.user', name='user'),
-    url(r'(?i)user/(?P<userid>\d+)/messages/?$', 'mns.views.messages',
+    url(r'(?i)search/$', 'mns.views.search', name='search'),
+    url(r'(?i)user/$', 'mns.views.profile', name='profile'),
+    url(r'(?i)user/contacts/$', 'mns.views.contacts', name='contacts'),
+    url(r'(?i)user/settings/$', 'mns.views.settings', name='settings'),
+    url(r'(?i)user/(?P<userid>\d+)/$', 'mns.views.user', name='user'),
+    url(r'(?i)user/(?P<userid>\d+)/messages/$', 'mns.views.messages',
         name='messages'),
 
     # Examples:

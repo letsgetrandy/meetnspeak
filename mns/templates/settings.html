@@ -3,14 +3,39 @@
 {% block styles %}
 {{ block.super }}
 <style>
+.head {
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
+.head .content {
+    color:#999;
+    left:0px;
+    line-height:2em;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+}
 </style>
 {% endblock %}
 
 {% block body %}
 <header>
+<div class="head">
+    <div class="content">Settings</div>
+</div>
 </header>
 <main>
-<strong>settings</strong>
+<form>
+    <div class="field">
+        <label>Name</label>
+        <input type="text">
+    </div>
+    <div class="field">
+        <label>Name</label>
+        <input type="text">
+    </div>
+</form>
 </main>
 <footer>
 </footer>
