@@ -7,7 +7,7 @@ header .stuff {
     color:#fc5;
     display:none;
 }
-header .stuff::before {
+header .stuff:before {
     border-radius:50%;
     background:#59c;
     content:' ';
@@ -19,7 +19,7 @@ header .stuff::before {
 header .other {
     color:#cc5;
 }
-header .other::before {
+header .other:before {
     background:#cc5;
 }
 .head {
@@ -29,10 +29,7 @@ header .other::before {
     position:relative;
 }
 .head .blur {
-    background:url({{ STATIC_URL }}pattern6.jpg);
-    -webkit-filter:blur(15px);
-    -moz-filter:blur(15px);
-    filter:blur(15px);
+    background:url({{ STATIC_URL }}pattern.jpg);
     left:0px;
     min-height:8em;
     padding:10px;
@@ -183,9 +180,6 @@ ul.languages li {
         <a href="#">update</a>
     </div>
 </div>
-<p><a href="{% url profile %}">My Profile</a></p>
-<p><a href="{% url user 4 %}">User</a></p>
-<p><a href="{% url messages 4 %}">Messages</a></p>
 </main>
 <footer>
 </footer>

@@ -29,10 +29,7 @@ header .other::before {
     position:relative;
 }
 .head .blur {
-    background:url({{ STATIC_URL }}pattern6.jpg);
-    -webkit-filter:blur(15px);
-    -moz-filter:blur(15px);
-    filter:blur(15px);
+    background:url({{ STATIC_URL }}pattern.jpg);
     left:0px;
     min-height:8em;
     padding:10px;
@@ -113,11 +110,21 @@ ul.languages li {
     .mapdiv {
         text-align:center;
     }
+    #messages {
+        color:#ccc;
+        font-weight:100;
+        position:absolute;
+        right:10px;
+        text-decoration:none;
+        top:10px;
+        z-index:2;
+    }
 }
 </style>
 {% endblock %}
 
 {% block body %}
+<a id="messages" href="{% url messages 4 %}">Messages</a>
 <header>
 <div class="head">
     <div class="blur">
@@ -147,9 +154,6 @@ ul.languages li {
         <img src="{{ STATIC_URL }}gmap.gif">
     </div>
 </div>
-<p><a href="{% url profile %}">My Profile</a></p>
-<p><a href="{% url user 4 %}">User</a></p>
-<p><a href="{% url messages 4 %}">Messages</a></p>
 </main>
 <footer>
 </footer>
