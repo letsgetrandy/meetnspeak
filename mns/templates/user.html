@@ -129,10 +129,10 @@ ul.languages li {
 <div class="head">
     <div class="blur">
     </div>
-    <div class="content">Donald Trump</div>
+    <div class="content">{{ profile.name }}</div>
     <div class="band">
-        <div class="left">70 years old</div>
-        <div class="right">New York City</div>
+        <div class="left">{{ profile.age }} years old</div>
+        <div class="right">{{ profile.hometown }}</div>
     </div>
     <div class="image">
         <img src="{{ STATIC_URL }}trump.jpg">

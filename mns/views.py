@@ -1,42 +1,60 @@
 #from django.conf import settings
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+#from django.contrib.auth.decorators import login_required
+#from django.http import HttpResponse
 from django.shortcuts import render, redirect
 #from mns.models import APISession
-import json
-import re
+#import json
+#import re
+import api_v1
+#import sys
 
 
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    context = {}
+
+    # TODO: move this to the login handler
+    api = api_v1.MNSAPI()
+    request.session['notifications'] = api.get_notifications(1)
+
+    return render(request, 'index.html', context)
 
 
 def search(request):
-    return render(request, 'search.html', {})
+    context = {}
+    return render(request, 'search.html', context)
 
 
 def profile(request):
-    return render(request, 'profile.html', {})
+    context = {}
+    return render(request, 'profile.html', context)
 
 
 def contacts(request):
-    return render(request, 'contacts.html', {})
+    context = {}
+    api = api_v1.MNSAPI()
+    context['contacts'] = api.get_contacts(1)
+    return render(request, 'contacts.html', context)
 
 
 def user(request, userid):
-    return render(request, 'user.html', {})
+    context = {}
+    api = api_v1.MNSAPI()
+    context['profile'] = api.get_profile(1)
+    return render(request, 'user.html', context)
 
 
 def messages(request, userid):
-    return render(request, 'messages.html', {})
+    context = {}
+    return render(request, 'messages.html', context)
 
 
 def settings(request):
-    return render(request, 'settings.html', {})
+    context = {}
+    return render(request, 'settings.html', context)
 
 
 def logout(request):

@@ -164,9 +164,9 @@ footer {
     </nav>
     <h3 class="notify_heading">Notifications</h3>
     <ul id="notifications">
-        <li>foo</li>
-        <li>foo</li>
-        <li>foo</li>
+        {% for n in notifications %}
+        <li><a href="">{{ n.text }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 <div id="wrapper">

@@ -12,6 +12,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+APIHOST = str(os.environ.get('APIHOST', ''))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.',
@@ -111,6 +113,11 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'mns.context_processors.request_session',
 )
 
 INSTALLED_APPS = (

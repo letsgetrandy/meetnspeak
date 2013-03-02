@@ -48,10 +48,9 @@
 </header>
 <main>
 <ul id="contacts">
-    <li><a href="{% url user 1 %}">Fred Flintstone</a></li>
-    <li><a href="{% url user 2 %}">Barney Rubble</a></li>
-    <li><a href="{% url user 3 %}">Peter Griffin</a></li>
-    <li><a href="{% url user 4 %}">George Jetson</a></li>
+    {% for c in contacts %}
+    <li><a href="{% url user c.id %}">{{ c.name }}</a></li>
+    {% endfor %}
 </ul>
 </main>
 <footer>
