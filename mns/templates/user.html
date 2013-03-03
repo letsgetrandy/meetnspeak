@@ -144,10 +144,15 @@ ul.languages li {
     <div>
         <strong>Speaks:</strong>
         <ul class="languages">
+            {% for l in profile.languages %}
+            <li>{{ l.name }} <em>{{ l.level }}</em></li>
+            {% endfor %}
+            {% comment %}
             <li>English <em>Native</em></li>
             <li>Spanish <em>Fluent</em></li>
             <li>Italian <em>Intermediate</em></li>
             <li>French <em>Beginner</em></li>
+            {% endcomment %}
         </ul>
     </div>
     <div class="mapdiv">

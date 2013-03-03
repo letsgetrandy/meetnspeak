@@ -5,11 +5,31 @@ import urllib
 #import sys
 
 
-class Notification(object):
+language_name = {
+        'EN': 'English',
+        'FR': 'French',
+        'IT': 'Italian',
+        'RU': 'Russian',
+        'SP': 'Spanish',
+    }
 
-    text = ''
-    target = 0
-    sender = 0
+
+language_level = [
+        'None',
+        'Beginner',      # 1
+        'Beginner',
+        'Intermediate',  # 3
+        'Intermediate',
+        'Advanced',      # 5
+        'Advanced',
+        'Fluent',        # 7
+        'Fluent',
+        'Native',        # 9
+        'Native',
+    ]
+
+
+class Notification(object):
 
     def __init__(self, *args, **kwargs):
         self.text = kwargs['text']
@@ -18,28 +38,32 @@ class Notification(object):
         return
 
 
-class Contact(object):
-
-    id = 0
-    name = ''
+class Contact:
 
     def __init__(self, *args, **kwargs):
         self.id = kwargs['id']
         self.name = kwargs['name']
 
 
-class Profile(object):
+class Message:
 
-    id = 0
-    name = ''
-    age = 0
-    hometown = ''
+    def __init__(self, *args, **kwargs):
+        self.text = kwargs['text']
+
+
+class Profile:
 
     def __init__(self, *args, **kwargs):
         self.id = kwargs['id']
         self.name = kwargs['name']
         self.age = kwargs['age']
         self.hometown = kwargs['hometown']
+        self.languages = []
+        for lang, lev in kwargs['languages'].items():
+            self.languages.append({
+                    'name': language_name[lang],
+                    'level': language_level[lev],
+                })
 
 
 class APIException(Exception):
@@ -106,6 +130,13 @@ class MNSAPI(APIBase):
         result = []
         for c in data['contacts']:
             result.append(Contact(**c))
+        return result
+
+    def get_messages(self, userid):
+        data = self.get('/api/v1/person/%s/messages/' % userid)
+        result = []
+        for m in data['messages']:
+            result.append(Message(**m))
         return result
 
     def get_profile(self, userid):

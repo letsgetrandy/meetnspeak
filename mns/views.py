@@ -49,6 +49,8 @@ def user(request, userid):
 
 def messages(request, userid):
     context = {}
+    api = api_v1.MNSAPI()
+    context['messages'] = api.get_messages(1)
     return render(request, 'messages.html', context)
 
 

@@ -76,6 +76,12 @@ main {
 </div>
 </header>
 <main>
+{% for m in messages %}
+<div class="message">
+    <div>foo</div>
+    <p>{{ m.text }}</p>
+</div>
+{% endfor %}
 <div class="message">
     <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
