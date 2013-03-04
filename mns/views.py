@@ -28,18 +28,28 @@ def login(request):
     if request.method == 'POST':
         email = request.GET.get('email')
         password = request.GET.get('password')
-        if email and password:
+        try:
             api = api_v1.MNSAPI()
             token = api.login(email, password)
             request.session['token'] = token
             context['token'] = token
-        else:
+        except:
             context['error'] = True
     return render(request, 'login.html', context)
 
 
 def signup(request):
     context = {}
+    if request.method == 'POST':
+        email = request.GET.get('email')
+        password = request.GET.get('password')
+        try:
+            api = api_v1.MNSAPI()
+            token = api.signup(email, password)
+            request.session['token'] = token
+            context['token'] = token
+        except:
+            context['error'] = True
     return render(request, 'signup.html', context)
 
 

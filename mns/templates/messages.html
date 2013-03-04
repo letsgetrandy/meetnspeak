@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block title %}Messages{% endblock %}
 {% block styles %}
 {{ block.super }}
 <style>
@@ -75,6 +76,7 @@ main {
     <div class="content">Messages</div>
 </div>
 </header>
+
 <main>
 {% for m in messages %}
 <div class="message">
@@ -98,6 +100,7 @@ main {
     <p>non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </div>
 </main>
+
 <footer>
 </footer>
 {% endblock %}

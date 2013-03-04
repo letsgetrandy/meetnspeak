@@ -31,6 +31,29 @@ main {
 }
 footer {
 }
+.field {
+    margin:0 10px 15px;
+    position:relative;
+}
+.field label {
+    display:block;
+}
+.field input[type=text],
+.field input[type=email],
+.field input[type=password] {
+    font-size:14px;
+    padding:3px;
+    width:100%;
+}
+.field button {
+    border-radius:5px;
+    font-size:14px;
+    padding:3px 12px;
+}
+form ~ .field.alternate {
+    border-top:1px solid #333;
+    margin-top:2em;
+}
 .split,
 .split > * {
     overflow:hidden;

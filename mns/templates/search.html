@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Search{% endblock %}
+
 {% block styles %}
 {{ block.super }}
 <style>
@@ -25,6 +27,7 @@
     <div class="content">Search</div>
 </div>
 </header>
+
 <main>
 <div class="split">
     <div id="map">
@@ -39,6 +42,7 @@
     </div>
 </div>
 </main>
+
 <footer>
 </footer>
 {% endblock %}

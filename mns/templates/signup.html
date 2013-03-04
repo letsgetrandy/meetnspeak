@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Signup{% endblock %}
 
 {% block styles %}
 {{ block.super }}
@@ -56,7 +56,7 @@ ul.languages li {
 {% block body %}
 <header>
 <div class="head">
-    <div class="content">Login</div>
+    <div class="content">Sign up</div>
 </div>
 </header>
 
@@ -75,17 +75,16 @@ ul.languages li {
         <input type="password" name="password">
     </div>
     <div class="field">
-        <button type="submit">Login</button>
+        <button type="submit">Signup</button>
     </div>
 </form>
 
 <div class="field alternate">
-    <p>Not a member yet?</p>
-    <button onclick="location='/signup/';">Sign up</button>
-</div>
+    <p>Already signed up?</p>
+    <button onclick="location='/login/';">Login</button>
+<div class="field">
 </main>
 
 <footer>
 </footer>
 {% endblock %}
-
