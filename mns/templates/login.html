@@ -140,20 +140,24 @@ ul.languages li {
 </div>
 </header>
 <main>
-<div class="split">
-    <div>
-        <strong>Speaks:</strong>
-        <ul class="languages">
-            {% for l in profile.languages %}
-            <li>{{ l.name }} <em>{{ l.level }}</em></li>
-            {% endfor %}
-        </ul>
+<h1>FOO: {{ foo }}</h1>
+{% if error %}
+<p>No user was found with that combination of email and password.</p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <div class="field">
+        <label>Email</label>
+        <input type="email" name="email">
     </div>
-    <div class="mapdiv">
-        <img src="{{ STATIC_URL }}gmap.gif">
+    <div class="field">
+        <label>Password</label>
+        <input type="password" name="password">
     </div>
-</div>
+    <button type="submit">Login</button>
+</form>
 </main>
 <footer>
 </footer>
 {% endblock %}
+

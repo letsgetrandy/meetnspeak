@@ -23,6 +23,26 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+def login(request):
+    context = {}
+    if request.method == 'POST':
+        email = request.GET.get('email')
+        password = request.GET.get('password')
+        if email and password:
+            api = api_v1.MNSAPI()
+            token = api.login(email, password)
+            request.session['token'] = token
+            context['token'] = token
+        else:
+            context['error'] = True
+    return render(request, 'login.html', context)
+
+
+def signup(request):
+    context = {}
+    return render(request, 'signup.html', context)
+
+
 def search(request):
     context = {}
     return render(request, 'search.html', context)

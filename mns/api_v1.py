@@ -79,10 +79,12 @@ class BadLogin(Exception):
 
 
 class APIBase(object):
-    def request(self, endpoint, method='GET', data=None):
+    def request(self, endpoint, method='GET', data=None, head=None):
         headers = {
                 'Accept': 'text/json',
             }
+        if head:
+            headers.update(head)
         conn = httplib.HTTPConnection(settings.APIHOST)
         if data:
             encdata = urllib.urlencode(data)
@@ -109,36 +111,44 @@ class APIBase(object):
             raise APIException(j['error'])
         return j
 
-    def get(self, endpoint, data=None):
-        return self.request(endpoint, data=data)
+    def get(self, endpoint, data=None, head=None):
+        return self.request(endpoint, data=data, head=head)
 
-    def post(self, endpoint, data=None):
-        return self.request(endpoint, method='POST', data=data)
+    def post(self, endpoint, data=None, head=None):
+        return self.request(endpoint, method='POST', data=data, head=head)
 
 
 class MNSAPI(APIBase):
 
+    def signup(self, *args, **kwargs):
+        pass
+
+    def login(self, email, password):
+        form = {'email': email, 'password': password}
+        data = self.post('/api/1.0/login/', data=form)
+        return data['token']
+
     def get_notifications(self, userid):
-        data = self.get('/api/v1/person/%s/notifications/' % userid)
+        data = self.get('/api/1.0/person/%s/notifications/' % userid)
         result = []
         for n in data['notifications']:
             result.append(Notification(**n))
         return result
 
     def get_contacts(self, userid):
-        data = self.get('/api/v1/person/%s/contacts/' % userid)
+        data = self.get('/api/1.0/person/%s/contacts/' % userid)
         result = []
         for c in data['contacts']:
             result.append(Contact(**c))
         return result
 
     def get_messages(self, userid):
-        data = self.get('/api/v1/person/%s/messages/' % userid)
+        data = self.get('/api/1.0/person/%s/messages/' % userid)
         result = []
         for m in data['messages']:
             result.append(Message(**m))
         return result
 
     def get_profile(self, userid):
-        data = self.get('/api/v1/person/%s/profile/' % userid)
+        data = self.get('/api/1.0/person/%s/profile/' % userid)
         return Profile(**data['person'])
