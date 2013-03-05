@@ -1,5 +1,6 @@
 #from django.conf import settings
-from django.contrib import auth
+#from django.contrib import auth
+from django.core.urlresolvers import reverse
 #from django.contrib.auth.decorators import login_required
 #from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -28,15 +29,16 @@ def login(request):
     if request.session.get('token'):
         context['error'] = "already logged in"
     elif request.method == 'POST':
-        email = request.GET.get('email')
-        password = request.GET.get('password')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
         try:
             api = api_v1.MNSAPI()
             token = api.login(email, password)
             request.session['token'] = token
             context['token'] = token
-        except:
-            context['error'] = "No user was found with that combination of username and password."
+            return redirect(reverse('notifications'))
+        except api_v1.AccessDenied as err:
+            context['error'] = str(err)
     return render(request, 'login.html', context)
 
 
@@ -52,6 +54,7 @@ def signup(request):
         token = api.signup(email, password)
         request.session['token'] = token
         context['token'] = token
+        return redirect(reverse('profile'))
         #except:
         #    context['error'] = True
     return render(request, 'signup.html', context)
@@ -63,6 +66,14 @@ def search(request):
         return render(request, 'login.html', context)
     context = {}
     return render(request, 'search.html', context)
+
+
+def notifications(request):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
+    context = {}
+    return render(request, 'notifications.html', context)
 
 
 def profile(request):
@@ -113,5 +124,7 @@ def settings(request):
 
 def logout(request):
     #auth.logout(request)
-    del request.session['token']
-    return render(request, 'logout.html', {})
+    if request.session.get('token'):
+        del request.session['token']
+    return redirect(reverse('login'))
+    #return render(request, 'login.html', {})

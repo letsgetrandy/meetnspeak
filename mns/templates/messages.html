@@ -66,11 +66,21 @@ main {
         height:50px;
         width:50px;
     }
+    #profile {
+        color:#ccc;
+        font-weight:100;
+        position:absolute;
+        right:10px;
+        text-decoration:none;
+        top:10px;
+        z-index:2;
+    }
 }
 </style>
 {% endblock %}
 
 {% block body %}
+<a id="profile" href="{% url user 4 %}">Profile</a>
 <header>
 <div class="head">
     <div class="content">Messages</div>

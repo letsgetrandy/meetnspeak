@@ -66,6 +66,10 @@ class Profile:
                 })
 
 
+class AccessDenied(Exception):
+    pass
+
+
 class APIException(Exception):
     pass
 
@@ -100,14 +104,16 @@ class APIBase(object):
         st = resp.status
         d = resp.read()
         conn.close
-        if st != 200:
-            raise APIException(d)
         j = json.loads(d)
-        if j.get('token_expired'):
+        if st == 401:
+            raise AccessDenied(j['error'])
+        elif st != 200:
+            raise APIException(d)
+        elif j.get('token_expired'):
             raise ExpiredToken(j['error'])
-        if j.get('bad_login'):
+        elif j.get('bad_login'):
             raise BadLogin(j['error'])
-        if not j['success']:
+        elif not j['success']:
             raise APIException(j['error'])
         return j
 

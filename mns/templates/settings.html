@@ -18,10 +18,22 @@
     text-shadow:1px 1px 6px #000;
     top:0px;
 }
+@media screen and (max-width:640px) {
+    #logout {
+        color:#ccc;
+        font-weight:100;
+        position:absolute;
+        right:10px;
+        text-decoration:none;
+        top:10px;
+        z-index:2;
+    }
+}
 </style>
 {% endblock %}
 
 {% block body %}
+<a id="logout" href="{% url logout %}">Logout</a>
 <header>
 <div class="head">
     <div class="content">Settings</div>
@@ -31,14 +43,23 @@
 <main>
 <form>
     <div class="field">
-        <label>Name</label>
-        <input type="text">
+        <label>Update your email address</label>
+        <input type="email" name="email" autocomplete="off">
     </div>
     <div class="field">
-        <label>Name</label>
-        <input type="text">
+        <label>Change your password</label>
+        <input type="password" name="password" autocomplete="off">
     </div>
+
 </form>
+<div class="field">
+    <button>Update</button>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="field">
+    <button>Cancel your account</button>
+</div>
 </main>
 
 <footer>
