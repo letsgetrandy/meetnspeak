@@ -120,8 +120,10 @@ class APIBase(object):
 
 class MNSAPI(APIBase):
 
-    def signup(self, *args, **kwargs):
-        pass
+    def signup(self, email, password):
+        form = {'email': email, 'password': password}
+        data = self.post('/api/1.0/signup/', data=form)
+        return data['token']
 
     def login(self, email, password):
         form = {'email': email, 'password': password}

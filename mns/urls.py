@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     url(r'^$', 'mns.views.index', name='index'),
     url(r'(?i)login/$', 'mns.views.login', name='login'),
+    url(r'(?i)logout/$', 'mns.views.logout', name='logout'),
     url(r'(?i)signup/$', 'mns.views.signup', name='signup'),
     url(r'(?i)search/$', 'mns.views.search', name='search'),
     url(r'(?i)user/$', 'mns.views.profile', name='profile'),

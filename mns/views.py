@@ -25,7 +25,9 @@ def index(request):
 
 def login(request):
     context = {}
-    if request.method == 'POST':
+    if request.session.get('token'):
+        context['error'] = "already logged in"
+    elif request.method == 'POST':
         email = request.GET.get('email')
         password = request.GET.get('password')
         try:
@@ -34,36 +36,47 @@ def login(request):
             request.session['token'] = token
             context['token'] = token
         except:
-            context['error'] = True
+            context['error'] = "No user was found with that combination of username and password."
     return render(request, 'login.html', context)
 
 
 def signup(request):
     context = {}
-    if request.method == 'POST':
-        email = request.GET.get('email')
-        password = request.GET.get('password')
-        try:
-            api = api_v1.MNSAPI()
-            token = api.signup(email, password)
-            request.session['token'] = token
-            context['token'] = token
-        except:
-            context['error'] = True
+    if request.session.get('token'):
+        context['error'] = "already logged in"
+    elif request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        #try:
+        api = api_v1.MNSAPI()
+        token = api.signup(email, password)
+        request.session['token'] = token
+        context['token'] = token
+        #except:
+        #    context['error'] = True
     return render(request, 'signup.html', context)
 
 
 def search(request):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
     context = {}
     return render(request, 'search.html', context)
 
 
 def profile(request):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
     context = {}
     return render(request, 'profile.html', context)
 
 
 def contacts(request):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
     context = {}
     api = api_v1.MNSAPI()
     context['contacts'] = api.get_contacts(1)
@@ -71,6 +84,9 @@ def contacts(request):
 
 
 def user(request, userid):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
     context = {}
     api = api_v1.MNSAPI()
     context['profile'] = api.get_profile(1)
@@ -78,6 +94,9 @@ def user(request, userid):
 
 
 def messages(request, userid):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
     context = {}
     api = api_v1.MNSAPI()
     context['messages'] = api.get_messages(1)
@@ -85,10 +104,14 @@ def messages(request, userid):
 
 
 def settings(request):
+    if not request.session.get('token'):
+        context = {'error': 'login required'}
+        return render(request, 'login.html', context)
     context = {}
     return render(request, 'settings.html', context)
 
 
 def logout(request):
-    auth.logout(request)
+    #auth.logout(request)
+    del request.session['token']
     return render(request, 'logout.html', {})
