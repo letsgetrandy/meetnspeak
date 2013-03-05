@@ -18,18 +18,18 @@
     text-shadow:1px 1px 6px #000;
     top:0px;
 }
-#contacts {
+#notifications {
     color:#666;
     list-style-type:none;
     margin:0;
     padding:0;
 }
-#contacts li {
+#notifications li {
     border-bottom:1px solid #333;
     margin:0;
     padding:0;
 }
-#contacts a {
+#notifications a {
     color:#555;
     display:block;
     font-size:18px;
@@ -47,9 +47,9 @@
 </header>
 
 <main>
-<ul id="contacts">
+<ul id="notifications">
     {% for n in notifications %}
-    <li><a href="#">{{ n.name }}</a></li>
+    <li><a href="#">{{ n.text }}</a></li>
     {% endfor %}
 </ul>
 </main>

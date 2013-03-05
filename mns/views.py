@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 #from django.http import HttpResponse
 from django.shortcuts import render, redirect
 #from mns.models import APISession
+from functools import wraps
 #import json
 #import re
 import api_v1
@@ -14,13 +15,19 @@ import api_v1
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
 
 
+def login_required():
+    def decorator(fn):
+        def inner_decorator(request, *args, **kwargs):
+            if not request.session.get('token'):
+                return redirect(reverse('login'))
+            else:
+                return fn(request, *args, **kwargs)
+        return wraps(fn)(inner_decorator)
+    return decorator
+
+
 def index(request):
     context = {}
-
-    # TODO: move this to the login handler
-    api = api_v1.MNSAPI()
-    request.session['notifications'] = api.get_notifications(1)
-
     return render(request, 'index.html', context)
 
 
@@ -32,10 +39,16 @@ def login(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         try:
+            # get login token
             api = api_v1.MNSAPI()
             token = api.login(email, password)
             request.session['token'] = token
             context['token'] = token
+
+            # get notifications
+            api = api_v1.MNSAPI()
+            request.session['notifications'] = api.get_notifications(1)
+
             return redirect(reverse('notifications'))
         except api_v1.AccessDenied as err:
             context['error'] = str(err)
@@ -50,74 +63,66 @@ def signup(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         #try:
+        # get login token
         api = api_v1.MNSAPI()
         token = api.signup(email, password)
         request.session['token'] = token
         context['token'] = token
+
+        # get notifications
+        api = api_v1.MNSAPI()
+        request.session['notifications'] = api.get_notifications(1)
+
         return redirect(reverse('profile'))
         #except:
         #    context['error'] = True
     return render(request, 'signup.html', context)
 
 
+@login_required()
 def search(request):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     return render(request, 'search.html', context)
 
 
+@login_required()
 def notifications(request):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     return render(request, 'notifications.html', context)
 
 
+@login_required()
 def profile(request):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     return render(request, 'profile.html', context)
 
 
+@login_required()
 def contacts(request):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     api = api_v1.MNSAPI()
     context['contacts'] = api.get_contacts(1)
     return render(request, 'contacts.html', context)
 
 
+@login_required()
 def user(request, userid):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     api = api_v1.MNSAPI()
     context['profile'] = api.get_profile(1)
     return render(request, 'user.html', context)
 
 
+@login_required()
 def messages(request, userid):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     api = api_v1.MNSAPI()
     context['messages'] = api.get_messages(1)
     return render(request, 'messages.html', context)
 
 
+@login_required()
 def settings(request):
-    if not request.session.get('token'):
-        context = {'error': 'login required'}
-        return render(request, 'login.html', context)
     context = {}
     return render(request, 'settings.html', context)
 
