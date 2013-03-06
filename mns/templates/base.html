@@ -38,6 +38,12 @@ footer {
 .field label {
     display:block;
 }
+/*
+.field input[type=radio] + label,
+.field input[type=checkbox] + label {
+    display:inline;
+}
+*/
 .field input[type=text],
 .field input[type=email],
 .field input[type=password] {
@@ -49,6 +55,81 @@ footer {
     border-radius:5px;
     font-size:14px;
     padding:3px 12px;
+}
+.field .switch {
+    background:blue;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-shadow:inset 1px 1px 2px #ccc;
+    display:inline-block;
+    height:26px;
+    margin:4px 0;
+    overflow:hidden;
+    position:relative;
+    width:70px;
+}
+.field .switch input,
+.field .switch input:checked + label {
+    display:none !important;
+}
+.field .switch .indicator {
+    background:#999;
+    display:block;
+    height:100%;
+    pointer-events:none;
+    position:relative;
+    width:100%;
+    -webkit-transition:margin 80ms;
+}
+.field .switch .indicator:before {
+    background:#fff;
+    border:1px solid #333;
+    border-radius:5px;
+    content:' ';
+    display;block;
+    height:100%;
+    left:0;
+    pointer-events:none;
+    position:absolute;
+    top:0;
+    width:50%;
+
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    border:1px solid #fff;
+    border-radius:5px;
+    padding:8px;
+    background-origin:content-box, content-box, padding-box;
+    background-repeat:no-repeat;
+    background-size:100% 2px, 100% 2px, auto;
+    background-position:0 33%, 0 67%;
+    background-image:
+        -webkit-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        -webkit-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        -webkit-linear-gradient(#eee, #ccc);
+    background-image:
+        -moz-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        -moz-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        -moz-linear-gradient(#eee, #ccc);
+    background-image:
+        -ms-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        -ms-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        -ms-linear-gradient(#eee, #ccc);
+    background-image:
+        linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
+        linear-gradient(#eee, #ccc);
+}
+.field .switch input.on:checked ~ .indicator {
+    margin-left:35px;
+}
+.field .switch label {
+    height:100%;
+    left:0;
+    position:absolute;
+    top:0;
+    width:100%;
 }
 form ~ .field.alternate {
     border-top:1px solid #333;
@@ -297,5 +378,6 @@ $('#sidenav a.nav').click( function(event){
 
 })();
 </script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
