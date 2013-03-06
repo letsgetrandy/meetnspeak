@@ -47,7 +47,7 @@ def login(request):
 
             # get notifications
             api = api_v1.MNSAPI()
-            request.session['notifications'] = api.get_notifications(1, token)
+            request.session['notifications'] = api.get_notifications(token)
 
             return redirect(reverse('notifications'))
         except api_v1.AccessDenied as err:
@@ -73,7 +73,7 @@ def signup(request):
 
         # get notifications
         api = api_v1.MNSAPI()
-        request.session['notifications'] = api.get_notifications(1, token)
+        request.session['notifications'] = api.get_notifications(token)
 
         return redirect(reverse('profile'))
         #except:
@@ -132,7 +132,16 @@ def messages(request, userid):
 @login_required()
 def settings(request):
     context = {}
-    #token = request.session.get('token')
+    token = request.session.get('token')
+    api = api_v1.MNSAPI()
+    if request.method == 'POST':
+        obj = {}
+        obj['email'] = request.POST.get('email')
+        obj['autoupdate'] = request.POST.get('autoupdate')
+
+        api.set_settings(token, **obj)
+    obj = api.get_settings(token)
+    context.update(obj)
     return render(request, 'settings.html', context)
 
 

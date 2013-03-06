@@ -136,12 +136,23 @@ class MNSAPI(APIBase):
         data = self.post('/api/1.0/login/', data=form)
         return data['token']
 
-    def get_notifications(self, userid, token):
-        data = self.get('/api/1.0/person/%s/notifications/' % userid,
+    def get_notifications(self, token):
+        data = self.get('/api/1.0/notifications/',
                 head={'token': token})
         result = []
         for n in data['notifications']:
             result.append(Notification(**n))
+        return result
+
+    def get_settings(self, token):
+        data = self.get('/api/1.0/settings/', head={'token': token})
+        result = data
+        return result
+
+    def set_settings(self, token, *args, **kwargs):
+        form = kwargs
+        data = self.post('/api/1.0/settings/', head={'token': token}, data=form)
+        result = data
         return result
 
     def get_contacts(self, userid, token):
