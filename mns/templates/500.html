@@ -18,24 +18,6 @@
     text-shadow:1px 1px 6px #000;
     top:0px;
 }
-#notifications {
-    color:#666;
-    list-style-type:none;
-    margin:0;
-    padding:0;
-}
-#notifications li {
-    border-bottom:1px solid #333;
-    margin:0;
-    padding:0;
-}
-#notifications a {
-    color:#555;
-    display:block;
-    font-size:18px;
-    padding:10px 10px;
-    text-decoration:none;
-}
 </style>
 {% endblock %}
 
@@ -47,11 +29,7 @@
 </header>
 
 <main>
-<ul id="notifications">
-    {% for n in notifications %}
-    <li><a href="#">{{ n.text }}</a></li>
-    {% endfor %}
-</ul>
+    <p>An unexpected server error occurred.</p>
 </main>
 
 <footer>
