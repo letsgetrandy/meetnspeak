@@ -52,8 +52,8 @@ def login(request):
             return redirect(reverse('notifications'))
         except api_v1.AccessDenied as err:
             context['error'] = str(err)
-        #except Exception as err:
-        #    context['error'] = str(err)
+        except Exception as err:
+            context['error'] = str(err)
     return render(request, 'login.html', context)
 
 
