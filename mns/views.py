@@ -107,7 +107,7 @@ def contacts(request):
     context = {}
     token = request.session.get('token')
     api = api_v1.MNSAPI()
-    context['contacts'] = api.get_contacts(1, token)
+    context['contacts'] = api.get_contacts(token)
     return render(request, 'contacts.html', context)
 
 

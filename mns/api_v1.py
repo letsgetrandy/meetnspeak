@@ -155,9 +155,8 @@ class MNSAPI(APIBase):
         result = data
         return result
 
-    def get_contacts(self, userid, token):
-        data = self.get('/api/1.0/person/%s/contacts/' % userid,
-                head={'token': token})
+    def get_contacts(self, token):
+        data = self.get('/api/1.0/contacts/', head={'token': token})
         result = []
         for c in data['contacts']:
             result.append(Contact(**c))
