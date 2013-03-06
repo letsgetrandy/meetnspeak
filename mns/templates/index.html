@@ -24,54 +24,19 @@ header .other::before {
 }
 .head {
     border-radius:10px;
-    height:8em;
     overflow:hidden;
     position:relative;
 }
-.head .blur {
-    background:url({{ STATIC_URL }}pattern6.jpg);
-    -webkit-filter:blur(15px);
-    -moz-filter:blur(15px);
-    filter:blur(15px);
-    left:0px;
-    min-height:8em;
-    padding:10px;
-    pointer-events:none;
-    position:absolute;
-    top:0px;
-    width:100%;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 .head .content {
-    color:#fff;
+    color:#999;
     left:0px;
     line-height:2em;
-    position:absolute;
     text-align:center;
     text-shadow:1px 1px 6px #000;
     top:0px;
-    width:100%;
 }
-.head .image {
-    border:1px solid #000;
-    border-radius:50%;
-    box-shadow:0 0 10px #333;
-    height:100px;
-    left:50%;
-    margin-left:-50px;
-    position:absolute;
-    top:2em;
-    width:100px;
-}
-.head .image img {
-    border-radius:50%;
-    height:100px;
-    width:100px;
+main {
+    padding:1em;
 }
 </style>
 {% endblock %}
@@ -79,13 +44,22 @@ header .other::before {
 {% block body %}
 <header>
 <div class="head">
-    <div class="blur">
-    </div>
+    <div class="content">Spikizi!</div>
 </div>
 </header>
+
 <main>
-<strong>index</strong>
+<p>Find foreign language speakers near you!</p>
+<div class="field">
+    <p><button onclick="location='{% url signup %}';">Sign up!</button></p>
+</div>
+<p>&nbsp;</p>
+<p>Already a member?</p>
+<div class="field">
+    <button onclick="location='{% url login %}';">Login</button>
+</div>
 </main>
+
 <footer>
 </footer>
 {% endblock %}
