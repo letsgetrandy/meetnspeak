@@ -18,23 +18,27 @@
     text-shadow:1px 1px 6px #000;
     top:0px;
 }
-#notifications {
+#notification_list {
     color:#666;
     list-style-type:none;
     margin:0;
     padding:0;
 }
-#notifications li {
+#notification_list li {
     border-bottom:1px solid #333;
     margin:0;
     padding:0;
 }
-#notifications a {
+#notification_list a {
     color:#555;
     display:block;
     font-size:18px;
-    padding:10px 10px;
+    padding:5px 10px;
     text-decoration:none;
+    text-shadow:1px 0 2px #000;
+}
+#notification_list a:active {
+    background:#111;
 }
 </style>
 {% endblock %}
@@ -47,7 +51,7 @@
 </header>
 
 <main>
-<ul id="notifications">
+<ul id="notification_list">
     {% for n in notifications %}
     <li><a href="#">{{ n.text }}</a></li>
     {% endfor %}

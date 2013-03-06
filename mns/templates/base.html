@@ -82,7 +82,7 @@ form ~ .field.alternate {
         height:90%;
         left:0;
         overflow:hidden;
-        padding:10px;
+        padding:10px 5px;
         position:absolute;
         top:0;
         width:260px;
@@ -147,9 +147,11 @@ form ~ .field.alternate {
     }
     .notify_heading {
         clear:both;
+        color:#555;
         font-size:16px;
         margin:0;
         padding:5px;
+        text-shadow:1px 0 2px #000;
     }
     ul#notifications {
         list-style-type:none;
@@ -161,7 +163,17 @@ form ~ .field.alternate {
         color:#fff;
         font-size:14px;
         margin:2px 0;
-        padding:10px 5px;
+        padding:0;
+    }
+    ul#notifications a {
+        color:#ccc;
+        display:block;
+        font-weight:200;
+        padding:10px 10px;
+        text-decoration:none;
+    }
+    #notifications a:active {
+        background:#111;
     }
     .split,
     .split > * {
@@ -194,6 +206,7 @@ form ~ .field.alternate {
 </div>
 <div id="wrapper">
     <a id="draghandle" href="#"></a>
+    {% comment %}
 <script>
 $('#draghandle').click( function(event){
     event.preventDefault();
@@ -204,7 +217,85 @@ $('#sidenav a.nav').click( function(event){
     $('body').removeClass('navopen');
 });
 </script>
+{% endcomment %}
 {% block body %}{% endblock %}
 </div>
+<script>
+(function(){
+
+    var openWidth = 260;
+    var openX = 0;
+    var startX = 0;
+
+    function touchstart(event) {
+        var touches = event.originalEvent.touches;
+        if(touches.length == 1) {
+            if (event.target.id != 'draghandle' && !$('body').hasClass('navopen'))
+                return;
+            openX = parseInt($('#wrapper').css('margin-left'), 10);
+            startX = touches[0].pageX;
+            $('#wrapper').css('margin-left', openX+'px');
+            $('body').addClass('navopen');
+
+            // track movement
+            event.preventDefault();
+            $('body').on('touchmove', touchmove);
+            $('body').on('touchend', touchend);
+            $('body').on('mousemove', mousemove);
+            $('body').on('mouseup', mouseup);
+        }
+    }
+    function touchmove(event) {
+        var touches = event.originalEvent.touches;
+        var offset = openX - (startX - touches[0].pageX);
+        if (offset > 240) offset = 240;
+        if (offset < 0) offset = 0;
+        $('#wrapper').css('margin-left', offset+'px');
+    }
+    function touchend(event) {
+        // stop tracking movement after touchend
+        $('body').off('touchmove', touchmove);
+        $('body').off('touchend', touchend);
+        $('body').off('mousemove', mousemove);
+        $('body').off('mouseup', mouseup);
+
+        // slide to target
+        var targetX = (openX == 0) ? openWidth : 0;
+        $('#wrapper').css('margin-left', targetX+'px');
+        // clear "navopen" when closing
+        if (targetX == 0)
+            $('body').removeClass('navopen');
+        else
+            $('#sidenav').scrollTop(0);
+    }
+
+    // mock touch events with the mouse
+    function mousedown(event) {
+        event.originalEvent.touches = [event];
+        touchstart(event);
+    }
+    function mousemove(event) {
+        event.originalEvent.touches = [event];
+        touchmove(event);
+    }
+    function mouseup(event) {
+        event.originalEvent.touches = [event];
+        touchend(event);
+    }
+
+    // enable the touchnav handle
+    $('#draghandle').show();
+
+    // animate closed when a nav link is tapped
+    $('#touchnav a').click(function(event) {
+        $('body').removeClass('navopen');
+    });
+
+    // allow touch-drag on the slidewrapper
+    $('body').on('touchstart', '#wrapper', touchstart);
+    $('body').on('mousedown', '#wrapper', mousedown);
+
+})();
+</script>
 </body>
 </html>
