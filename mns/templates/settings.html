@@ -18,6 +18,9 @@
     text-shadow:1px 1px 6px #000;
     top:0px;
 }
+main > form {
+    margin:1em;
+}
 @media screen and (max-width:640px) {
     #logout {
         color:#ccc;
@@ -43,22 +46,22 @@
 <main>
 <form>
     <div class="field">
+        <label>Auto-update location</label>
+        <div class="switch">
+            <input type="radio" name="autoupdate" value="0" class="off" id="auto_no" {% if not autolocation %}checked{% endif %}>
+            <label for="auto_no"></label>
+            <input type="radio" name="autoupdate" value="1" class="on" id="auto_yes" {% if autolocation %}checked{% endif %}>
+            <label for="auto_yes"></label>
+            <div class="indicator"></div>
+        </div>
+    </div>
+    <div class="field">
         <label>Update your email address</label>
         <input type="email" name="email" autocomplete="off">
     </div>
     <div class="field">
         <label>Change your password</label>
         <input type="password" name="password" autocomplete="off">
-    </div>
-    <div class="field">
-        <label>Auto-update location</label>
-        <div class="switch">
-            <input type="radio" name="autoupdate" value="0" class="off" id="auto_no">
-            <label for="auto_no"></label>
-            <input type="radio" name="autoupdate" value="1" class="on" id="auto_yes">
-            <label for="auto_yes"></label>
-            <div class="indicator"></div>
-        </div>
     </div>
     <div class="field">
         <button type="submit">Update</button>
