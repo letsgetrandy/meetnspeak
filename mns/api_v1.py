@@ -136,27 +136,31 @@ class MNSAPI(APIBase):
         data = self.post('/api/1.0/login/', data=form)
         return data['token']
 
-    def get_notifications(self, userid):
-        data = self.get('/api/1.0/person/%s/notifications/' % userid)
+    def get_notifications(self, userid, token):
+        data = self.get('/api/1.0/person/%s/notifications/' % userid,
+                head={'token': token})
         result = []
         for n in data['notifications']:
             result.append(Notification(**n))
         return result
 
-    def get_contacts(self, userid):
-        data = self.get('/api/1.0/person/%s/contacts/' % userid)
+    def get_contacts(self, userid, token):
+        data = self.get('/api/1.0/person/%s/contacts/' % userid,
+                head={'token': token})
         result = []
         for c in data['contacts']:
             result.append(Contact(**c))
         return result
 
-    def get_messages(self, userid):
-        data = self.get('/api/1.0/person/%s/messages/' % userid)
+    def get_messages(self, userid, token):
+        data = self.get('/api/1.0/person/%s/messages/' % userid,
+                head={'token': token})
         result = []
         for m in data['messages']:
             result.append(Message(**m))
         return result
 
-    def get_profile(self, userid):
-        data = self.get('/api/1.0/person/%s/profile/' % userid)
+    def get_profile(self, userid, token):
+        data = self.get('/api/1.0/person/%s/profile/' % userid,
+                head={'token': token})
         return Profile(**data['person'])

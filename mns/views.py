@@ -47,13 +47,13 @@ def login(request):
 
             # get notifications
             api = api_v1.MNSAPI()
-            request.session['notifications'] = api.get_notifications(1)
+            request.session['notifications'] = api.get_notifications(1, token)
 
             return redirect(reverse('notifications'))
         except api_v1.AccessDenied as err:
             context['error'] = str(err)
-        except Exception as err:
-            context['error'] = str(err)
+        #except Exception as err:
+        #    context['error'] = str(err)
     return render(request, 'login.html', context)
 
 
@@ -73,7 +73,7 @@ def signup(request):
 
         # get notifications
         api = api_v1.MNSAPI()
-        request.session['notifications'] = api.get_notifications(1)
+        request.session['notifications'] = api.get_notifications(1, token)
 
         return redirect(reverse('profile'))
         #except:
@@ -84,48 +84,55 @@ def signup(request):
 @login_required()
 def search(request):
     context = {}
+    #token = request.session.get('token')
     return render(request, 'search.html', context)
 
 
 @login_required()
 def notifications(request):
     context = {}
+    #token = request.session.get('token')
     return render(request, 'notifications.html', context)
 
 
 @login_required()
 def profile(request):
     context = {}
+    #token = request.session.get('token')
     return render(request, 'profile.html', context)
 
 
 @login_required()
 def contacts(request):
     context = {}
+    token = request.session.get('token')
     api = api_v1.MNSAPI()
-    context['contacts'] = api.get_contacts(1)
+    context['contacts'] = api.get_contacts(1, token)
     return render(request, 'contacts.html', context)
 
 
 @login_required()
 def user(request, userid):
     context = {}
+    token = request.session.get('token')
     api = api_v1.MNSAPI()
-    context['profile'] = api.get_profile(1)
+    context['profile'] = api.get_profile(1, token)
     return render(request, 'user.html', context)
 
 
 @login_required()
 def messages(request, userid):
     context = {}
+    token = request.session.get('token')
     api = api_v1.MNSAPI()
-    context['messages'] = api.get_messages(1)
+    context['messages'] = api.get_messages(1, token)
     return render(request, 'messages.html', context)
 
 
 @login_required()
 def settings(request):
     context = {}
+    #token = request.session.get('token')
     return render(request, 'settings.html', context)
 
 
