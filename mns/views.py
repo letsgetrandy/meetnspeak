@@ -116,7 +116,17 @@ def user(request, userid):
     context = {}
     token = request.session.get('token')
     api = api_v1.MNSAPI()
-    context['profile'] = api.get_profile(1, token)
+    if request.method == 'POST':
+        form = {}
+        form['name'] = request.POST.get('name')
+        form['dob'] = request.POST.get('dob')
+        form['gender'] = request.POST.get('gender')
+        form['hometown'] = request.POST.get('hometown')
+        #form['languages'] = [
+        #       [Language('') for l in request.POST.get('languages')]
+        #    ]
+        api.set_profile(token, userid, **form)
+    context['profile'] = api.get_profile(token, 1)
     return render(request, 'user.html', context)
 
 
@@ -125,7 +135,7 @@ def messages(request, userid):
     context = {}
     token = request.session.get('token')
     api = api_v1.MNSAPI()
-    context['messages'] = api.get_messages(1, token)
+    context['messages'] = api.get_messages(token, 1)
     return render(request, 'messages.html', context)
 
 

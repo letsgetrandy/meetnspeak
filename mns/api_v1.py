@@ -162,7 +162,7 @@ class MNSAPI(APIBase):
             result.append(Contact(**c))
         return result
 
-    def get_messages(self, userid, token):
+    def get_messages(self, token, userid):
         data = self.get('/api/1.0/person/%s/messages/' % userid,
                 head={'token': token})
         result = []
@@ -170,7 +170,12 @@ class MNSAPI(APIBase):
             result.append(Message(**m))
         return result
 
-    def get_profile(self, userid, token):
+    def get_profile(self, token, userid):
         data = self.get('/api/1.0/person/%s/profile/' % userid,
                 head={'token': token})
         return Profile(**data['person'])
+
+    def set_profile(self, token, userid, **form):
+        data = self.post('/api/1.0/person/%s/profile/' % userid,
+                head={'token': token}, data=form)
+        return data.success

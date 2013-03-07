@@ -279,7 +279,7 @@ form ~ .field.alternate {
     <h3 class="notify_heading">Notifications</h3>
     <ul id="notifications">
         {% for n in notifications %}
-        <li><a href="">{{ n.text }}</a></li>
+        <li><a href="{% url notifications %}">{{ n.text }}</a></li>
         {% endfor %}
     </ul>
 </div>
