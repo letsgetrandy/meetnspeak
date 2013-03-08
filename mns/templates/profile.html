@@ -108,6 +108,10 @@ ul.languages li {
     margin:0;
     padding:0;
 }
+ul.languages label {
+    display:inline-block;
+    min-width:100px;
+}
 @media screen and (max-width:640px) {
     .mapdiv {
         text-align:center;
@@ -148,21 +152,23 @@ ul.languages li {
             <input type="text">
         </div>
 
-        <strong>Speaks:</strong>
-        <ul class="languages">
-            <li>English 
-                <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
-            </li>
-            <li>Spanish
-                <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
-            </li>
-            <li>Italian
-                <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
-            </li>
-            <li>French
-                <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
-            </li>
-        </ul>
+        <div class="field">
+            <strong>Speaks:</strong>
+            <ul class="languages">
+                <li><label>English</label>
+                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                </li>
+                <li><label>Spanish</label>
+                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                </li>
+                <li><label>Italian</label>
+                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                </li>
+                <li><label>French</label>
+                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="mapdiv">
         Location:<br>
