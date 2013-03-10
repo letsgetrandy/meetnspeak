@@ -192,15 +192,5 @@ ul.languages label {
 {% endblock %}
 
 {% block scripts %}
-<script>
-if (navigator.geolocation) {
-    $('a.locate').click(function(event) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            //
-        }, function() {
-            //
-        });
-    });
-}
-</script>
+<script src="{{ STATIC_URL }}mns.js" type="text/javascript"></script>
 {% endblock %}
