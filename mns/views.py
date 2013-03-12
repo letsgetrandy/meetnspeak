@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from functools import wraps
 #import json
 #import re
+import api
 import api_v1
 #import sys
 
@@ -40,18 +41,18 @@ def login(request):
         password = request.POST.get('password')
         try:
             # get login token
-            api = api_v1.MNSAPI()
-            token = api.login(email, password)
+            backend = api_v1.MNSAPI()
+            token = backend.login(email, password)
             request.session['token'] = token
             context['token'] = token
 
             # get notifications
-            api = api_v1.MNSAPI()
-            request.session['notifications'] = api.get_notifications(token)
+            request.session['notifications'] = backend.get_notifications(token)
 
             return redirect(reverse('notifications'))
-        except api_v1.AccessDenied as err:
-            context['error'] = str(err)
+        #except api_v1.AccessDenied as err:
+        except api.Unauthorized as e:
+            context['error'] = str(e)
         #except Exception as err:
         #    context['error'] = str(err)
     return render(request, 'login.html', context)
@@ -64,20 +65,22 @@ def signup(request):
     elif request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        #try:
-        # get login token
-        api = api_v1.MNSAPI()
-        token = api.signup(email, password)
-        request.session['token'] = token
-        context['token'] = token
+        try:
+            # get login token
+            backend = api_v1.MNSAPI()
+            token = backend.signup(email, password)
+            request.session['token'] = token
+            context['token'] = token
 
-        # get notifications
-        api = api_v1.MNSAPI()
-        request.session['notifications'] = api.get_notifications(token)
+            # get notifications
+            request.session['notifications'] = backend.get_notifications(token)
 
-        return redirect(reverse('profile'))
-        #except:
-        #    context['error'] = True
+            return redirect(reverse('profile'))
+
+        except api.BadRequest as e:
+            context['error'] = str(e)
+        except api.Forbidden as e:
+            context['error'] = str(e)
     return render(request, 'signup.html', context)
 
 
@@ -99,7 +102,7 @@ def notifications(request):
 def profile(request):
     context = {}
     token = request.session.get('token')
-    api = api_v1.MNSAPI()
+    backend = api_v1.MNSAPI()
     if request.method == 'POST':
         form = {}
         form['name'] = request.POST.get('name')
@@ -109,8 +112,8 @@ def profile(request):
         #form['languages'] = [
         #       [Language('') for l in request.POST.get('languages')]
         #    ]
-        api.set_profile(token, **form)
-    context['profile'] = api.get_profile(token)
+        backend.set_profile(token, **form)
+    context['profile'] = backend.get_profile(token)
     return render(request, 'profile.html', context)
 
 
@@ -118,8 +121,8 @@ def profile(request):
 def contacts(request):
     context = {}
     token = request.session.get('token')
-    api = api_v1.MNSAPI()
-    context['contacts'] = api.get_contacts(token)
+    backend = api_v1.MNSAPI()
+    context['contacts'] = backend.get_contacts(token)
     return render(request, 'contacts.html', context)
 
 
@@ -127,8 +130,8 @@ def contacts(request):
 def user(request, userid):
     context = {}
     token = request.session.get('token')
-    api = api_v1.MNSAPI()
-    context['profile'] = api.get_user(token, 1)
+    backend = api_v1.MNSAPI()
+    context['profile'] = backend.get_user(token, 1)
     return render(request, 'user.html', context)
 
 
@@ -136,8 +139,8 @@ def user(request, userid):
 def messages(request, userid):
     context = {}
     token = request.session.get('token')
-    api = api_v1.MNSAPI()
-    context['messages'] = api.get_messages(token, 1)
+    backend = api_v1.MNSAPI()
+    context['messages'] = backend.get_messages(token, 1)
     return render(request, 'messages.html', context)
 
 
@@ -145,14 +148,14 @@ def messages(request, userid):
 def settings(request):
     context = {}
     token = request.session.get('token')
-    api = api_v1.MNSAPI()
+    backend = api_v1.MNSAPI()
     if request.method == 'POST':
         obj = {}
         obj['email'] = request.POST.get('email')
         obj['autoupdate'] = request.POST.get('autoupdate')
 
-        api.set_settings(token, **obj)
-    obj = api.get_settings(token)
+        backend.set_settings(token, **obj)
+    obj = backend.get_settings(token)
     context.update(obj)
     return render(request, 'settings.html', context)
 

@@ -3,6 +3,7 @@ import json
 import httplib
 import urllib
 #import sys
+import api
 
 
 language_name = {
@@ -66,10 +67,6 @@ class Profile:
                 })
 
 
-class AccessDenied(Exception):
-    pass
-
-
 class APIException(Exception):
     pass
 
@@ -105,14 +102,22 @@ class APIBase(object):
         d = resp.read()
         conn.close
         j = json.loads(d)
-        if st == 401:
-            raise AccessDenied(j['error'])
+        if st == 400:
+            raise api.BadRequest(j['error'])
+        elif st == 401:
+            raise api.Unauthorized(j['error'])
+        elif st == 403:
+            raise api.Forbidden(j['error'])
+        elif st == 404:
+            raise api.NotFound(j['error'])
+        elif st == 405:
+            raise api.MethodNotAllowed(j['error'])
         elif st != 200:
-            raise APIException(d)
-        elif j.get('token_expired'):
-            raise ExpiredToken(j['error'])
-        elif j.get('bad_login'):
-            raise BadLogin(j['error'])
+            raise Exception(d)
+        #elif j.get('token_expired'):
+        #    raise ExpiredToken(j['error'])
+        #elif j.get('bad_login'):
+        #    raise BadLogin(j['error'])
         elif not j['success']:
             raise APIException(j['error'])
         return j
