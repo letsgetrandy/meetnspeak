@@ -156,6 +156,19 @@ ul.languages label {
         </div>
 
         <div class="field">
+            <label>Gender</label>
+            Male
+            <div class="switch">
+                <input type="radio" name="autoupdate" value="0" class="off" id="auto_no" {% if not autolocation %}checked{% endif %}>
+                <label for="auto_no"></label>
+                <input type="radio" name="autoupdate" value="1" class="on" id="auto_yes" {% if autolocation %}checked{% endif %}>
+                <label for="auto_yes"></label>
+                <div class="indicator"></div>
+            </div>
+            Female
+        </div>
+
+        <div class="field">
             <strong>Speaks:</strong>
             <ul class="languages">
                 <li><label>English</label>
