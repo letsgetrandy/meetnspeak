@@ -140,6 +140,8 @@ ul.languages label {
 <main>
 <div class="split">
     <div>
+        <form method="post">
+            {% csrf_token %}
         <div class="field">
             <label>Name</label>
             <input type="text">
@@ -170,6 +172,10 @@ ul.languages label {
                 </li>
             </ul>
         </div>
+        <div class="field">
+            <button type="submit">Update</button>
+        </div>
+        </form>
     </div>
     <div class="mapdiv">
         Location:<br>

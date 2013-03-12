@@ -98,7 +98,19 @@ def notifications(request):
 @login_required()
 def profile(request):
     context = {}
-    #token = request.session.get('token')
+    token = request.session.get('token')
+    api = api_v1.MNSAPI()
+    if request.method == 'POST':
+        form = {}
+        form['name'] = request.POST.get('name')
+        form['dob'] = request.POST.get('dob')
+        form['gender'] = request.POST.get('gender')
+        form['hometown'] = request.POST.get('hometown')
+        #form['languages'] = [
+        #       [Language('') for l in request.POST.get('languages')]
+        #    ]
+        api.set_profile(token, **form)
+    context['contacts'] = api.get_contacts(token)
     return render(request, 'profile.html', context)
 
 
@@ -116,17 +128,7 @@ def user(request, userid):
     context = {}
     token = request.session.get('token')
     api = api_v1.MNSAPI()
-    if request.method == 'POST':
-        form = {}
-        form['name'] = request.POST.get('name')
-        form['dob'] = request.POST.get('dob')
-        form['gender'] = request.POST.get('gender')
-        form['hometown'] = request.POST.get('hometown')
-        #form['languages'] = [
-        #       [Language('') for l in request.POST.get('languages')]
-        #    ]
-        api.set_profile(token, userid, **form)
-    context['profile'] = api.get_profile(token, 1)
+    context['profile'] = api.get_user(token, 1)
     return render(request, 'user.html', context)
 
 

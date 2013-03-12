@@ -170,12 +170,16 @@ class MNSAPI(APIBase):
             result.append(Message(**m))
         return result
 
-    def get_profile(self, token, userid):
-        data = self.get('/api/1.0/person/%s/profile/' % userid,
+    def get_user(self, token, userid):
+        data = self.get('/api/1.0/person/%s/' % userid, head={'token': token})
+        return Profile(**data['person'])
+
+    def get_profile(self, token):
+        data = self.get('/api/1.0/profile/',
                 head={'token': token})
         return Profile(**data['person'])
 
-    def set_profile(self, token, userid, **form):
-        data = self.post('/api/1.0/person/%s/profile/' % userid,
+    def set_profile(self, token, **form):
+        data = self.post('/api/1.0/profile/',
                 head={'token': token}, data=form)
-        return data.success
+        return data['success']
