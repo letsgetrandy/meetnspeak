@@ -144,15 +144,15 @@ ul.languages label {
             {% csrf_token %}
         <div class="field">
             <label>Name</label>
-            <input type="text">
+            <input type="text" name="name" value="{{ profile.name }}">
         </div>
         <div class="field">
             <label>Date of Birth</label>
-            <input type="text">
+            <input type="text" name="dob" value="{{ profile.dob }}">
         </div>
         <div class="field">
             <label>Hometown</label>
-            <input type="text">
+            <input type="text" name="hometown" value="{{ profile.hometown }}">
         </div>
 
         <div class="field">

@@ -54,7 +54,7 @@ class Message:
 class Profile:
 
     def __init__(self, *args, **kwargs):
-        self.id = kwargs['id']
+        #self.id = kwargs['id']
         self.name = kwargs['name']
         self.age = kwargs['age']
         self.hometown = kwargs['hometown']
@@ -175,11 +175,9 @@ class MNSAPI(APIBase):
         return Profile(**data['person'])
 
     def get_profile(self, token):
-        data = self.get('/api/1.0/profile/',
-                head={'token': token})
+        data = self.get('/api/1.0/profile/', head={'token': token})
         return Profile(**data['person'])
 
     def set_profile(self, token, **form):
-        data = self.post('/api/1.0/profile/',
-                head={'token': token}, data=form)
+        data = self.post('/api/1.0/profile/', head={'token': token}, data=form)
         return data['success']

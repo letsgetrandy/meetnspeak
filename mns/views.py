@@ -110,7 +110,7 @@ def profile(request):
         #       [Language('') for l in request.POST.get('languages')]
         #    ]
         api.set_profile(token, **form)
-    context['contacts'] = api.get_contacts(token)
+    context['profile'] = api.get_profile(token)
     return render(request, 'profile.html', context)
 
 
