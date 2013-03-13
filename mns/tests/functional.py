@@ -7,19 +7,16 @@ from django.core.urlresolvers import reverse
 class FunctionalTests(TestCase):
 
     def setUp(self):
-
-        pass
+        self.client = Client()
 
     def test_homepage(self):
-        client = Client()
-        response = client.get(reverse('index'))
-        #print response.content
+        response = self.client.get(reverse('index'))
+        assert(response)
 
     def test_does_something(self):
-
-        foo = "bar"
-        assert(foo == 'bar')
+        response = self.client.get(reverse('login'))
+        assert(response)
 
     def test_bar(self):
-
-        assert(1 == 1)
+        response = self.client.get(reverse('signup'))
+        assert(response)
