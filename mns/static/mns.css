@@ -26,6 +26,20 @@ button {
 header {
     font-size:1.3em;
 }
+header.min .head {
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
+header.min .head .content {
+    color:#999;
+    left:0px;
+    line-height:2em;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+}
+
 main {
     background:url(./black-tile.jpg);
     border: 1px solid #222;
@@ -38,6 +52,29 @@ main {
 footer {
 }
 */
+ul.listing {
+    color:#666;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+ul.listing li {
+    border-bottom:1px solid #333;
+    margin:0;
+    padding:0;
+}
+ul.listing a {
+    color:#555;
+    display:block;
+    font-size:18px;
+    padding:5px 10px;
+    text-decoration:none;
+    text-shadow:1px 0 2px #000;
+}
+ul.listing a:active {
+    background:#111;
+}
+
 .field {
     margin:0 10px 15px;
     position:relative;

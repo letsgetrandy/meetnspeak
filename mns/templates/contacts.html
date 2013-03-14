@@ -4,50 +4,17 @@
 
 {% block styles %}
 {{ block.super }}
-<style>
-.head {
-    border-radius:10px;
-    overflow:hidden;
-    position:relative;
-}
-.head .content {
-    color:#999;
-    left:0px;
-    line-height:2em;
-    text-align:center;
-    text-shadow:1px 1px 6px #000;
-    top:0px;
-}
-#contacts {
-    color:#666;
-    list-style-type:none;
-    margin:0;
-    padding:0;
-}
-#contacts li {
-    border-bottom:1px solid #333;
-    margin:0;
-    padding:0;
-}
-#contacts a {
-    color:#555;
-    display:block;
-    font-size:18px;
-    padding:10px 10px;
-    text-decoration:none;
-}
-</style>
 {% endblock %}
 
 {% block body %}
-<header>
+<header class="min">
 <div class="head">
     <div class="content">Contacts</div>
 </div>
 </header>
 
 <main>
-<ul id="contacts">
+<ul class="listing">
     {% for c in contacts %}
     <li><a href="{% url user c.id %}">{{ c.name }}</a></li>
     {% endfor %}

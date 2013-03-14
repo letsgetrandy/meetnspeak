@@ -4,54 +4,17 @@
 
 {% block styles %}
 {{ block.super }}
-<style>
-.head {
-    border-radius:10px;
-    overflow:hidden;
-    position:relative;
-}
-.head .content {
-    color:#999;
-    left:0px;
-    line-height:2em;
-    text-align:center;
-    text-shadow:1px 1px 6px #000;
-    top:0px;
-}
-#notification_list {
-    color:#666;
-    list-style-type:none;
-    margin:0;
-    padding:0;
-}
-#notification_list li {
-    border-bottom:1px solid #333;
-    margin:0;
-    padding:0;
-}
-#notification_list a {
-    color:#555;
-    display:block;
-    font-size:18px;
-    padding:5px 10px;
-    text-decoration:none;
-    text-shadow:1px 0 2px #000;
-}
-#notification_list a:active {
-    background:#111;
-}
-</style>
 {% endblock %}
 
 {% block body %}
-<header>
+<header class="min">
 <div class="head">
     <div class="content">Notifications</div>
 </div>
 </header>
 
 <main>
-<ul id="notification_list">
+<ul class="listing">
     {% for n in notifications %}
     <li><a href="#">{{ n.text }}</a></li>
     {% endfor %}
