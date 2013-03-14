@@ -1,3 +1,5 @@
+/* global google:false */
+
 (function(){
 
     var openWidth = 260;
@@ -7,8 +9,11 @@
     function touchstart(event) {
         var touches = event.originalEvent.touches;
         if(touches.length == 1) {
-            if (event.target.id != 'draghandle' && !$('body').hasClass('navopen'))
+            if (event.target.id != 'draghandle' &&
+                    !$('body').hasClass('navopen'))
+            {
                 return;
+            }
             openX = parseInt($('#wrapper').css('margin-left'), 10);
             startX = touches[0].pageX;
             $('#wrapper').css('margin-left', openX+'px');
@@ -25,11 +30,15 @@
     function touchmove(event) {
         var touches = event.originalEvent.touches;
         var offset = openX - (startX - touches[0].pageX);
-        if (offset > 240) offset = 240;
-        if (offset < 0) offset = 0;
+        if (offset > 240) {
+            offset = 240;
+        }
+        if (offset < 0) {
+            offset = 0;
+        }
         $('#wrapper').css('margin-left', offset+'px');
     }
-    function touchend(event) {
+    function touchend() {
         // stop tracking movement after touchend
         $('body').off('touchmove', touchmove);
         $('body').off('touchend', touchend);
@@ -40,10 +49,11 @@
         var targetX = (openX == 0) ? openWidth : 0;
         $('#wrapper').css('margin-left', targetX+'px');
         // clear "navopen" when closing
-        if (targetX == 0)
+        if (targetX == 0) {
             $('body').removeClass('navopen');
-        else
+        } else {
             $('#sidenav').scrollTop(0);
+        }
     }
 
     // mock touch events with the mouse
@@ -77,6 +87,8 @@
 
 (function(){
 
+    var infowindow;
+
     function initialize() {
         var mapOptions = {
             zoom: 6,
@@ -92,7 +104,7 @@
                                     position.coords.latitude,
                                     position.coords.longitude);
 
-                var infowindow = new google.maps.InfoWindow({
+                infowindow = new google.maps.InfoWindow({
                     map: map,
                     position: pos,
                     content: 'Location found using HTML5.'
@@ -108,10 +120,11 @@
     }
 
     function handleNoGeolocation(errorFlag) {
+        var content;
         if (errorFlag) {
-            var content = 'Error: The Geolocation service failed.';
+            content = 'Error: The Geolocation service failed.';
         } else {
-            var content = 'Error: Your browser doesn\'t support geolocation.';
+            content = 'Error: Your browser doesn\'t support geolocation.';
         }
 
         var options = {
