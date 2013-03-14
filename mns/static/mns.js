@@ -145,9 +145,9 @@
         event.preventDefault();
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                //
+                alert(position);
             }, function() {
-                //
+                alert('foo');
             });
         }
     });
