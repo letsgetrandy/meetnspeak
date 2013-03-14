@@ -46,10 +46,10 @@
         $('body').off('mouseup', mouseup);
 
         // slide to target
-        var targetX = (openX == 0) ? openWidth : 0;
+        var targetX = (openX === 0) ? openWidth : 0;
         $('#wrapper').css('margin-left', targetX+'px');
         // clear "navopen" when closing
-        if (targetX == 0) {
+        if (targetX === 0) {
             $('body').removeClass('navopen');
         } else {
             $('#sidenav').scrollTop(0);
@@ -74,7 +74,7 @@
     $('#draghandle').show();
 
     // animate closed when a nav link is tapped
-    $('#touchnav a').click(function(event) {
+    $('#touchnav a').click(function() {
         $('body').removeClass('navopen');
     });
 
@@ -132,7 +132,7 @@
             position: new google.maps.LatLng(60, 105),
             content: content
         };
-        var infowindow = new google.maps.InfoWindow(options);
+        infowindow = new google.maps.InfoWindow(options);
         map.setCenter(options.position);
     }
 
