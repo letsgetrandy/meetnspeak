@@ -144,7 +144,7 @@
     $('a.locate').click(function(event) {
         event.preventDefault();
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.getCurrentPosition(function() {
                 //
             }, function() {
                 //
