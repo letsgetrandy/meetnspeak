@@ -26,18 +26,6 @@
 </div>
 <div id="wrapper">
     <a id="draghandle" href="#"></a>
-    {% comment %}
-<script>
-$('#draghandle').click( function(event){
-    event.preventDefault();
-    $('#sidenav').scrollTop(0);
-    $('body').toggleClass('navopen');
-});
-$('#sidenav a.nav').click( function(event){
-    $('body').removeClass('navopen');
-});
-</script>
-{% endcomment %}
 {% block body %}{% endblock %}
 </div>
 <script src="{{ STATIC_URL }}mns.js" type="text/javascript"></script>
