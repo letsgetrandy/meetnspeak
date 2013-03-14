@@ -33,11 +33,11 @@ header.min .head {
 }
 header.min .head .content {
     color:#999;
-    left:0px;
+    left:0;
     line-height:2em;
     text-align:center;
     text-shadow:1px 1px 6px #000;
-    top:0px;
+    top:0;
 }
 
 main {
