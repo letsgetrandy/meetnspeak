@@ -1,0 +1,4 @@
+--format=text
+--errors=important,display-property-grouping,duplicate-properties,empty-rules,known-properties,star-property-hack,underscore-property-hack,bulletproof-font-face,zero-units,duplicate-background-images,outline-none
+--ignore=box-model,adjoining-classes,compatible-vendor-prefixes,gradients,fallback-colors,import,regex-selectors,universal-selector,overqualified-elements,shorthand,font-faces,floats,font-sizes,unqualified-attributes,box-sizing,text-indent,ids
+--exclude-list=
