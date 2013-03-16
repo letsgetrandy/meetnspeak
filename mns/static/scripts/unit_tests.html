@@ -8,7 +8,8 @@
   <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
-  <script type="text/javascript" src="lib/jasmine.console_reporter.js"></script>
+  <script type="text/javascript" src="lib/jasmine.terminal_reporter.js"></script>
+  <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
 
   <!-- core libraries -->
   <script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>
@@ -30,7 +31,7 @@
 if (/PhantomJS/.test(navigator.userAgent)) {
     jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
     //jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter('reports/'));
-    jasmine.getEnv().addReporter(new jasmine.ConsoleReporter());
+    jasmine.getEnv().addReporter(new jasmine.TerminalReporter());
 } else {
     jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
 }
