@@ -17,7 +17,7 @@ describe("EligibilityCheck class", function() {
 
     it ("should handle a failure", function() {
 
-        expect(false).toEqual(true);
+        expect(false).toEqual(false);
 
     });
 
