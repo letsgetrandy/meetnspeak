@@ -81,12 +81,12 @@ header.profile .head {
 }
 header.profile .head .blur {
     background:url(../pattern.jpg);
-    left:0px;
+    left:0;
     min-height:8em;
     padding:10px;
     pointer-events:none;
     position:absolute;
-    top:0px;
+    top:0;
     width:100%;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -97,12 +97,12 @@ header.profile .head .blur {
 }
 header.profile .head .content {
     color:#ccc;
-    left:0px;
+    left:0;
     line-height:2em;
     position:absolute;
     text-align:center;
     text-shadow:1px 1px 6px #000;
-    top:0px;
+    top:0;
     width:100%;
 }
 header.profile .head .image {
@@ -125,8 +125,8 @@ header.profile .head .band {
     background:rgba(0,0,0,.5);
     border:1px solid #333;
     border-width:1px 0;
-    bottom:0em;
-    box-shadow:0px 0px 10px #333;
+    bottom:0;
+    box-shadow:0 0 10px #333;
     font-size:.7em;
     height:2em;
     position:absolute;
@@ -223,6 +223,8 @@ ul.listing a:active {
     position:relative;
     width:100%;
     -webkit-transition:margin 80ms;
+    -moz-transition:margin 80ms;
+    transition:margin 80ms;
 }
 .field .switch .indicator:before {
     background:#fff;
@@ -434,10 +436,6 @@ form ~ .field.alternate {
 }
 
 
-/* profile page */
-
-
-
 /* message list */
 
 ul.message_list {
@@ -456,14 +454,14 @@ ul.message_list {
     border-radius:50%;
     box-shadow:0 0 10px #333;
     height:100px;
-    left:0px;
+    left:0;
     position:absolute;
-    top:0px;
+    top:0;
     width:100px;
 }
 .message_list .message.me .image {
     left:auto;
-    right:0px;
+    right:0;
 }
 .message_list .message .image img {
     border-radius:50%;
