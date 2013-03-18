@@ -180,6 +180,10 @@ form ~ .field.alternate {
     border-top:1px solid #333;
     margin-top:2em;
 }
+
+
+/* split */
+
 .split,
 .split > * {
     overflow:hidden;
@@ -193,6 +197,20 @@ form ~ .field.alternate {
 #sidenav {
     display:none;
 }
+@media screen and (max-width:640px) {
+    .split,
+    .split > * {
+        overflow:visible;
+    }
+    .split > :first-child,
+    .split.flip > :first-child {
+        float:none;
+    }
+}
+
+
+/* side nav */
+
 @media screen and (max-width:640px) {
     #draghandle {
         background:url(./uisprite.png) -72px 0 no-repeat;
@@ -301,12 +319,57 @@ form ~ .field.alternate {
     #notifications a:active {
         background:#111;
     }
-    .split,
-    .split > * {
-        overflow:visible;
+}
+
+
+/* message list */
+
+ul.message_list {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.message_list .message {
+    margin:10px;
+    min-height:100px;
+    padding:0 110px;
+    position:relative;
+}
+.message_list .message .image {
+    border:2px solid #333;
+    border-radius:50%;
+    box-shadow:0 0 10px #333;
+    height:100px;
+    left:0px;
+    position:absolute;
+    top:0px;
+    width:100px;
+}
+.message_list .message.me .image {
+    left:auto;
+    right:0px;
+}
+.message_list .message .image img {
+    border-radius:50%;
+    height:100px;
+    width:100px;
+}
+@media screen and (max-width:640px) {
+    .message_list .message {
+        min-height:50px;
+        padding:0;
+        padding-left:60px;
     }
-    .split > :first-child,
-    .split.flip > :first-child {
-        float:none;
+    .message_list .message.me {
+        padding:0;
+        padding-right:60px;
+    }
+    .message_list .message .image {
+        height:50px;
+        width:50px;
+    }
+    .message_list .message .image img {
+        height:50px;
+        width:50px;
     }
 }

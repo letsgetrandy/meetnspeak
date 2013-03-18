@@ -4,68 +4,7 @@
 {% block styles %}
 {{ block.super }}
 <style>
-.head {
-    border-radius:10px;
-    overflow:hidden;
-    position:relative;
-}
-.head .content {
-    color:#999;
-    left:0px;
-    line-height:2em;
-    text-align:center;
-    text-shadow:1px 1px 6px #000;
-    top:0px;
-}
-.message {
-    margin:10px;
-    min-height:100px;
-    padding:0 110px;
-    position:relative;
-}
-.message .image {
-    border:2px solid #333;
-    border-radius:50%;
-    box-shadow:0 0 10px #333;
-    height:100px;
-    left:0px;
-    position:absolute;
-    top:0px;
-    width:100px;
-}
-.message.me .image {
-    left:auto;
-    right:0px;
-}
-.message .image img {
-    border-radius:50%;
-    height:100px;
-    width:100px;
-}
-main {
-    padding:10px;
-}
-.mapdiv {
-    text-align:right;
-}
 @media screen and (max-width:640px) {
-    .message {
-        min-height:50px;
-        padding:0;
-        padding-left:60px;
-    }
-    .message.me {
-        padding:0;
-        padding-right:60px;
-    }
-    .message .image {
-        height:50px;
-        width:50px;
-    }
-    .message .image img {
-        height:50px;
-        width:50px;
-    }
     #profile {
         color:#ccc;
         font-weight:100;
@@ -81,34 +20,37 @@ main {
 
 {% block body %}
 <a id="profile" href="{% url user 4 %}">Profile</a>
-<header>
+<header class="min">
 <div class="head">
     <div class="content">Messages</div>
 </div>
 </header>
 
 <main>
-{% for m in messages %}
-<div class="message">
-    <div>foo</div>
-    <p>{{ m.text }}</p>
-</div>
-{% endfor %}
-<div class="message">
-    <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-</div>
-<div class="message me">
-    <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
-    <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat</p>
-</div>
-<div class="message">
-    <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
-    <p>non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
+<ul class="message_list">
+    {% for m in messages %}
+    <li class="message">
+        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <p>{{ m.text }}</p>
+    </li>
+    {% endfor %}
+
+    <li class="message">
+        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+    </li>
+    <li class="message me">
+        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat</p>
+    </li>
+    <li class="message">
+        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <p>non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </li>
+</ul>
 </main>
 
 <footer>
