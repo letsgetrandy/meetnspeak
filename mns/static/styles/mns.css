@@ -26,6 +26,8 @@ button {
 header {
     font-size:1.3em;
 }
+
+
 header.min .head {
     border-radius:10px;
     overflow:hidden;
@@ -48,6 +50,101 @@ main {
     display:block;
     min-height:280px;
 }
+
+
+/* profile header */
+
+header.profile .stuff {
+    color:#fc5;
+    display:none;
+}
+header.profile .stuff::before {
+    border-radius:50%;
+    background:#59c;
+    content:' ';
+    display:inline-block;
+    height:1em;
+    margin-right:10px;
+    width:1em;
+}
+header.profile .other {
+    color:#cc5;
+}
+header.profile .other::before {
+    background:#cc5;
+}
+header.profile .head {
+    border-radius:10px;
+    height:8em;
+    overflow:hidden;
+    position:relative;
+}
+header.profile .head .blur {
+    background:url(../pattern.jpg);
+    left:0px;
+    min-height:8em;
+    padding:10px;
+    pointer-events:none;
+    position:absolute;
+    top:0px;
+    width:100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+header.profile .head .content {
+    color:#ccc;
+    left:0px;
+    line-height:2em;
+    position:absolute;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+    width:100%;
+}
+header.profile .head .image {
+    border:1px solid #000;
+    border-radius:50%;
+    box-shadow:0 0 10px #333;
+    height:100px;
+    left:50%;
+    margin-left:-50px;
+    position:absolute;
+    top:2em;
+    width:100px;
+}
+header.profile .head .image img {
+    border-radius:50%;
+    height:100px;
+    width:100px;
+}
+header.profile .head .band {
+    background:rgba(0,0,0,.5);
+    border:1px solid #333;
+    border-width:1px 0;
+    bottom:0em;
+    box-shadow:0px 0px 10px #333;
+    font-size:.7em;
+    height:2em;
+    position:absolute;
+    text-align:center;
+    width:100%;
+}
+header.profile .head .band .left {
+    float:left;
+    padding:5px;
+    text-align:left;
+}
+header.profile .head .band .right {
+    padding:5px;
+    text-align:right;
+}
+
+
+
 /*
 footer {
 }
@@ -209,6 +306,21 @@ form ~ .field.alternate {
 }
 
 
+/* header link */
+
+@media screen and (max-width:640px) {
+    .title_link {
+        color:#ccc;
+        font-weight:100;
+        position:absolute;
+        right:10px;
+        text-decoration:none;
+        top:10px;
+        z-index:2;
+    }
+}
+
+
 /* side nav */
 
 @media screen and (max-width:640px) {
@@ -320,6 +432,10 @@ form ~ .field.alternate {
         background:#111;
     }
 }
+
+
+/* profile page */
+
 
 
 /* message list */

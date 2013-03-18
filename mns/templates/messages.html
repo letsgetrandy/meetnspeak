@@ -1,25 +1,13 @@
 {% extends "base.html" %}
 
 {% block title %}Messages{% endblock %}
+
 {% block styles %}
 {{ block.super }}
-<style>
-@media screen and (max-width:640px) {
-    #profile {
-        color:#ccc;
-        font-weight:100;
-        position:absolute;
-        right:10px;
-        text-decoration:none;
-        top:10px;
-        z-index:2;
-    }
-}
-</style>
 {% endblock %}
 
 {% block body %}
-<a id="profile" href="{% url user 4 %}">Profile</a>
+<a id="profile" class="title_link" href="{% url user 4 %}">Profile</a>
 <header class="min">
 <div class="head">
     <div class="content">Messages</div>
