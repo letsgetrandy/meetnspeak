@@ -43,7 +43,7 @@ header.min .head .content {
 }
 
 main {
-    background:url(./black-tile.jpg);
+    background:url(../black-tile.jpg);
     border: 1px solid #222;
     border-width:1px 0;
     box-shadow:0 0 10px #333;
@@ -330,7 +330,7 @@ form ~ .field.alternate {
 
 @media screen and (max-width:640px) {
     .draghandle {
-        background:url(./uisprite.png) -72px 0 no-repeat;
+        background:url(../uisprite.png) -72px 0 no-repeat;
         height:36px;
         left:5px;
         position:absolute;
@@ -373,7 +373,7 @@ form ~ .field.alternate {
         display:block;
     }
     .sidenav a.nav .image {
-        background:url(./uisprite.png) 0 0 no-repeat;
+        background:url(../uisprite.png) 0 0 no-repeat;
         height:36px;
         left:39px;
         position:absolute;

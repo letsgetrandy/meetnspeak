@@ -1,5 +1,7 @@
 /* global google:false */
 
+foo = 'bar';
+
 (function(){
 
     var openWidth = 260;
@@ -9,14 +11,14 @@
     function touchstart(event) {
         var touches = event.originalEvent.touches;
         if(touches.length == 1) {
-            if (event.target.id != 'draghandle' &&
+            if (!$(event.target).hasClass('draghandle') &&
                     !$('body').hasClass('navopen'))
             {
                 return;
             }
-            openX = parseInt($('#wrapper').css('margin-left'), 10);
+            openX = parseInt($('.body_wrapper').css('margin-left'), 10);
             startX = touches[0].pageX;
-            $('#wrapper').css('margin-left', openX+'px');
+            $('.body_wrapper').css('margin-left', openX+'px');
             $('body').addClass('navopen');
 
             // track movement
@@ -36,7 +38,7 @@
         if (offset < 0) {
             offset = 0;
         }
-        $('#wrapper').css('margin-left', offset+'px');
+        $('.body_wrapper').css('margin-left', offset+'px');
     }
     function touchend() {
         // stop tracking movement after touchend
@@ -47,12 +49,12 @@
 
         // slide to target
         var targetX = (openX === 0) ? openWidth : 0;
-        $('#wrapper').css('margin-left', targetX+'px');
+        $('.body_wrapper').css('margin-left', targetX+'px');
         // clear "navopen" when closing
         if (targetX === 0) {
             $('body').removeClass('navopen');
         } else {
-            $('#sidenav').scrollTop(0);
+            $('.sidenav').scrollTop(0);
         }
     }
 
@@ -71,16 +73,16 @@
     }
 
     // enable the touchnav handle
-    $('#draghandle').show();
+    $('.draghandle').show();
 
     // animate closed when a nav link is tapped
-    $('#touchnav a').click(function() {
+    $('.touchnav a').click(function() {
         $('body').removeClass('navopen');
     });
 
     // allow touch-drag on the slidewrapper
-    $('body').on('touchstart', '#wrapper', touchstart);
-    $('body').on('mousedown', '#wrapper', mousedown);
+    $('body').on('touchstart', '.body_wrapper', touchstart);
+    $('body').on('mousedown', '.body_wrapper', mousedown);
 
 })();
 
