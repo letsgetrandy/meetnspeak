@@ -1,3 +1,5 @@
+/*global describe:false, it:false, expect:false, beforeEach:false */
+
 describe("EligibilityCheck class", function() {
 
     // create the display element that we'll interact with
