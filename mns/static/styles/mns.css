@@ -1,3 +1,8 @@
+.uisprite {
+    background-image:url(../uisprite.png);
+    background-repeat:no-repeat;
+}
+
 body {
     background:#222;
     color:#aaa;
@@ -330,7 +335,7 @@ form ~ .field.alternate {
 
 @media screen and (max-width:640px) {
     .draghandle {
-        background:url(../uisprite.png) -72px 0 no-repeat;
+        background-position:-72px 0;
         height:36px;
         left:5px;
         position:absolute;
@@ -373,7 +378,6 @@ form ~ .field.alternate {
         display:block;
     }
     .sidenav a.nav .image {
-        background:url(../uisprite.png) 0 0 no-repeat;
         height:36px;
         left:39px;
         position:absolute;

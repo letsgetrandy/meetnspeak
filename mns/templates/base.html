@@ -12,10 +12,10 @@
 <body>
 <div class="sidenav">
     <nav>
-    <a class="nav navsearch" href="{% url search %}"><span class="image"></span><span class="label">Search</span></a>
-    <a class="nav navprofile" href="{% url profile %}"><span class="image"></span><span class="label">Profile</span></a>
-    <a class="nav navcontacts" href="{% url contacts %}"><span class="image"></span><span class="label">Contacts</span></a>
-    <a class="nav navsettings" href="{% url settings %}"><span class="image"></span><span class="label">Settings</span></a>
+    <a class="nav navsearch" href="{% url search %}"><span class="uisprite image"></span><span class="label">Search</span></a>
+    <a class="nav navprofile" href="{% url profile %}"><span class="uisprite image"></span><span class="label">Profile</span></a>
+    <a class="nav navcontacts" href="{% url contacts %}"><span class="uisprite image"></span><span class="label">Contacts</span></a>
+    <a class="nav navsettings" href="{% url settings %}"><span class="uisprite image"></span><span class="label">Settings</span></a>
     </nav>
     <h3 class="notify_heading">Notifications</h3>
     <ul class="notifications">
@@ -25,7 +25,7 @@
     </ul>
 </div>
 <div class="body_wrapper">
-    <a class="draghandle" href="#"></a>
+    <a class="uisprite draghandle" href="#"></a>
 {% block body %}{% endblock %}
 </div>
 <script src="{{ STATIC_URL }}/scripts/mns.js" type="text/javascript"></script>
