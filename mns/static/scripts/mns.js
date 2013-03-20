@@ -5,10 +5,15 @@ function TouchMenu(conf) {
         handle: "draghandle",
         wrapper: ".body_wrapper",
         openClass: "navopen",
-        menu: ".sidenav"
+        menu: ".sidenav",
+        ua: navigator.userAgent
     };
     this.conf = $.extend(defaults, conf);
-    this.init();
+    if (this.checkUserAgent()) {
+        this.init();
+    } else {
+        $("." + this.conf.handle).hide();
+    }
 }
 
 TouchMenu.prototype = {
@@ -16,10 +21,15 @@ TouchMenu.prototype = {
     openWidth: 260,
     openX: 0,
     startx:0,
+    events:{},
+
+    checkUserAgent: function() {
+        var rx = /android|iphone|ipod|ipad|blackberry|touch|tablet|mobile safari|iemobile|windows phone/i;
+        return !!rx.test(this.conf.ua);
+    },
 
     init: function() {
         var self = this;
-        self.events = {};
 
         // enable the touchnav handle
         $("." + this.conf.handle).show();
@@ -28,14 +38,38 @@ TouchMenu.prototype = {
         $(".touchnav a").click(function() {
             $("body").removeClass(self.conf.openClass);
         });
+        // add listeners
+        this.attachEvent("touchstart", self.conf.wrapper);
+        this.attachEvent("mousedown", self.conf.wrapper);
 
-        // allow touch-drag on the slidewrapper
-        $("body").on("touchstart", self.conf.wrapper, function(event) {
-            self.touchstart(event);
-        });
-        $("body").on("mousedown", self.conf.wrapper, function(event) {
-            self.mousedown(event);
-        });
+        // show drag handle
+        $("." + self.conf.handle).show();
+    },
+
+    cleanup: function() {
+        var evts = ["touchstart", "touchmove", "touchend",
+                    "mousedown", "mousemove", "mouseup"];
+        for (var evt in evts) {
+            this.removeEvent(evt);
+        }
+    },
+
+    // cash a handle to an event wrapper
+    attachEvent: function(evt, target) {
+        var self = this;
+        self.removeEvent(evt);
+        this.events[evt] = function(event) {
+            self[evt](event);
+        };
+        $("body").on(evt, target || null, this.events[evt]);
+        return this.events[evt];
+    },
+
+    // remove listener for the given event
+    removeEvent: function(evt) {
+        if (this.events[evt]) {
+            $("body").off(evt, this.events[evt]);
+        }
     },
 
     touchstart: function(event) {
@@ -53,18 +87,10 @@ TouchMenu.prototype = {
             $("body").addClass(self.conf.openClass);
 
             event.preventDefault();
-
-            // cache handles to anonymous functions
-            self.events.touchmove = function(event) { self.touchmove(event); };
-            self.events.touchend = function(event) { self.touchend(event); };
-            self.events.mousemove = function(event) { self.mousemove(event); };
-            self.events.mouseup = function(event) { self.mouseup(event); };
-
-            // track movement
-            $("body").on("touchmove", self.events.touchmove);
-            $("body").on("touchend", self.events.touchend);
-            $("body").on("mousemove", self.events.mousemove);
-            $("body").on("mouseup", self.events.mouseup);
+            self.attachEvent("touchmove");
+            self.attachEvent("touchend");
+            self.attachEvent("mousemove");
+            self.attachEvent("mouseup");
         }
     },
     touchmove: function(event) {
@@ -81,11 +107,10 @@ TouchMenu.prototype = {
     },
     touchend: function(event) {
         var self = this;
-        // stop tracking movement after touchend
-        $("body").off("touchmove",self.events.touchmove);
-        $("body").off("touchend", self.events.touchend);
-        $("body").off("mousemove", self.events.mousemove);
-        $("body").off("mouseup", self.events.mouseup);
+        self.removeEvent("touchmove");
+        self.removeEvent("touchend");
+        self.removeEvent("mousemove");
+        self.removeEvent("mouseup");
 
         // slide to target
         var targetX = (openX === 0) ? self.openWidth : 0;

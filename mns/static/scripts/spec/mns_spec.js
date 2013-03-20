@@ -1,26 +1,34 @@
 /*global describe:false, it:false, expect:false, beforeEach:false */
 
-describe("EligibilityCheck class", function() {
-
-    // create the display element that we'll interact with
-    //document.write('<div id="eligibility"></div>');
+describe("TouchMenu class", function() {
 
     beforeEach(function(){
-        //document.getElementById('eligibility').className = '';
-    });
-
-
-    it ("should skip eligibility check when overridden", function() {
-
-        expect(1).toEqual(1);
 
     });
 
+    it ("should show for mobile user-agents", function() {
 
-    it ("should handle a failure", function() {
+        setFixtures('<div class="handle"></div>');
 
-        expect(false).toEqual(false);
+        var tm = new TouchMenu({
+            ua: "mobile safari",
+            handle: "handle"
+        });
+        expect($(".handle")).toBeVisible();
+        tm.cleanup();
 
+    });
+
+    it ("should hide for non-touch user-agents", function() {
+
+        setFixtures('<div class="handle"></div>');
+
+        var tm = new TouchMenu({
+            ua: "msie 9.0",
+            handle: "handle"
+        });
+        expect($(".handle")).not.toBeVisible();
+        tm.cleanup();
     });
 
 });
