@@ -62,7 +62,7 @@ TouchMenu.prototype = {
             self[evt](event);
         };
         $("body").on(evt, target || null, this.events[evt]);
-        return this.events[evt];
+        //return this.events[evt];
     },
 
     // remove listener for the given event
