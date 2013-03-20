@@ -1,34 +1,75 @@
 /* global google:false */
 
-(function(){
+function TouchMenu(conf) {
+    var defaults = {
+        handle: "draghandle",
+        wrapper: ".body_wrapper",
+        openClass: "navopen",
+        menu: ".sidenav"
+    };
+    this.conf = $.extend(defaults, conf);
+    this.init();
+}
 
-    var openWidth = 260;
-    var openX = 0;
-    var startX = 0;
+TouchMenu.prototype = {
 
-    function touchstart(event) {
-        var touches = event.originalEvent.touches;
-        if(touches.length == 1) {
-            if (!$(event.target).hasClass("draghandle") &&
-                    !$("body").hasClass("navopen"))
+    openWidth: 260,
+    openX: 0,
+    startx:0,
+
+    init: function() {
+        var self = this;
+        self.events = {};
+
+        // enable the touchnav handle
+        $("." + this.conf.handle).show();
+
+        // animate closed when a nav link is tapped
+        $(".touchnav a").click(function() {
+            $("body").removeClass(self.conf.openClass);
+        });
+
+        // allow touch-drag on the slidewrapper
+        $("body").on("touchstart", self.conf.wrapper, function(event) {
+            self.touchstart(event);
+        });
+        $("body").on("mousedown", self.conf.wrapper, function(event) {
+            self.mousedown(event);
+        });
+    },
+
+    touchstart: function(event) {
+        var self = this,
+            touches = event.originalEvent.touches;
+        if (touches.length == 1) {
+            if (!$(event.target).hasClass(self.conf.handle) &&
+                    !$("body").hasClass(self.conf.openClass))
             {
                 return;
             }
-            openX = parseInt($(".body_wrapper").css("margin-left"), 10);
+            openX = parseInt($(self.conf.wrapper).css("margin-left"), 10);
             startX = touches[0].pageX;
-            $(".body_wrapper").css("margin-left", openX + "px");
-            $("body").addClass("navopen");
+            $(self.conf.wrapper).css("margin-left", openX + "px");
+            $("body").addClass(self.conf.openClass);
+
+            event.preventDefault();
+
+            // cache handles to anonymous functions
+            self.events.touchmove = function(event) { self.touchmove(event); };
+            self.events.touchend = function(event) { self.touchend(event); };
+            self.events.mousemove = function(event) { self.mousemove(event); };
+            self.events.mouseup = function(event) { self.mouseup(event); };
 
             // track movement
-            event.preventDefault();
-            $("body").on("touchmove", touchmove);
-            $("body").on("touchend", touchend);
-            $("body").on("mousemove", mousemove);
-            $("body").on("mouseup", mouseup);
+            $("body").on("touchmove", self.events.touchmove);
+            $("body").on("touchend", self.events.touchend);
+            $("body").on("mousemove", self.events.mousemove);
+            $("body").on("mouseup", self.events.mouseup);
         }
-    }
-    function touchmove(event) {
-        var touches = event.originalEvent.touches;
+    },
+    touchmove: function(event) {
+        var self = this,
+            touches = event.originalEvent.touches;
         var offset = openX - (startX - touches[0].pageX);
         if (offset > 240) {
             offset = 240;
@@ -36,53 +77,41 @@
         if (offset < 0) {
             offset = 0;
         }
-        $(".body_wrapper").css("margin-left", offset + "px");
-    }
-    function touchend() {
+        $(self.conf.wrapper).css("margin-left", offset + "px");
+    },
+    touchend: function(event) {
+        var self = this;
         // stop tracking movement after touchend
-        $("body").off("touchmove", touchmove);
-        $("body").off("touchend", touchend);
-        $("body").off("mousemove", mousemove);
-        $("body").off("mouseup", mouseup);
+        $("body").off("touchmove",self.events.touchmove);
+        $("body").off("touchend", self.events.touchend);
+        $("body").off("mousemove", self.events.mousemove);
+        $("body").off("mouseup", self.events.mouseup);
 
         // slide to target
-        var targetX = (openX === 0) ? openWidth : 0;
+        var targetX = (openX === 0) ? self.openWidth : 0;
         $(".body_wrapper").css("margin-left", targetX + "px");
         // clear "navopen" when closing
         if (targetX === 0) {
             $("body").removeClass("navopen");
         } else {
-            $(".sidenav").scrollTop(0);
+            $(self.conf.menu).scrollTop(0);
         }
-    }
+    },
 
     // mock touch events with the mouse
-    function mousedown(event) {
+    mousedown: function(event) {
         event.originalEvent.touches = [event];
-        touchstart(event);
-    }
-    function mousemove(event) {
+        this.touchstart(event);
+    },
+    mousemove: function(event) {
         event.originalEvent.touches = [event];
-        touchmove(event);
-    }
-    function mouseup(event) {
+        this.touchmove(event);
+    },
+    mouseup: function(event) {
         event.originalEvent.touches = [event];
-        touchend(event);
+        this.touchend(event);
     }
-
-    // enable the touchnav handle
-    $(".draghandle").show();
-
-    // animate closed when a nav link is tapped
-    $(".touchnav a").click(function() {
-        $("body").removeClass("navopen");
-    });
-
-    // allow touch-drag on the slidewrapper
-    $("body").on("touchstart", ".body_wrapper", touchstart);
-    $("body").on("mousedown", ".body_wrapper", mousedown);
-
-})();
+};
 
 
 (function(){
