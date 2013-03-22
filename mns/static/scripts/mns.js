@@ -76,7 +76,7 @@ TouchMenu.prototype = {
         var self = this,
             touches = event.originalEvent.touches;
         if (touches.length == 1) {
-            if (!$(event.target).attr("id") == self.conf.handle.substring(1) &&
+            if ($(event.target).attr("id") != self.conf.handle.substring(1) &&
                     !$("body").hasClass(self.conf.openClass))
             {
                 return;

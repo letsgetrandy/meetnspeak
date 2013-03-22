@@ -16,3 +16,7 @@ class NotFound(Exception):
 
 class MethodNotAllowed(Exception):
     response_code = 405
+
+
+class ServerError(Exception):
+    response_code = 500

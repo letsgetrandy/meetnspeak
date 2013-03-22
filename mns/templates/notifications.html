@@ -16,7 +16,7 @@
 <main>
 <ul class="listing">
     {% for n in notifications %}
-    <li><a href="#">{{ n.text }}</a></li>
+    <li><a href="{{ n.target_url }}">{{ n.text }}</a></li>
     {% endfor %}
 </ul>
 </main>

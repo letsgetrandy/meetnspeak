@@ -94,7 +94,12 @@ def search(request):
 @login_required()
 def notifications(request):
     context = {}
-    #token = request.session.get('token')
+
+    # re-check notifications
+    backend = api_v1.MNSAPI()
+    token = request.session.get('token')
+    request.session['notifications'] = backend.get_notifications(token)
+
     return render(request, 'notifications.html', context)
 
 

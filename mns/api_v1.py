@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.conf import settings
 import json
 import httplib
@@ -33,10 +34,17 @@ language_level = [
 class Notification(object):
 
     def __init__(self, *args, **kwargs):
-        self.text = kwargs['text']
+        self.text = kwargs['message']
         self.target = kwargs['target']
         self.sender = kwargs['sender']
-        return
+        self.readdate = kwargs['readdate']
+
+    @property
+    def target_url(self):
+        if self.target == 1:
+            return reverse("profile")
+        else:
+            return "#"
 
 
 class Contact:
@@ -112,6 +120,9 @@ class APIBase(object):
             raise api.NotFound(j['error'])
         elif st == 405:
             raise api.MethodNotAllowed(j['error'])
+        #TODO:500 error
+        #elif st == 500:
+        #   raise api.
         elif st != 200:
             raise Exception(d)
         #elif j.get('token_expired'):
