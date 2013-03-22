@@ -2,7 +2,7 @@
 
 function TouchMenu(conf) {
     var defaults = {
-        handle: "draghandle",
+        handle: "#draghandle",
         wrapper: ".body_wrapper",
         openClass: "navopen",
         menu: ".sidenav",
@@ -12,7 +12,7 @@ function TouchMenu(conf) {
     if (this.checkUserAgent()) {
         this.init();
     } else {
-        $("." + this.conf.handle).hide();
+        $(this.conf.handle).hide();
     }
 }
 
@@ -32,10 +32,10 @@ TouchMenu.prototype = {
         var self = this;
 
         // enable the touchnav handle
-        $("." + this.conf.handle).show();
+        $(this.conf.handle).show();
 
         // animate closed when a nav link is tapped
-        $(".touchnav a").click(function() {
+        $(self.conf.menu + " a").click(function() {
             $("body").removeClass(self.conf.openClass);
         });
         // add listeners
@@ -43,7 +43,7 @@ TouchMenu.prototype = {
         this.attachEvent("mousedown", self.conf.wrapper);
 
         // show drag handle
-        $("." + self.conf.handle).show();
+        $(self.conf.handle).show();
     },
 
     cleanup: function() {
@@ -76,14 +76,14 @@ TouchMenu.prototype = {
         var self = this,
             touches = event.originalEvent.touches;
         if (touches.length == 1) {
-            if (!$(event.target).hasClass(self.conf.handle) &&
+            if (!$(event.target).attr("id") == self.conf.handle.substring(1) &&
                     !$("body").hasClass(self.conf.openClass))
             {
                 return;
             }
-            openX = parseInt($(self.conf.wrapper).css("margin-left"), 10);
-            startX = touches[0].pageX;
-            $(self.conf.wrapper).css("margin-left", openX + "px");
+            self.openX = parseInt($(self.conf.wrapper).css("margin-left"), 10);
+            self.startX = touches[0].pageX;
+            $(self.conf.wrapper).css("margin-left", self.openX + "px");
             $("body").addClass(self.conf.openClass);
 
             event.preventDefault();
@@ -96,7 +96,7 @@ TouchMenu.prototype = {
     touchmove: function(event) {
         var self = this,
             touches = event.originalEvent.touches;
-        var offset = openX - (startX - touches[0].pageX);
+        var offset = self.openX - (self.startX - touches[0].pageX);
         if (offset > 240) {
             offset = 240;
         }
@@ -113,11 +113,11 @@ TouchMenu.prototype = {
         self.removeEvent("mouseup");
 
         // slide to target
-        var targetX = (openX === 0) ? self.openWidth : 0;
-        $(".body_wrapper").css("margin-left", targetX + "px");
+        var targetX = (self.openX === 0) ? self.openWidth : 0;
+        $(self.conf.wrapper).css("margin-left", targetX + "px");
         // clear "navopen" when closing
         if (targetX === 0) {
-            $("body").removeClass("navopen");
+            $("body").removeClass(self.conf.openClass);
         } else {
             $(self.conf.menu).scrollTop(0);
         }
