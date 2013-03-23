@@ -12,12 +12,6 @@ main {
 .mapdiv {
     text-align:right;
 }
-#genderswitch {
-    background:red;
-}
-#genderswitch .indicator {
-    background:blue;
-}
 ul.languages {
     margin:0;
     padding:0;
@@ -75,15 +69,15 @@ ul.languages label {
 
         <div class="field">
             <label>Gender</label>
-            Male
-            <div class="switch" id="genderswitch">
-                <input type="radio" name="autoupdate" value="0" class="off" id="auto_no" {% if not autolocation %}checked{% endif %}>
-                <label for="auto_no"></label>
-                <input type="radio" name="autoupdate" value="1" class="on" id="auto_yes" {% if autolocation %}checked{% endif %}>
-                <label for="auto_yes"></label>
-                <div class="indicator"></div>
+            <div class="switch">
+                <input type="radio" name="gender" value="M" id="gender_m" {% if not male %}checked{% endif %}>
+                <input type="radio" name="gender" value="F" id="gender_f" {% if male %}checked{% endif %}>
+                <div class="slide">
+                    <label for="gender_m">M</label>
+                    <div class="indicator"></div>
+                    <label for="gender_f">F</label>
+                </div>
             </div>
-            Female
         </div>
 
         <div class="field">

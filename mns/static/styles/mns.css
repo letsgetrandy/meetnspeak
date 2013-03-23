@@ -203,84 +203,73 @@ ul.listing a:active {
     font-size:14px;
     padding:3px 12px;
 }
-.field .switch {
-    background:blue;
-    border:1px solid #000;
-    border-radius:13px;
-    box-shadow:inset 0 0 4px #555;
-    display:inline-block;
-    height:26px;
-    margin:4px 0;
+.switch {
+    border:1px solid #333;
+    border-radius:24px;
+    height:24px;
     overflow:hidden;
+    width:60px;
+}
+.switch input {
+    display:none;
+}
+.switch input:checked + .slide {
+    margin-left:0;
     position:relative;
-    vertical-align:middle;
-    width:70px;
 }
-.field .switch input,
-.field .switch input:checked + label {
-    display:none !important;
-}
-.field .switch .indicator {
-    background:#999;
-    border-radius:13px;
-    display:block;
-    height:100%;
-    pointer-events:none;
+.switch .slide {
+    height:30px;
+    margin-left:-36px;
     position:relative;
-    width:100%;
-    -webkit-transition:margin 80ms;
-    -moz-transition:margin 80ms;
-    transition:margin 80ms;
+    -moz-transition:margin 250ms ease-out;
+    -webkit-transition:margin 250ms ease-out;
+    transition:margin 250ms ease-out;
+    width:200px;
 }
-.field .switch .indicator:before {
-    background:#fff;
-    border:1px solid #666;
-    border-radius:13px;
-    box-shadow:inset 0 0 6px #555;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-    content:' ';
-    display:block;
-    height:100%;
+.switch .slide label {
+    color:#333;
+    cursor:pointer;
+    display:inline-block;
+    font-size:12px;
+    height:30px;
     left:0;
-    padding:8px;
-    pointer-events:none;
+    line-height:24px;
+    padding-right:15px;
     position:absolute;
+    text-align:center;
+    text-shadow:0 1px 0 #fff;
     top:0;
-    width:50%;
+    width:36px;
+}
+.switch .slide .indicator + label {
+    left:50px;
+    padding-left:10px;
+    background:#fdd;
+}
+.switch label:first-child{
+    background:#ddf;
+}
+.switch .indicator {
+    background:#ccc;
+    background: -moz-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%, rgba(130,140,149,1) 100%);
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
+    background: radial-gradient(ellipse at center, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
+    border:1px solid #333;
+    border-radius:30px;
+    display:inline-block;
+    height:24px;
+    left:35px;
+    position:absolute;
+    pointer-events:none;
+    top:-1px;
+    width:24px;
+    z-index:2;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#828c95',GradientType=1 );
+}
 
-    background-origin:content-box, content-box, padding-box;
-    background-repeat:no-repeat;
-    background-size:100% 2px, 100% 2px, auto;
-    background-position:0 33%, 0 67%;
-    background-image:
-        -webkit-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        -webkit-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        -webkit-linear-gradient(#eee, #ccc);
-    background-image:
-        -moz-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        -moz-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        -moz-linear-gradient(#eee, #ccc);
-    background-image:
-        -ms-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        -ms-linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        -ms-linear-gradient(#eee, #ccc);
-    background-image:
-        linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        linear-gradient(rgba(128, 127, 127, .75), rgba(127, 127, 127, .75)),
-        linear-gradient(#eee, #ccc);
-}
-.field .switch input.on:checked ~ .indicator {
-    margin-left:35px;
-}
-.field .switch label {
-    height:100%;
-    left:0;
-    position:absolute;
-    top:0;
-    width:100%;
-}
+
 /*
 form ~ .field.alternate {
     border-top:1px solid #333;

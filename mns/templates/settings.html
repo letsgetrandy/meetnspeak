@@ -49,10 +49,12 @@ main > form {
         <label>Auto-update location</label>
         <div class="switch">
             <input type="radio" name="autoupdate" value="0" class="off" id="auto_no" {% if not autolocation %}checked{% endif %}>
-            <label for="auto_no"></label>
             <input type="radio" name="autoupdate" value="1" class="on" id="auto_yes" {% if autolocation %}checked{% endif %}>
-            <label for="auto_yes"></label>
-            <div class="indicator"></div>
+            <div class="slide">
+                <label for="auto_no">NO</label>
+                <div class="indicator"></div>
+                <label for="auto_yes">YES</label>
+            </div>
         </div>
     </div>
     <div class="field">
