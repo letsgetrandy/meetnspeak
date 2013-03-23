@@ -40,3 +40,18 @@ class APITests(TestCase):
         assert(token)
         result = self.mns.get_contacts(token)
         assert(result)
+
+    def test_notifications(self):
+        pass
+
+    def test_messages(self):
+        pass
+
+    def test_user_page(self):
+        pass
+
+    def test_profile(self):
+        pass
+
+    def test_settings(self):
+        pass
