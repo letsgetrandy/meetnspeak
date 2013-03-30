@@ -1,9 +1,20 @@
+PORT := 8000
+DEBUG := True
 APIHOST := localhost:8101
-TEST_CMD = python manage.py test mns
+ENV = PORT=$(PORT) DJANGO_DEBUG=$(DEBUG) APIHOST=$(APIHOST)
+VENV = venv/bin/python
+SCRIPTS = $(shell pwd)/mns/static/scripts
 
 
-.PHONY: test
+.PHONY: test run nose jasmine_tests
 
-test:
-	APIHOST=$(APIHOST) \
-	$(TEST_CMD)
+run:
+	$(ENV) $(VENV) manage.py runserver
+
+test: django_tests jasmine
+
+nose:
+	$(ENV) $(VENV) manage.py test mns
+
+jasmine:
+	phantomjs $(SCRIPTS)/lib/test_runner.js $(SCRIPTS)/unit_tests.html

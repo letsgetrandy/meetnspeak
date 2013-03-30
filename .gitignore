@@ -1,4 +1,5 @@
 venv
 *.pyc
+*.pid
 .env
 .DS_Store
