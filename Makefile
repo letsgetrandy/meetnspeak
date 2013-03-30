@@ -11,7 +11,7 @@ SCRIPTS = $(shell pwd)/mns/static/scripts
 run:
 	$(ENV) $(VENV) manage.py runserver
 
-test: django_tests jasmine
+test: nose jasmine
 
 nose:
 	$(ENV) $(VENV) manage.py test mns
