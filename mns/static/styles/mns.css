@@ -227,6 +227,7 @@ ul.listing a:active {
     width:200px;
 }
 .switch .slide label {
+    box-shadow:inset -5px 0 5px #333;
     color:#333;
     cursor:pointer;
     display:inline-block;
@@ -258,6 +259,7 @@ ul.listing a:active {
     background: radial-gradient(ellipse at center, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
     border:1px solid #333;
     border-radius:30px;
+    box-shadow:0 0 3px #333;
     display:inline-block;
     height:24px;
     left:35px;
