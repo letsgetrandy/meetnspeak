@@ -32,7 +32,7 @@ TouchMenu.prototype = {
         var self = this;
 
         // enable the touchnav handle
-        $(this.conf.handle).show();
+        $(this.conf.handle).css("display", "");  // show();
 
         // animate closed when a nav link is tapped
         $(self.conf.menu + " a").click(function() {
@@ -41,9 +41,6 @@ TouchMenu.prototype = {
         // add listeners
         this.attachEvent("touchstart", self.conf.wrapper);
         this.attachEvent("mousedown", self.conf.wrapper);
-
-        // show drag handle
-        $(self.conf.handle).show();
     },
 
     cleanup: function() {

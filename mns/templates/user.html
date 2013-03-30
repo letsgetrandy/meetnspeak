@@ -8,6 +8,9 @@
 main {
     padding:10px;
 }
+.split > .profile {
+    margin-bottom:60px;
+}
 .mapdiv {
     text-align:right;
 }
@@ -20,7 +23,7 @@ ul.languages li {
     margin:0;
     padding:0;
 }
-@media screen and (max-width:640px) {
+@media screen and (max-width:900px) {
     .mapdiv {
         text-align:center;
     }
@@ -47,7 +50,7 @@ ul.languages li {
 
 <main>
 <div class="split">
-    <div>
+    <div class="profile">
         <strong>Speaks:</strong>
         <ul class="languages">
             {% for l in profile.languages %}

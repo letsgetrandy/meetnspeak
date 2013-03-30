@@ -295,7 +295,7 @@ form ~ .field.alternate {
 .sidenav {
     display:none;
 }
-@media screen and (max-width:640px) {
+@media screen and (max-width:900px) {
     .split,
     .split > * {
         overflow:visible;
@@ -303,6 +303,19 @@ form ~ .field.alternate {
     .split > :first-child,
     .split.flip > :first-child {
         float:none;
+    }
+}
+@media screen and (min-width:641px) {
+    .wide .split,
+    .wide .split > * {
+        overflow:hidden;
+    }
+    .wide .split > :first-child {
+        float:left;
+        width:50%;
+    }
+    .wide .split.flip > :first-child {
+        float:right;
     }
 }
 
@@ -437,6 +450,9 @@ ul.notifications a {
     .sidenav + .body_wrapper {
         margin-left:260px;
     }
+}
+.wide .draghandle {
+    display:none;
 }
 
 

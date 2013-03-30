@@ -9,7 +9,7 @@
 <script type="text/javascript" src="{{ STATIC_URL }}scripts/lib/jquery-1.9.1.min.js"></script>
 </head>
 
-<body>
+<body class="{% block bodyclass %}{% endblock %}">
 {% block sidenav %}
 <div class="sidenav">
     <nav>
@@ -27,7 +27,7 @@
 </div>
 {% endblock %}
 <div class="body_wrapper">
-    <a id="draghandle" class="uisprite draghandle" href="#"></a>
+    <a id="draghandle" class="uisprite draghandle" style="display:none" href="#"></a>
 {% block body %}{% endblock %}
 </div>
 <script src="{{ STATIC_URL }}/scripts/mns.js" type="text/javascript"></script>
