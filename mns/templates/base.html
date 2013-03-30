@@ -10,6 +10,7 @@
 </head>
 
 <body>
+{% block sidenav %}
 <div class="sidenav">
     <nav>
     <a class="nav navsearch" href="{% url search %}"><span class="uisprite image"></span><span class="label">Search</span></a>
@@ -24,6 +25,7 @@
         {% endfor %}
     </ul>
 </div>
+{% endblock %}
 <div class="body_wrapper">
     <a id="draghandle" class="uisprite draghandle" href="#"></a>
 {% block body %}{% endblock %}

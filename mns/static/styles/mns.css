@@ -309,21 +309,116 @@ form ~ .field.alternate {
 
 /* header link */
 
-@media screen and (max-width:640px) {
-    .title_link {
-        color:#ccc;
-        font-weight:100;
-        position:absolute;
-        right:10px;
-        text-decoration:none;
-        top:10px;
-        z-index:2;
-    }
+.title_link {
+    color:#ccc;
+    font-weight:100;
+    position:absolute;
+    right:10px;
+    text-decoration:none;
+    top:10px;
+    z-index:2;
 }
 
 
 /* side nav */
 
+.sidenav {
+    display:block;
+    height:90%;
+    left:0;
+    overflow:hidden;
+    padding:10px 5px;
+    position:absolute;
+    top:0;
+    width:260px;
+}
+.sidenav a.nav {
+    background:#000;
+    background:#4c4c4c;
+    background:-moz-linear-gradient(top left, #4c4c4c 0%, #131313 100%);
+    background:-webkit-linear-gradient(top left, #4c4c4c 0%,#131313 100%);
+    background:-o-linear-gradient(top left, #4c4c4c 0%,#131313 100%);
+    background:-ms-linear-gradient(top left, #4c4c4c 0%,#131313 100%);
+    background:linear-gradient(top left, #4c4c4c 0%,#131313 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c4c4c', endColorstr='#131313', GradientType=0);
+    border:1px solid #000;
+    display:inline-block;
+    float:left;
+    height:110px;
+    margin:0 0 5px 5px;
+    position:relative;
+    text-align:center;
+    text-decoration:none;
+    width:120px;
+}
+.sidenav a.nav .label {
+    color:#fff;
+    margin-top:75px;
+    display:block;
+}
+.sidenav a.nav .image {
+    height:36px;
+    left:39px;
+    position:absolute;
+    top:25px;
+    width:36px;
+}
+.sidenav .navsearch   .image {background-position:0 0;     }
+.sidenav .navprofile  .image {background-position:0 -36px; }
+.sidenav .navcontacts .image {background-position:-36px 0; }
+.sidenav .navsettings .image {background-position:-36px -36px;}
+
+.body_wrapper {
+    margin:0;
+    position:relative;
+    -webkit-transition:margin 200ms;
+    -moz-transition:margin 200ms;
+    transition:margin 200ms;
+}
+body.navopen {
+    height:100%;
+    overflow:hidden;
+    width:100%;
+}
+.navopen .sidenav {
+    height:100%;
+    overflow:scroll;
+}
+.navopen .body_wrapper {
+    height:100%;
+    margin-left:260px;
+}
+.notify_heading {
+    clear:both;
+    color:#555;
+    font-size:16px;
+    margin:0;
+    padding:5px;
+    text-shadow:1px 0 2px #000;
+}
+ul.notifications {
+    list-style-type:none;
+    margin:0 5px;
+    padding:0;
+}
+ul.notifications li {
+    background:rgb(0,0,0);
+    background:rgba(0,0,0,.7);
+    color:#fff;
+    font-size:14px;
+    margin:2px 0;
+    padding:0;
+}
+ul.notifications a {
+    color:#ccc;
+    display:block;
+    font-weight:200;
+    padding:10px 10px;
+    text-decoration:none;
+}
+.notifications a:active {
+    background:#111;
+}
 @media screen and (max-width:640px) {
     .draghandle {
         background-position:-72px 0;
@@ -334,103 +429,13 @@ form ~ .field.alternate {
         width:36px;
         z-index:2;
     }
-    .sidenav {
-        display:block;
-        height:90%;
-        left:0;
-        overflow:hidden;
-        padding:10px 5px;
-        position:absolute;
-        top:0;
-        width:260px;
-    }
-    .sidenav a.nav {
-        background:#000;
-        background:#4c4c4c;
-        background:-moz-linear-gradient(top left, #4c4c4c 0%, #131313 100%);
-        background:-webkit-linear-gradient(top left, #4c4c4c 0%,#131313 100%);
-        background:-o-linear-gradient(top left, #4c4c4c 0%,#131313 100%);
-        background:-ms-linear-gradient(top left, #4c4c4c 0%,#131313 100%);
-        background:linear-gradient(top left, #4c4c4c 0%,#131313 100%);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c4c4c', endColorstr='#131313', GradientType=0);
-        border:1px solid #000;
-        display:inline-block;
-        float:left;
-        height:110px;
-        margin:0 0 5px 5px;
-        position:relative;
-        text-align:center;
-        text-decoration:none;
-        width:120px;
-    }
-    .sidenav a.nav .label {
-        color:#fff;
-        margin-top:75px;
-        display:block;
-    }
-    .sidenav a.nav .image {
-        height:36px;
-        left:39px;
-        position:absolute;
-        top:25px;
-        width:36px;
-    }
-    .sidenav .navsearch   .image {background-position:0 0;     }
-    .sidenav .navprofile  .image {background-position:0 -36px; }
-    .sidenav .navcontacts .image {background-position:-36px 0; }
-    .sidenav .navsettings .image {background-position:-36px -36px;}
-
     .body_wrapper {
-        margin:0;
-        position:relative;
-        -webkit-transition:margin 200ms;
-        -moz-transition:margin 200ms;
-        transition:margin 200ms;
         width:100%;
     }
-    body.navopen {
-        height:100%;
-        overflow:hidden;
-        width:100%;
-    }
-    .navopen .sidenav {
-        height:100%;
-        overflow:scroll;
-    }
-    .navopen .body_wrapper {
-        height:100%;
+}
+@media screen and (min-width:641px) {
+    .sidenav + .body_wrapper {
         margin-left:260px;
-    }
-    .notify_heading {
-        clear:both;
-        color:#555;
-        font-size:16px;
-        margin:0;
-        padding:5px;
-        text-shadow:1px 0 2px #000;
-    }
-    ul.notifications {
-        list-style-type:none;
-        margin:0 5px;
-        padding:0;
-    }
-    ul.notifications li {
-        background:rgb(0,0,0);
-        background:rgba(0,0,0,.7);
-        color:#fff;
-        font-size:14px;
-        margin:2px 0;
-        padding:0;
-    }
-    ul.notifications a {
-        color:#ccc;
-        display:block;
-        font-weight:200;
-        padding:10px 10px;
-        text-decoration:none;
-    }
-    .notifications a:active {
-        background:#111;
     }
 }
 
