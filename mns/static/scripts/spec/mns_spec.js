@@ -11,8 +11,8 @@ describe("TouchMenu class", function() {
         setFixtures('<div class="handle"></div>');
 
         var tm = new TouchMenu({
-            ua: "msie 9.0",
-            handle: "handle"
+            ua: "MSIE 9.0",
+            handle: ".handle"
         });
         expect($(".handle")).not.toBeVisible();
         tm.cleanup();
@@ -23,8 +23,8 @@ describe("TouchMenu class", function() {
         setFixtures('<div class="handle"></div>');
 
         var tm = new TouchMenu({
-            ua: "mobile safari",
-            handle: "handle"
+            ua: "Mobile Safari",
+            handle: ".handle"
         });
         expect($(".handle")).toBeVisible();
         tm.cleanup();
