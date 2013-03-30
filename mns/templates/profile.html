@@ -9,9 +9,6 @@
 main {
     padding:10px;
 }
-.mapdiv {
-    text-align:right;
-}
 ul.languages {
     margin:0;
     padding:0;
@@ -25,9 +22,16 @@ ul.languages label {
     display:inline-block;
     min-width:100px;
 }
-@media screen and (max-width:640px) {
+.mapdiv {
+    padding:10px;
+}
+.mapdiv img {
+    box-shadow:0 0 15px #bbf;
+    width:100%;
+}
+@media screen and (min-width:900px){
     .mapdiv {
-        text-align:center;
+        text-align:right;
     }
 }
 </style>
@@ -104,7 +108,7 @@ ul.languages label {
     </div>
     <div class="mapdiv">
         Location:<br>
-        {#<img src="{% static_map 80 40 %}"><br>#}
+        <img src="http://maps.googleapis.com/maps/api/staticmap?format=jpg&center=chicago+il+usa&zoom=13&size=550x550&sensor=false&markers=color:blue%7CChicago+IL+USA">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>

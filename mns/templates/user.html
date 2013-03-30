@@ -11,9 +11,6 @@ main {
 .split > .profile {
     margin-bottom:60px;
 }
-.mapdiv {
-    text-align:right;
-}
 ul.languages {
     margin:0;
     padding:0;
@@ -23,9 +20,16 @@ ul.languages li {
     margin:0;
     padding:0;
 }
-@media screen and (max-width:900px) {
+.mapdiv {
+    padding:10px;
+}
+.mapdiv img {
+    box-shadow:0 0 15px #bbf;
+    width:100%;
+}
+@media screen and (min-width:900px){
     .mapdiv {
-        text-align:center;
+        text-align:right;
     }
 }
 </style>
@@ -59,7 +63,7 @@ ul.languages li {
         </ul>
     </div>
     <div class="mapdiv">
-        <img src="{{ STATIC_URL }}gmap.gif">
+        <img src="http://maps.googleapis.com/maps/api/staticmap?format=jpg&center=chicago+il+usa&zoom=13&size=550x550&sensor=false&markers=color:blue%7CChicago+IL+USA">
     </div>
 </div>
 </main>
