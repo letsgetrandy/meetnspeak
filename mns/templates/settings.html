@@ -45,28 +45,42 @@ main > form {
 
 <main>
 <form>
-    <div class="field">
-        <label>Auto-update location</label>
-        <div class="switch">
-            <input type="radio" name="autoupdate" value="0" class="off" id="auto_no" {% if not autolocation %}checked{% endif %}>
-            <input type="radio" name="autoupdate" value="1" class="on" id="auto_yes" {% if autolocation %}checked{% endif %}>
-            <div class="slide">
-                <label for="auto_no">NO</label>
-                <div class="indicator"></div>
-                <label for="auto_yes">YES</label>
+    <div class="split">
+        <div class="field">
+            <label>Auto-update location</label>
+            <div class="switch">
+                <input type="radio" name="autoupdate" value="0" class="off" id="auto_off" {% if not autolocation %}checked{% endif %}>
+                <input type="radio" name="autoupdate" value="1" class="on" id="auto_on" {% if autolocation %}checked{% endif %}>
+                <div class="slide">
+                    <label for="auto_off">On</label>
+                    <div class="indicator"></div>
+                    <label for="auto_on">Off</label>
+                </div>
             </div>
         </div>
+        <div class="caption">Use this setting to automatically update your location every
+            time you log in.</div>
     </div>
-    <div class="field">
-        <label>Update your email address</label>
-        <input type="email" name="email" autocomplete="off">
+    <div class="split">
+        <div class="field">
+            <label>Update your email address</label>
+            <input type="email" name="email" autocomplete="off">
+        </div>
+        <div class="caption">This is the email address you will use to log in.</div>
     </div>
-    <div class="field">
-        <label>Change your password</label>
-        <input type="password" name="password" autocomplete="off">
+    <div class="split">
+        <div class="field">
+            <label>Change your password</label>
+            <input type="password" name="password" autocomplete="off">
+        </div>
+        <div class="caption">Passwords are case sensitive.</div>
     </div>
-    <div class="field">
-        <button type="submit">Update</button>
+    <div class="split">
+        <div class="field">
+            <button type="submit">Update</button>
+        </div>
+        <div class="caption">
+        </div>
     </div>
 </form>
 <p>&nbsp;</p>

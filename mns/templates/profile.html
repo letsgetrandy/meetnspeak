@@ -70,12 +70,12 @@ ul.languages label {
         <div class="field">
             <label>Gender</label>
             <div class="switch">
-                <input type="radio" name="gender" value="M" id="gender_m" {% if not male %}checked{% endif %}>
-                <input type="radio" name="gender" value="F" id="gender_f" {% if male %}checked{% endif %}>
+                <input type="radio" name="gender" value="F" id="gender_f" {% if not male %}checked{% endif %}>
+                <input type="radio" name="gender" value="M" id="gender_m" {% if male %}checked{% endif %}>
                 <div class="slide">
-                    <label for="gender_m">M</label>
+                    <label for="gender_f">M</label>
                     <div class="indicator"></div>
-                    <label for="gender_f">F</label>
+                    <label for="gender_m">F</label>
                 </div>
             </div>
         </div>
@@ -120,7 +120,4 @@ ul.languages label {
 <footer>
 &copy;2013 Randy Hunt
 </footer>
-{% endblock %}
-
-{% block scripts %}
 {% endblock %}

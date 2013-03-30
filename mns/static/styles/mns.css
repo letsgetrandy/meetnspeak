@@ -239,15 +239,16 @@ ul.listing a:active {
     position:absolute;
     text-align:center;
     text-shadow:0 1px 0 #fff;
+    text-transform:uppercase;
     top:0;
     width:36px;
 }
 .switch .slide .indicator + label {
+    background:#fdd;
     left:50px;
     padding-left:10px;
-    background:#fdd;
 }
-.switch label:first-child{
+.switch label:first-child {
     background:#ddf;
 }
 .switch .indicator {
@@ -288,6 +289,10 @@ form ~ .field.alternate {
 }
 .split > :first-child {
     float:left;
+    -webkit-transition:width 400ms;
+    -moz-transition:width 400ms;
+    transition:width 400ms;
+    width:50%;
 }
 .split.flip > :first-child {
     float:right;
@@ -295,7 +300,12 @@ form ~ .field.alternate {
 .sidenav {
     display:none;
 }
-@media screen and (max-width:900px) {
+.split .field + .caption {
+    font-size:13px;
+    max-height:60px;
+    padding:15px 5px 0;
+}
+@media screen and (max-width:900px){
     .split,
     .split > * {
         overflow:visible;
@@ -303,9 +313,13 @@ form ~ .field.alternate {
     .split > :first-child,
     .split.flip > :first-child {
         float:none;
+        width:100%;
+    }
+    .split .field + .caption {
+        padding:0 10px 25px;
     }
 }
-@media screen and (min-width:641px) {
+@media screen and (min-width:641px){
     .wide .split,
     .wide .split > * {
         overflow:hidden;
@@ -318,7 +332,6 @@ form ~ .field.alternate {
         float:right;
     }
 }
-
 
 /* header link */
 
@@ -432,7 +445,7 @@ ul.notifications a {
 .notifications a:active {
     background:#111;
 }
-@media screen and (max-width:640px) {
+@media screen and (max-width:640px){
     .draghandle {
         background-position:-72px 0;
         height:36px;
@@ -445,14 +458,14 @@ ul.notifications a {
     .body_wrapper {
         width:100%;
     }
+    .wide .draghandle {
+        display:none;
+    }
 }
-@media screen and (min-width:641px) {
+@media screen and (min-width:641px){
     .sidenav + .body_wrapper {
         margin-left:260px;
     }
-}
-.wide .draghandle {
-    display:none;
 }
 
 
@@ -488,7 +501,7 @@ ul.message_list {
     height:100px;
     width:100px;
 }
-@media screen and (max-width:640px) {
+@media screen and (max-width:640px){
     .message_list .message {
         min-height:50px;
         padding:0;
