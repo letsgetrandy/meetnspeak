@@ -1,5 +1,27 @@
 /*global describe:false, it:false, expect:false, beforeEach:false */
 
+describe("mns namespace", function() {
+
+    it ("should define the namespace", function() {
+        expect(mns).toBeDefined();
+    });
+    it ("should render templated objects", function() {
+        var obj = {foo:"Hello", bar:"World"},
+            template = "[[foo]] [[bar]]!",
+            s = mns.render(obj, template);
+        expect(s).toEqual("Hello World!");
+    });
+    it ("should populate language drop-downs", function() {
+        setFixtures('<select id="foo"><option value="3">Advanced' +
+                    '</option></select>');
+        mns.langOptions("#foo");
+        var s = $("#foo");
+        expect(s.find("option").length).toBe(5);
+        expect(s.val()).toBe("3");
+    });
+});
+
+
 describe("TouchMenu class", function() {
 
     beforeEach(function(){
