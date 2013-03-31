@@ -10,24 +10,32 @@ main {
     padding:10px;
 }
 ul.languages {
-    margin:0;
+    margin:0 0 10px;
     padding:0;
     list-style-type:none;
 }
 ul.languages li {
-    margin:0;
+    border-bottom:1px dotted #666;
+    margin:10px 0 0;
     padding:0;
 }
 ul.languages label {
     display:inline-block;
     min-width:100px;
 }
+ul.languages select {
+    float:right;
+    margin-bottom:2px;
+}
 .mapdiv {
     padding:10px;
 }
 .mapdiv img {
-    box-shadow:0 0 15px #bbf;
+    box-shadow:0 0 10px #bbf;
     width:100%;
+}
+.mapdiv a.locate {
+    color:#fff;
 }
 @media screen and (min-width:900px){
     .mapdiv {
@@ -88,16 +96,22 @@ ul.languages label {
             <strong>Speaks:</strong>
             <ul class="languages">
                 <li><label>English</label>
-                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                    <select id="lang_en"><option value="9"></option></select>
                 </li>
                 <li><label>Spanish</label>
-                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                    <select id="lang_sp"><option value="7"></option></select>
                 </li>
                 <li><label>Italian</label>
-                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                    <select id="lang_it"><option value="7"></option></select>
                 </li>
                 <li><label>French</label>
-                    <select><option value="1">Beginner</option><option value="3">Intermediate</option><option value="5">Advanced</option><option value="8">Fluent</option><option value="10">Native</option></select>
+                    <select id="lang_fr"><option value="1"></option></select>
+                </li>
+                <li><label>German</label>
+                    <select id="lang_de"><option value="5"></option></select>
+                </li>
+                <li><label>Russian</label>
+                    <select id="lang_ru"><option value="7"></option></select>
                 </li>
             </ul>
         </div>
@@ -109,13 +123,6 @@ ul.languages label {
     <div class="mapdiv">
         Location:<br>
         <img src="http://maps.googleapis.com/maps/api/staticmap?format=jpg&center=chicago+il+usa&zoom=13&size=550x550&sensor=false&markers=color:blue%7CChicago+IL+USA">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
         <a class="locate" href="#">update</a>
     </div>
 </div>
@@ -124,4 +131,15 @@ ul.languages label {
 <footer>
 &copy;2013 Randy Hunt
 </footer>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+$(function() {
+    $("ul.languages select").each( function() {
+        mns.langOptions(this);
+    });
+});
+</script>
 {% endblock %}
