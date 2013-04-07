@@ -3,7 +3,7 @@ from django.conf import settings
 import json
 import httplib
 import urllib
-#import sys
+import sys
 import api
 
 
@@ -63,16 +63,24 @@ class Message:
 class Profile:
 
     def __init__(self, *args, **kwargs):
+        print >> sys.stderr, kwargs
         #self.id = kwargs['id']
-        self.name = kwargs['name']
-        self.age = kwargs['age']
-        self.hometown = kwargs['hometown']
+        self.name = kwargs['name'] or ""
+        self.age = kwargs['age'] or ""
+        self.gender = kwargs['gender'] or ""
+        self.hometown = kwargs['hometown'] or ""
         self.languages = []
         for lang, lev in kwargs['languages'].items():
             self.languages.append({
-                    'name': language_name[lang],
-                    'level': language_level[lev],
+                    'code': lang,
+                    'name': language_name[lang.upper()],
+                    'level': lev,
+                    'levelname': language_level[lev],
                 })
+
+    @property
+    def male(self):
+        return self.gender > 0
 
 
 class APIException(Exception):
@@ -108,6 +116,7 @@ class APIBase(object):
         resp = conn.getresponse()
         st = resp.status
         d = resp.read()
+        print >> sys.stderr, d
         conn.close
         j = json.loads(d)
         if st == 400:

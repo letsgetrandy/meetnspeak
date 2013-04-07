@@ -82,8 +82,8 @@ ul.languages select {
         <div class="field">
             <label>Gender</label>
             <div class="switch">
-                <input type="radio" name="gender" value="F" id="gender_f" {% if not male %}checked{% endif %}>
-                <input type="radio" name="gender" value="M" id="gender_m" {% if male %}checked{% endif %}>
+                <input type="radio" name="gender" value="-1" id="gender_f" {% if not profile.male %}checked{% endif %}>
+                <input type="radio" name="gender" value="1" id="gender_m" {% if profile.male %}checked{% endif %}>
                 <div class="slide">
                     <label for="gender_f">M</label>
                     <div class="indicator"></div>
@@ -95,24 +95,10 @@ ul.languages select {
         <div class="field">
             <strong>Speaks:</strong>
             <ul class="languages">
-                <li><label>English</label>
-                    <select id="lang_en"><option value="9"></option></select>
-                </li>
-                <li><label>Spanish</label>
-                    <select id="lang_sp"><option value="7"></option></select>
-                </li>
-                <li><label>Italian</label>
-                    <select id="lang_it"><option value="7"></option></select>
-                </li>
-                <li><label>French</label>
-                    <select id="lang_fr"><option value="1"></option></select>
-                </li>
-                <li><label>German</label>
-                    <select id="lang_de"><option value="5"></option></select>
-                </li>
-                <li><label>Russian</label>
-                    <select id="lang_ru"><option value="7"></option></select>
-                </li>
+                {% for lang in profile.languages %}
+                <li><label>{{ lang.name }}</label>
+                    <select id="lang_{{ lang.code }}"><option value="{{ lang.level }}"></option></select>
+                {% endfor %}
             </ul>
         </div>
         <div class="field">
