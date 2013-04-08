@@ -10,7 +10,9 @@ import api
 language_name = {
         'EN': 'English',
         'FR': 'French',
+        'GR': 'Greek',
         'IT': 'Italian',
+        'PL': 'Polish',
         'RU': 'Russian',
         'SP': 'Spanish',
     }
