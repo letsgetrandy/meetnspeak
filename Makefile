@@ -23,7 +23,7 @@ deploy: deployapi
 
 deployapi:
 	cd $(APIDIR)
-	echo fluentYearly1 | appcfg.py --email=yearlyglot@gmail.com --passin update .
+	appcfg.py update ~/dev/meetnspeak
 	cd -
 
 .PHONY: test run nose jasmine_tests
