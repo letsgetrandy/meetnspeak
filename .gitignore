@@ -3,3 +3,4 @@ venv
 *.pid
 .env
 .DS_Store
+local
