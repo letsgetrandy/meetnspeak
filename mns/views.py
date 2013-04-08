@@ -27,11 +27,23 @@ def login_required():
     return decorator
 
 
+def no_login():
+    def decorator(fn):
+        def inner_decorator(request, *args, **kwargs):
+            if request.session.get('token'):
+                return redirect(reverse('profile'))
+            else:
+                return fn(request, *args, **kwargs)
+        return wraps(fn)(inner_decorator)
+    return decorator
+
+
 def index(request):
     context = {}
     return render(request, 'index.html', context)
 
 
+@no_login()
 def login(request):
     context = {}
     if request.session.get('token'):
@@ -58,6 +70,7 @@ def login(request):
     return render(request, 'login.html', context)
 
 
+@no_login()
 def signup(request):
     context = {}
     if request.session.get('token'):

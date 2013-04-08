@@ -3,7 +3,7 @@ from django.conf import settings
 import json
 import httplib
 import urllib
-import sys
+#import sys
 import api
 
 
@@ -65,7 +65,7 @@ class Message:
 class Profile:
 
     def __init__(self, *args, **kwargs):
-        print >> sys.stderr, kwargs
+        #print >> sys.stderr, kwargs
         #self.id = kwargs['id']
         self.name = kwargs['name'] or ""
         self.age = kwargs['age'] or ""
@@ -118,7 +118,7 @@ class APIBase(object):
         resp = conn.getresponse()
         st = resp.status
         d = resp.read()
-        print >> sys.stderr, d
+        #print >> sys.stderr, d
         conn.close
         j = json.loads(d)
         if st == 400:
