@@ -149,12 +149,14 @@ header.profile .head .band .right {
     text-align:right;
 }
 
-
-
-/*
-footer {
+body > footer {
+    font-size:.8em;
+    padding:5px;
+    text-align:right;
 }
-*/
+
+
+
 ul.listing {
     color:#666;
     list-style-type:none;
