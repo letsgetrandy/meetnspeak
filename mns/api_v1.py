@@ -8,6 +8,7 @@ import api
 
 
 language_name = {
+        'AR': 'Arabic',
         'EN': 'English',
         'FR': 'French',
         'GR': 'Greek',
@@ -65,20 +66,20 @@ class Message:
 class Profile:
 
     def __init__(self, *args, **kwargs):
-        #print >> sys.stderr, kwargs
         #self.id = kwargs['id']
         self.name = kwargs['name'] or ""
         self.age = kwargs['age'] or ""
         self.gender = kwargs['gender'] or ""
         self.hometown = kwargs['hometown'] or ""
-        self.languages = []
-        for lang, lev in kwargs['languages'].items():
-            self.languages.append({
-                    'code': lang,
-                    'name': language_name[lang.upper()],
-                    'level': lev,
-                    'levelname': language_level[lev],
-                })
+        langnames = {c: language_name[c] for c in kwargs['languages'].keys()}
+        self.lang_keys = sorted(langnames, key=langnames.__getitem__)
+        languages = {lang: {
+                'code': lang,
+                'name': language_name[lang.upper()],
+                'level': level,
+                'levelname': language_level[level],
+            } for lang, level in kwargs['languages'].items()}
+        self.languages = [languages[key] for key in self.lang_keys]
 
     @property
     def male(self):
