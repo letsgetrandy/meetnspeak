@@ -114,11 +114,15 @@ def profile(request):
         form['dob'] = request.POST.get('dob')
         form['gender'] = request.POST.get('gender')
         form['hometown'] = request.POST.get('hometown')
-        #form['languages'] = [
-        #       [Language('') for l in request.POST.get('languages')]
-        #    ]
+        languages = []
+        for (key, val) in request.POST.items():
+            if key.startswith("lang_"):
+                code = key[5:]
+                languages.append("%s=%s" % (code, val))
+        form['languages'] = ",".join(languages)
         backend.set_profile(token, **form)
     context['profile'] = backend.get_profile(token)
+    context['lang_options'] = api_v1.language_name
     return render(request, 'profile.html', context)
 
 

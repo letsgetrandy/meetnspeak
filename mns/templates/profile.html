@@ -9,9 +9,25 @@
 main {
     padding:10px;
 }
+.lang_heading {
+    position:relative;
+}
+.add_language {
+    color:#ddd;
+    font-size:.9em;
+    position:absolute;
+    right:5px;
+    text-decoration:underline;
+}
+.lang_heading select {
+    opacity:0;
+    position:absolute;
+    right:0;
+}
 ul.languages {
-    margin:0 0 10px;
-    padding:0;
+    background:#111;
+    margin:10px 0;
+    padding:5px 10px;
     list-style-type:none;
 }
 ul.languages li {
@@ -93,11 +109,19 @@ ul.languages select {
         </div>
 
         <div class="field">
-            <strong>Speaks:</strong>
+            <div class="lang_heading">
+                <strong>Speaks:</strong>
+                <span class="add_language">add language</span>
+                <select id="newlang">
+                <option value="">add language</option>
+                <option value="">------------</option>
+                {% for code,name in lang_options.items %}<option value="{{ code }}">{{ name }}</option>{% endfor %}
+                </select>
+            </div>
             <ul class="languages">
                 {% for lang in profile.languages %}
                 <li><label>{{ lang.name }}</label>
-                    <select id="lang_{{ lang.code }}"><option value="{{ lang.level }}"></option></select>
+                    <select name="lang_{{ lang.code }}" id="lang_{{ lang.code }}"><option value="{{ lang.level }}"></option></select>
                 {% endfor %}
             </ul>
         </div>
@@ -124,6 +148,17 @@ ul.languages select {
 $(function() {
     $("ul.languages select").each( function() {
         mns.langOptions(this);
+    });
+    $(".lang_heading select").change( function(event) {
+        var self = $(this),
+            val = self.val(),
+            name = self.find("option:selected").text();
+        event.preventDefault();
+        self.selectedIndex = 0;
+        $("ul.languages").append("<li><label>" + name +
+            "</label><select name=\"lang_" + val + "\" id=\"lang_" + val +
+            "\"><option value=\"1\"></option></select></li>");
+        mns.langOptions("#lang_" + val);
     });
 });
 </script>
