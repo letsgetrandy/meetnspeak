@@ -398,6 +398,11 @@ form ~ .field.alternate {
     top:0;
     width:260px;
 }
+@-moz-document url-prefix() {
+    .sidenav {
+        width:275px;
+    }
+}
 .sidenav a.nav {
     background:#000;
     background:#4c4c4c;
