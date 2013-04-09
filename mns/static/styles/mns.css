@@ -211,8 +211,8 @@ ul.listing a:active {
 }
 .field button {
     border-radius:5px;
-    font-size:14px;
-    padding:3px 12px;
+    font-size:16px;
+    padding:5px 12px;
 }
 .switch {
     border:1px solid #333;

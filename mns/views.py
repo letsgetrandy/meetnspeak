@@ -127,6 +127,7 @@ def profile(request):
         form['age'] = request.POST.get('age', '')
         form['gender'] = request.POST.get('gender')
         form['hometown'] = request.POST.get('hometown')
+        form['location'] = request.POST.get('location')
         languages = []
         for (key, val) in request.POST.items():
             if key.startswith("lang_"):
