@@ -52,14 +52,31 @@ main {
 </header>
 
 <main>
-<p>Find foreign language speakers near you!</p>
-<div class="field">
-    <p><button onclick="location='{% url signup %}';">Sign up!</button></p>
-</div>
-<p>&nbsp;</p>
-<p>Already a member?</p>
-<div class="field">
-    <button onclick="location='{% url login %}';">Login</button>
+<div class="split loginform">
+    <div>
+        <p>Welcome!</p>
+        <p><strong><em>Spikizi</em></strong> (say, "speak easy") is a place for you to
+        find people who speak the same languages you do.</p>
+        <p>Who it's for:</p>
+        <ul>
+            <li>Expats and immigrants who miss the sound of their homeland...</li>
+            <li>Language learners looking for people to practice with...</li>
+            <li>Travelers who need a tour guide...</li>
+            <li>Anyone who wants to find someone else to speak to!</li>
+        </ul>
+        <p>Find foreign language speakers near you!</p>
+        <div class="field">
+            <p><button onclick="location='{% url signup %}';">Sign up!</button></p>
+        </div>
+        <p>&nbsp;</p>
+    </div>
+    <div>
+        <p>Already a member?</p>
+        <div class="field">
+            <button onclick="location='{% url login %}';">Login</button>
+        </div>
+        <p>&nbsp;</p>
+    </div>
 </div>
 </main>
 
