@@ -73,15 +73,15 @@ ul.languages li {
 <p>{{ error }}</p>
 {% endif %}
 <div class="split">
-    <form method="post">
+    <form method="post" autofill="off">
         {% csrf_token %}
         <div class="field">
             <label>Email</label>
-            <input type="email" name="email">
+            <input type="email" id="email" name="email" value="{{ email }}" autocomplete="off">
         </div>
         <div class="field">
             <label>Password</label>
-            <input type="password" name="password">
+            <input type="password" id="password" name="password" value="{{ password }}" autocomplete="off">
         </div>
         <div class="field">
             <button type="submit">Login</button>

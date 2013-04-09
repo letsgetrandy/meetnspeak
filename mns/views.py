@@ -67,6 +67,8 @@ def login(request):
             context['error'] = str(e)
         #except Exception as err:
         #    context['error'] = str(err)
+        context['email'] = email
+        context['password'] = password
     return render(request, 'login.html', context)
 
 
@@ -94,6 +96,8 @@ def signup(request):
             context['error'] = str(e)
         except api.Forbidden as e:
             context['error'] = str(e)
+        context['email'] = email
+        context['password'] = password
     return render(request, 'signup.html', context)
 
 
