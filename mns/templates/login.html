@@ -7,6 +7,13 @@
 {% block styles %}
 {{ block.super }}
 <style>
+h3 {
+    color:#bbc;
+    font-family:serif;
+    font-size:48px;
+    font-style:italic;
+    font-weight:500;
+}
 .head {
     border-radius:10px;
     height:2em;
@@ -38,7 +45,22 @@ ul.languages li {
     margin:0;
     padding:0;
 }
+form {
+    background:#333;
+    background:rgba(255,255,255,.1);
+    border-radius:1em;
+    margin:2em;
+    padding:2em 1em 1em;
+}
+form input[type=email],
+form input[type=password] {
+    background:#ddd;
+    color:#666;
+}
 @media screen and (max-width:640px) {
+    h3 {
+        text-align:center;
+    }
     .mapdiv {
         text-align:center;
     }
@@ -51,9 +73,42 @@ ul.languages li {
         top:10px;
         z-index:2;
     }
-}
-.split > :first-child {
-    padding-bottom:60px;
+    .field input[type=email],
+    .field input[type=password] {
+        border:1px solid #666;
+        color: #666;
+        font-size:16px;
+        margin:0;
+        padding:8px 5px 8px 36px;
+    }
+    .field input[type=email] {
+        background:#fff url(/static/user.gif) no-repeat;
+    }
+    .field input[type=password] {
+        background:#fff url(/static/key.gif) no-repeat;
+    }
+    .field button {
+        background: rgb(33,33,33); /* Old browsers */
+        background: -moz-linear-gradient(top, rgba(33,33,33,1) 0%, rgba(28,28,28,1) 43%, rgba(0,0,0,1) 100%);
+        background: -webkit-linear-gradient(top, rgba(33,33,33,1) 0%,rgba(28,28,28,1) 43%,rgba(0,0,0,1) 100%);
+        background: -ms-linear-gradient(top, rgba(33,33,33,1) 0%,rgba(28,28,28,1) 43%,rgba(0,0,0,1) 100%);
+        background: linear-gradient(to bottom, rgba(33,33,33,1) 0%,rgba(28,28,28,1) 43%,rgba(0,0,0,1) 100%);
+        border:#111;
+        color:#fff;
+        margin-top:.6em;
+        width:100%;
+    }
+    form {
+        background:none;
+        margin:0;
+        padding:0;
+    }
+    form .field {
+        margin:0;
+    }
+    form .field label {
+        display:none;
+    }
 }
 .split > :first-child + * {
     text-align:center;
@@ -64,7 +119,7 @@ ul.languages li {
 {% block body %}
 <header>
 <div class="head">
-    <div class="content">Spikizi! Login</div>
+    <div class="content">Login</div>
 </div>
 </header>
 
@@ -72,26 +127,25 @@ ul.languages li {
 {% if error %}
 <p>{{ error }}</p>
 {% endif %}
-<div class="split">
+    <h3>Spikizi</h3>
+    <p>Please enter your email address and password here to sign in.</p>
+    <p>Not a member yet? <a href="{% url signup %}">Sign up</a> now!</p>
+    <p>&nbsp;</p>
     <form method="post" autofill="off">
         {% csrf_token %}
         <div class="field">
             <label>Email</label>
-            <input type="email" id="email" name="email" value="{{ email }}" autocomplete="off">
+            <input type="email" id="email" name="email" value="{{ email }}" autocomplete="off" placeholder="email address">
         </div>
         <div class="field">
             <label>Password</label>
-            <input type="password" id="password" name="password" value="{{ password }}" autocomplete="off">
+            <input type="password" id="password" name="password" value="{{ password }}" autocomplete="off" placeholder="password">
         </div>
         <div class="field">
             <button type="submit">Login</button>
         </div>
     </form>
-    <div class="field alternate">
-        <p>Not a member yet?</p>
-        <button onclick="location='/signup/';">Sign up</button>
-    </div>
-</div>
+    <p>&nbsp;</p>
 </main>
 
 <footer>
