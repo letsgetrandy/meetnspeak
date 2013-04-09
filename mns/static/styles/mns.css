@@ -180,6 +180,14 @@ ul.listing a:active {
     background:#111;
 }
 
+.fieldsplit,
+.fieldsplit > .field {
+    overflow:hidden;
+}
+.fieldsplit > .field:first-child {
+    float:left;
+    width:50%;
+}
 .field {
     margin:0 10px 15px;
     position:relative;
@@ -193,6 +201,7 @@ ul.listing a:active {
     display:inline;
 }
 */
+.field input[type=tel],
 .field input[type=text],
 .field input[type=email],
 .field input[type=password] {

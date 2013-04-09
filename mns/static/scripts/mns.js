@@ -31,6 +31,15 @@ if (typeof mns == "undefined") {
                 $(selector).val(val);
             }
             return s;
+        },
+
+        get_geo: function(success, fail) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success,
+                    function() { fail(true); });
+            } else {
+                fail(false);
+            }
         }
     }
 }

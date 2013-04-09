@@ -10,7 +10,7 @@ from functools import wraps
 #import re
 import api
 import api_v1
-#import sys
+import sys
 
 
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
@@ -124,7 +124,7 @@ def profile(request):
     if request.method == 'POST':
         form = {}
         form['name'] = request.POST.get('name')
-        form['dob'] = request.POST.get('dob')
+        form['age'] = request.POST.get('age', '')
         form['gender'] = request.POST.get('gender')
         form['hometown'] = request.POST.get('hometown')
         languages = []
@@ -133,6 +133,7 @@ def profile(request):
                 code = key[5:]
                 languages.append("%s=%s" % (code, val))
         form['languages'] = ",".join(languages)
+        print >> sys.stderr, form
         backend.set_profile(token, **form)
     context['profile'] = backend.get_profile(token)
     context['lang_options'] = api_v1.language_name
