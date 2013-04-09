@@ -137,7 +137,8 @@ def profile(request):
             if key.startswith("lang_"):
                 code = key[5:]
                 languages.append("%s=%s" % (code, val))
-        form['languages'] = ",".join(languages)
+        if languages:
+            form['languages'] = ",".join(languages)
         print >> sys.stderr, form
         backend.set_profile(token, **form)
     context['profile'] = backend.get_profile(token)
