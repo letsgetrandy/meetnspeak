@@ -69,7 +69,7 @@ class Profile:
         #self.id = kwargs['id']
         self.name = kwargs['name'] or ""
         self.age = kwargs['age'] or ""
-        self.gender = int(kwargs.get('gender'0) or 0)
+        self.gender = int(kwargs.get('gender') or 0)
         self.hometown = kwargs['hometown'] or ""
         self.location = kwargs['location'] or ""
         langnames = {c: language_name[c] for c in kwargs['languages'].keys()}
