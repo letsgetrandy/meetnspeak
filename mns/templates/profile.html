@@ -146,7 +146,7 @@ ul.languages select {
     </div>
     <div class="mapdiv">
         Location:<br>
-        <a href="#" class="map"><img src="http://maps.googleapis.com/maps/api/staticmap?format=jpg&center=chicago+il+usa&zoom=13&size=550x550&sensor=false&markers=color:blue%7CChicago+IL+USA"></a>
+        <a href="#" class="map"><img src="{% if profile.location %}http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }}{% endif %}"></a>
         <span class="locate">update</span>
     </div>
 </div>
