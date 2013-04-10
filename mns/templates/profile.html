@@ -50,17 +50,14 @@ ul.languages select {
     padding:10px;
     position:relative;
 }
-.mapdiv img {
-    box-shadow:0 0 10px #bbf;
-    width:100%;
-}
-.mapdiv .locate {
-    color:#fff;
-    font-size:1.4em;
-    position:absolute;
-    right:20px;
-    text-shadow:1px 1px 4px #000;
-    top:40px;
+.mapdiv .map {
+    {% if profile.location %}
+    background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }});
+    {% endif %}
+    background-position:center;
+    background-repeat:no-repeat;
+    display:block;
+    height:400px;
 }
 @media screen and (min-width:900px){
     .mapdiv {
@@ -145,9 +142,8 @@ ul.languages select {
         </form>
     </div>
     <div class="mapdiv">
-        Location:<br>
-        <a href="#" class="map"><img src="{% if profile.location %}http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }}{% endif %}"></a>
-        <span class="locate">update</span>
+        Update location:<br>
+        <a href="#" class="map"></a>
     </div>
 </div>
 </main>
