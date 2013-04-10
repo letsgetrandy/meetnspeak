@@ -3,5 +3,6 @@ venv
 *.pid
 .env
 .DS_Store
+redacted*
 local
 Makefile
