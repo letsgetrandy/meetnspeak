@@ -245,6 +245,7 @@ ul.listing a:active {
 }
 .switch {
     border:1px solid #333;
+    -webkit-border-radius:24px;
     border-radius:24px;
     height:24px;
     overflow:hidden;
@@ -299,6 +300,7 @@ ul.listing a:active {
     background: -ms-radial-gradient(center, ellipse cover, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
     background: radial-gradient(ellipse at center, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 100%);
     border:1px solid #333;
+    -webkit-border-radius:30px;
     border-radius:30px;
     box-shadow:0 0 3px #333;
     display:inline-block;
