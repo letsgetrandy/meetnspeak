@@ -2,7 +2,7 @@
 #from django.contrib import auth
 from django.core.urlresolvers import reverse
 #from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 #from mns.models import APISession
 from functools import wraps
@@ -110,15 +110,23 @@ def search(request):
 
 @login_required()
 def search_ajax(request):
+    # don't allow my service to get hijacked
+    from urlparse import urlparse
+    u = urlparse(request.META.get('HTTP_REFERER'))
+    if u.hostname not in [
+            'localhost',
+            'www.spikizi.com',
+            'spikizi.herokuapp.com'
+        ]:
+        raise Http404
+
     #context = {}
     #token = request.session.get('token')
     backend = api_v1.MNSAPI()
     form = {}
-    form['foo'] = 'bar'
+    form['pos'] = request.GET.get('pos')
     result = backend.search(**form)
-    result['referer'] = request.META.get('HTTP_REFERER')
     return HttpResponse(json.dumps(result), mimetype='application/json')
-    # result  # '{"foo":"bar"}'  # render(request, 'search.html', context)
 
 
 @login_required()

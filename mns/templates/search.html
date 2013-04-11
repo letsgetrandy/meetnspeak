@@ -38,7 +38,7 @@ main {
 <div class="split">
     <div id="map_canvas"></div>
     <div id="listing">
-        <div><button class="search">Search</button></div>
+        <div class="field"><button class="search" disabled>Search</button></div>
         <ul>
             <li>blah </li>
             <li>blah </li>
@@ -56,11 +56,12 @@ main {
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true" type="text/javascript"></script>
 {{ block.super }}
 <script>
-$('button.search').click(function(event) {
+function do_search(position) {
     $.ajax({
         async: true,
         data: {
-                langs:['EN','SP']
+            pos: position,
+            langs:['EN','SP']
             },
         type: 'GET',
         url: '{% url search-ajax %}'
@@ -74,6 +75,20 @@ $('button.search').click(function(event) {
         //
         //console.log('always');
     });
+}
+
+mg = new MapGeo({
+    mapdiv: 'map_canvas',
+    on_geo: function(position) {
+            do_search(position);
+            $('button.search').prop('disabled',false).click(function(event) {
+                do_search(position);
+            });
+        }
 });
+
+
+//$('button.search').click(do_search);
+
 </script>
 {% endblock %}
