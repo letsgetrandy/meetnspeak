@@ -38,6 +38,7 @@ main {
 <div class="split">
     <div id="map_canvas"></div>
     <div id="listing">
+        <div><button class="search">Search</button></div>
         <ul>
             <li>blah </li>
             <li>blah </li>
@@ -54,4 +55,25 @@ main {
 {% block scripts %}
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true" type="text/javascript"></script>
 {{ block.super }}
+<script>
+$('button.search').click(function(event) {
+    $.ajax({
+        async: true,
+        data: {
+                langs:['EN','SP']
+            },
+        type: 'GET',
+        url: '{% url search-ajax %}'
+    }).done(function(data) {
+        //
+        console.log(data);
+    }).fail(function(xhr){
+        //
+        console.log(xhr);
+    }).always(function(){
+        //
+        //console.log('always');
+    });
+});
+</script>
 {% endblock %}

@@ -210,3 +210,7 @@ class MNSAPI(APIBase):
     def set_profile(self, token, **form):
         data = self.post('/api/1.0/profile/', head={'token': token}, data=form)
         return data['success']
+
+    def search(self, **form):
+        data = self.get('/api/1.0/search/', data=form)
+        return data

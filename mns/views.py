@@ -2,11 +2,11 @@
 #from django.contrib import auth
 from django.core.urlresolvers import reverse
 #from django.contrib.auth.decorators import login_required
-#from django.http import HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 #from mns.models import APISession
 from functools import wraps
-#import json
+import json
 #import re
 import api
 import api_v1
@@ -106,6 +106,19 @@ def search(request):
     context = {}
     #token = request.session.get('token')
     return render(request, 'search.html', context)
+
+
+@login_required()
+def search_ajax(request):
+    #context = {}
+    #token = request.session.get('token')
+    backend = api_v1.MNSAPI()
+    form = {}
+    form['foo'] = 'bar'
+    result = backend.search(**form)
+    result['referer'] = request.META.get('HTTP_REFERER')
+    return HttpResponse(json.dumps(result), mimetype='application/json')
+    # result  # '{"foo":"bar"}'  # render(request, 'search.html', context)
 
 
 @login_required()
