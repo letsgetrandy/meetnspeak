@@ -111,6 +111,8 @@ header.profile .head .content {
     width:100%;
 }
 header.profile .head .image {
+    background:rgb(255,255,255);
+    background:rgba(255,255,255,.5);
     border:1px solid #000;
     border-radius:50%;
     box-shadow:0 0 10px #333;
