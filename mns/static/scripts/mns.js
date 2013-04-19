@@ -311,15 +311,19 @@ MapGeo.prototype = {
 
     geo_fail: function (self, supported)
     {
-        var s;
-        if (supported) {
-            s = "An error occurred while getting your location.";
+        if (self.config.on_geo_fail) {
+            self.config.on_geo_fail(supported);
         } else {
-            s = "Your browser doesn't support geolocation.";
-        }
-        if (self.map_loaded) {
-            var pos = new google.maps.LatLng(60, 105);
-            self.show_info_window(pos, s);
+            var s;
+            if (supported) {
+                s = "An error occurred while getting your location.";
+            } else {
+                s = "Your browser doesn't support geolocation.";
+            }
+            if (self.map_loaded) {
+                var pos = new google.maps.LatLng(60, 105);
+                self.show_info_window(pos, s);
+            }
         }
     },
 

@@ -50,6 +50,24 @@ ul.languages select {
     padding:10px;
     position:relative;
 }
+.mapdiv .manual {
+    height:0;
+    overflow:hidden;
+    -webkit-transition:height 100ms;
+    -moz-transition:height 100ms;
+    transition:height 100ms;
+}
+.mapdiv .manual input {
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    font-size:14px;
+    padding:3px;
+}
+.mapdiv .manual button {
+    font-size:14px;
+    padding:4px 10px;
+}
 .mapdiv .map {
     {% if profile.location %}
     background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }});
@@ -142,7 +160,11 @@ ul.languages select {
         </form>
     </div>
     <div class="mapdiv">
-        Update location:<br>
+        Update location:
+        <div class="manual">
+            <input type="text" id="manual" placeholder="Enter a location">
+            <button>Update</button>
+        </div>
         <a href="#" class="map"></a>
     </div>
 </div>
@@ -176,6 +198,23 @@ $(function() {
         mns.langOptions("#lang_" + data.value);
     });
 
+    var manual = $(".mapdiv .manual");
+    manual.find("input,button").on("click keypress", function(event) {
+        if (event.which == 13 ||
+            (event.type == "click" && $(event.target).is("button")))
+        {
+            event.preventDefault();
+            manual.height(0);
+            mg.geocode(manual.find("input").val());
+            manual.find("input").val("");
+        }
+    });
+
+    function manual_address() {
+        var h = manual.find("input").outerHeight() + 4;
+        manual.height(h);
+    }
+
     function update_position(position) {
         var lat = position.lat,
             lng = position.lng,
@@ -192,9 +231,14 @@ $(function() {
     var mg = new MapGeo({
         on_geo: function(position) {
             //update_position(position);
-            mg.geocode(position.lat + "," + position.lng);
+            //mg.geocode(position.lat + "," + position.lng);
+            manual_address();
+        },
+        on_geo_fail: function(supported) {
+            manual_address();
         },
         on_geocode: function(position) {
+            console.log(position);
             update_position(position);
         }
     });
