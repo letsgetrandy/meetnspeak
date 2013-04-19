@@ -6,9 +6,8 @@
 {% block styles %}
 {% load compressed %}
 {% compressed_css 'main' %}
-{% comment %}<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}styles/mns.css">{% endcomment %}
 {% endblock %}
-<script type="text/javascript" src="{{ STATIC_URL }}lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/lib/jquery-1.9.1.min.js"></script>
 </head>
 
 <body class="{% block bodyclass %}{% endblock %}">
@@ -34,7 +33,6 @@
 </div>
 {% block scripts %}
 {% compressed_js 'main' %}
-{% comment %}<script src="{{ STATIC_URL }}/scripts/mns.js" type="text/javascript"></script>{% endcomment %}
 <script>
 new TouchMenu({ua:"touch"});
 </script>
