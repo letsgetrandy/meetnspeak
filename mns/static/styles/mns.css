@@ -1,5 +1,5 @@
 .uisprite {
-    background-image:url(../uisprite.png);
+    background-image:url(../images/uisprite.png);
     background-repeat:no-repeat;
 }
 
@@ -48,7 +48,7 @@ header.min .head .content {
 }
 
 main {
-    background:url(../black-tile.jpg);
+    background:url(../images/black-tile.jpg);
     border: 1px solid #222;
     border-width:1px 0;
     box-shadow:0 0 10px #333;
@@ -85,7 +85,7 @@ header.profile .head {
     position:relative;
 }
 header.profile .head .blur {
-    background:url(../pattern.jpg);
+    background:url(../images/pattern.jpg);
     left:0;
     min-height:8em;
     padding:10px;
@@ -228,10 +228,10 @@ ul.listing a:active {
     padding:8px 5px 8px 36px;
 }
 .loginform input[type=email] {
-    background:#fff url(../user.gif) no-repeat;
+    background:#fff url(../images/user.gif) no-repeat;
 }
 .loginform input[type=password] {
-    background:#fff url(../key.gif) no-repeat;
+    background:#fff url(../images/key.gif) no-repeat;
 }
 @media screen and (max-width:640px){
     .loginform button {

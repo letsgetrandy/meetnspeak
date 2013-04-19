@@ -3,7 +3,7 @@ import os
 import dj_database_url
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
+DEBUG = False  # bool(os.environ.get('DJANGO_DEBUG', ''))
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -63,7 +63,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'collected_static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -74,6 +74,10 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'static'),
+    #os.path.join(PROJECT_ROOT, 'scripts/'),
+    #os.path.join(PROJECT_ROOT, 'styles/'),
+    #os.path.join(PROJECT_ROOT, 'images/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -83,6 +87,34 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+
+#PIPELINE = False
+
+PIPELINE_CSS = {
+    'main': {
+        'source_filenames': (
+            'styles/*.css',
+        ),
+        'output_filename': 'mns.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+PIPELINE_JS = {
+    'main': {
+        'source_filenames': (
+            'scripts/*.js',
+        ),
+        'output_filename': 'mns.js',
+    },
+}
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSminCompressor'
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'v8hik-8)sboec2wtsfw=w9s0*ixrg0c3n=+jg1l*m7cfk)3^rq'
@@ -127,10 +159,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'pipeline',
     'mns',
 )
 
@@ -162,3 +191,4 @@ LOGGING = {
         },
     }
 }
+
