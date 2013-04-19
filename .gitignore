@@ -6,4 +6,4 @@ venv
 redacted*
 local
 Makefile
-collected_static/*
+collected_static
