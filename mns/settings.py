@@ -3,7 +3,7 @@ import os
 import dj_database_url
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-DEBUG = False  # bool(os.environ.get('DJANGO_DEBUG', ''))
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -75,9 +75,6 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_ROOT, 'static'),
-    #os.path.join(PROJECT_ROOT, 'scripts/'),
-    #os.path.join(PROJECT_ROOT, 'styles/'),
-    #os.path.join(PROJECT_ROOT, 'images/'),
 )
 
 # List of finder classes that know how to find static files in
