@@ -43,6 +43,94 @@ if (typeof mns == "undefined") {
     }
 }
 
+function Pattern() {
+    if (arguments.length) {
+        var arg = arguments[0];
+        if(arg.jquery) {
+            this._template = arg.html();
+        } else if (arg.innerHTML) {
+            this._template = arg.innerHTML;
+        } else if (typeof arg == "string") {
+            this._template = arg;
+        } else {
+            throw "Invalid pattern argument";
+        }
+    } else {
+        this._template = "";
+    }
+}
+Pattern.prototype = {
+
+    // to ease string concatenation
+    append: function(s) {
+        this._template += s;
+        return this;
+    },
+
+    // for console logging
+    toString: function() {
+        return "[Pattern]: " + this._template;
+    },
+
+    // render an object through the "template", into a string
+    render: function (data)
+    {
+        // allow repeating when an array is passed
+        if (!(data instanceof Array)) {
+            data = [data];
+        }
+        // the actual templating
+        var idx, val, out="",
+            re = new RegExp("\\[\\[([^\\]]+)\\]\\]");
+        for (idx in data) {
+            var match, obj = data[idx],
+                template = this._template;
+            while (match = re.exec(template)) {
+                switch(match[1].charAt(0)) {
+                // branch-for-true
+                case "?":
+                    template = this.branch(match[1],
+                                !!obj[match[1].substring(1)], template);
+                    break;
+                // branch-for-false
+                case "!":
+                    template = this.branch(match[1],
+                                !obj[match[1].substring(1)], template);
+                    break;
+                // default behavior
+                default:
+                    val = obj[match[1]] || "";
+                    template = template.replace(match[0], val);
+                    break;
+                }
+            }
+            out += template;
+        }
+        return out;
+    },
+
+    // helper function, for the branch-if-true or branch-if-false logic
+    branch: function (tag, cond, template)
+    {
+        var tagvar = tag.substring(1),
+            endtag = "[[" + tagvar + tag.charAt(0) + "]]",
+            a = template.indexOf("[[" + tag + "]]"),
+            b = template.indexOf(endtag);
+        if (b < 0) {
+            throw ("missing endtag: " + endtag);
+        }
+        if (cond) {
+            template = template.substring(0, a) +
+                template.substring(a + 4 + tag.length, b) +
+                template.substring(b + endtag.length);
+        } else {
+            template = template.substring(0, a) +
+                template.substring(b + endtag.length);
+        }
+        return template;
+    }
+}
+
 function TouchMenu(conf) {
     var defaults = {
         handle: "#draghandle",
@@ -181,7 +269,8 @@ TouchMenu.prototype = {
 function MapGeo (config) {
     var defaults = {
         mapdiv: null,
-        on_geo: null
+        on_geo: null,
+        on_geocode: null
     };
     this.init(mns.extend(defaults, config));
 }
@@ -199,7 +288,7 @@ MapGeo.prototype = {
         if (config.mapdiv) {
             this.init_maps(config.mapdiv);
         }
-        this.init_geo();
+        //this.init_geo();
     },
 
     init_geo: function (success, fail)
@@ -279,7 +368,40 @@ MapGeo.prototype = {
         if (this.infowindow) {
             this.infowindow.setMap(null);
         }
+    },
+
+    geocode: function(address)
+    {
+        var self = this;
+        $.ajax({
+            url:'http://maps.googleapis.com/maps/api/geocode/json?address=' +
+                address + '&sensor=false',
+            data: {
+                address: address,
+                sensor: false
+            },
+            type: 'GET',
+            dataType: 'json'
+        }).done(function(data) {
+            if (data.results.length) {
+                var r = data.results[0], fmt = [];
+                for (var i=0; i<r.address_components.length; i++) {
+                    if (r.address_components[i].types.join(',').match(/locality|country/)) {
+                        fmt.push(r.address_components[i].short_name);
+                    }
+                }
+                if (self.config.on_geocode) {
+                    self.config.on_geocode({
+                        lat: r.geometry.location.lat,
+                        lng: r.geometry.location.lng,
+                        description: fmt.join(', ')
+                    });
+                }
+            }
+        }).fail(function() {
+            //console.log('error');
+        }).always(function() {
+            //console.log('done');
+        });
     }
-
 };
-

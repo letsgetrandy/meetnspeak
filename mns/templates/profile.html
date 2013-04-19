@@ -161,44 +161,47 @@ $(function() {
     });
     $(".lang_heading select").change( function(event) {
         var self = $(this),
-            val = self.val(),
-            name = self.find("option:selected").text();
+            data = {
+                    value:self.val(),
+                    name:self.find("option:selected").text()
+                };
         event.preventDefault();
         self.selectedIndex = 0;
         $("#lang_empty").remove();
-        $("ul.languages").append("<li><label>" + name +
-            "</label><select name=\"lang_" + val + "\" id=\"lang_" + val +
-            "\"><option value=\"1\"></option></select></li>");
-        mns.langOptions("#lang_" + val);
+        var pattern = new Pattern(
+                '<li><label>[[name]]</label>' +
+                '<select name="lang_[[value]]" id="lang_[[value]]"' +
+                '<option value="1"></option></select></li>');
+        $("ul.languages").append(pattern.render(data));
+        mns.langOptions("#lang_" + data.value);
     });
 
+    function update_position(position) {
+        var lat = position.lat,
+            lng = position.lng,
+            s = 'http://maps.googleapis.com/maps/api/staticmap?' +
+                'format=jpg&center=' + lat + ',' + lng +
+                '&zoom=12&size=550x550&sensor=false&markers=color:blue%7C' +
+                lat + ',' + lng;
+        $('.mapdiv .map').css('background', 'url('+s+')');
+        $('.location').html(position.description);
+        $('#location').val(lat + ',' + lng);
+    }
+
     // TODO
-    var mg = new MapGeo({});
+    var mg = new MapGeo({
+        on_geo: function(position) {
+            //update_position(position);
+            mg.geocode(position.lat + "," + position.lng);
+        },
+        on_geocode: function(position) {
+            update_position(position);
+        }
+    });
 
     $('.mapdiv .map').click(function(event) {
         event.preventDefault();
-
-        // TODO
-        mns.get_geo(function(position) {
-            var lat = position.coords.latitude,
-                lng = position.coords.longitude,
-                s = 'http://maps.googleapis.com/maps/api/staticmap?' +
-                    'format=jpg&center=' + lat + ',' + lng +
-                    '&zoom=12&size=550x550&sensor=false&markers=color:blue%7C' +
-                    lat + ',' + lng;
-            $('.mapdiv .map img')[0].src = s;
-            $('.location').html(lat + ',' + lng);
-            $('#location').val(lat + ',' + lng);
-
-            //alert(lat + ',' + lng);
-
-        }, function(supported) {
-            if (supported) {
-                alert("an error occurred");
-            } else {
-                alert('your browser doesn\'t support geolocation');
-            }
-        });
+        mg.init_geo();
     });
 });
 </script>
