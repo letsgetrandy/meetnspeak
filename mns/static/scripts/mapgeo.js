@@ -1,13 +1,16 @@
-function MapGeo (config) {
-    var defaults = {
-        mapdiv: null,
-        on_geo: null,
-        on_geocode: null
-    };
-    this.init(mns.extend(defaults, config));
-}
+/* global mns:true */
 
-MapGeo.prototype = {
+mns.define("MapGeo", {
+
+    __init__: function(config) {
+        var defaults = {
+            mapdiv: null,
+            on_geo: null,
+            on_geocode: null
+        };
+        this.init(mns.extend(defaults, config));
+    },
+
     init: function (config)
     {
         this.config = config;
@@ -141,4 +144,4 @@ MapGeo.prototype = {
             //console.log('done');
         });
     }
-};
+});

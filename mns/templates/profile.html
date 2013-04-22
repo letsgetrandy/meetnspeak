@@ -190,7 +190,7 @@ $(function() {
         event.preventDefault();
         self.selectedIndex = 0;
         $("#lang_empty").remove();
-        var pattern = new Pattern(
+        var pattern = new mns.Pattern(
                 '<li><label>[[name]]</label>' +
                 '<select name="lang_[[value]]" id="lang_[[value]]"' +
                 '<option value="1"></option></select></li>');
@@ -228,7 +228,7 @@ $(function() {
     }
 
     // TODO
-    var mg = new MapGeo({
+    var mg = new mns.MapGeo({
         on_geo: function(position) {
             //update_position(position);
             //mg.geocode(position.lat + "," + position.lng);

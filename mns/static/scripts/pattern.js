@@ -1,21 +1,23 @@
-function Pattern() {
-    if (arguments.length) {
-        var arg = arguments[0];
-        if(arg.jquery) {
-            this._template = arg.html();
-        } else if (arg.innerHTML) {
-            this._template = arg.innerHTML;
-        } else if (typeof arg == "string") {
-            this._template = arg;
-        } else {
-            throw "Invalid pattern argument";
-        }
-    } else {
-        this._template = "";
-    }
-}
+/* global mns:true */
 
-Pattern.prototype = {
+mns.define("Pattern", {
+
+    __init__: function() {
+        if (arguments.length) {
+            var arg = arguments[0];
+            if(arg.jquery) {
+                this._template = arg.html();
+            } else if (arg.innerHTML) {
+                this._template = arg.innerHTML;
+            } else if (typeof arg == "string") {
+                this._template = arg;
+            } else {
+                throw "Invalid pattern argument";
+            }
+        } else {
+            this._template = "";
+        }
+    },
 
     // to ease string concatenation
     append: function(s) {
@@ -85,4 +87,4 @@ Pattern.prototype = {
         }
         return template;
     }
-}
+});

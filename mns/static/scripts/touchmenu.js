@@ -1,25 +1,27 @@
-function TouchMenu(conf) {
-    var defaults = {
-        handle: "#draghandle",
-        wrapper: ".body_wrapper",
-        openClass: "navopen",
-        menu: ".sidenav",
-        ua: navigator.userAgent
-    };
-    this.conf = $.extend(defaults, conf);
-    if (this.checkUserAgent()) {
-        this.init();
-    } else {
-        $(this.conf.handle).hide();
-    }
-}
+/* global mns:true */
 
-TouchMenu.prototype = {
+mns.define("TouchMenu", {
 
     openWidth: 260,
     openX: 0,
     startx:0,
     events:{},
+
+    __init__: function(conf) {
+        var defaults = {
+            handle: "#draghandle",
+            wrapper: ".body_wrapper",
+            openClass: "navopen",
+            menu: ".sidenav",
+            ua: navigator.userAgent
+        };
+        this.conf = $.extend(defaults, conf);
+        //if (this.checkUserAgent()) {
+            this.init();
+        //} else {
+        //    $(this.conf.handle).hide();
+        //}
+    },
 
     checkUserAgent: function() {
         var rx = /android|iphone|ipod|ipad|blackberry|touch|tablet|mobile safari|iemobile|windows phone/i;
@@ -131,4 +133,4 @@ TouchMenu.prototype = {
         event.originalEvent.touches = [event];
         this.touchend(event);
     }
-};
+});
