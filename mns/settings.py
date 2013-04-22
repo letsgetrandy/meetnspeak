@@ -104,6 +104,7 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'main': {
         'source_filenames': (
+            'scripts/mns.js',
             'scripts/*.js',
         ),
         'output_filename': 'mns.js',

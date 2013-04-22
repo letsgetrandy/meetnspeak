@@ -23,10 +23,21 @@ ul.languages li {
 .mapdiv {
     padding:10px;
 }
+.mapdiv .map {
+    {% if profile.location %}
+    background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }});
+    {% endif %}
+    background-position:center;
+    background-repeat:no-repeat;
+    display:block;
+    height:400px;
+}
+/*
 .mapdiv img {
     box-shadow:0 0 15px #bbf;
     width:100%;
 }
+*/
 @media screen and (min-width:900px){
     .mapdiv {
         text-align:right;
@@ -47,7 +58,7 @@ ul.languages li {
         <div class="right">{{ profile.hometown }}</div>
     </div>
     <div class="image">
-        <img src="{{ STATIC_URL }}trump.jpg">
+        <img src="{{ STATIC_URL }}images/default_profile.png">
     </div>
 </div>
 </header>
@@ -63,7 +74,7 @@ ul.languages li {
         </ul>
     </div>
     <div class="mapdiv">
-        <img src="http://maps.googleapis.com/maps/api/staticmap?format=jpg&center=chicago+il+usa&zoom=13&size=550x550&sensor=false&markers=color:blue%7CChicago+IL+USA">
+        <span class="map"></span>
     </div>
 </div>
 </main>
