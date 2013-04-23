@@ -20,6 +20,7 @@ mns.define("MapGeo", {
         this.info_window = null;
         this.overlays = [];
         this.geo_position = null;
+        this.markers = [];
 
         if (config.mapdiv) {
             this.init_maps(config.mapdiv);
@@ -171,5 +172,24 @@ mns.define("MapGeo", {
         }).always(function() {
             //console.log('done');
         });
+    },
+
+    clear_markers: function(loc)
+    {
+        while (this.markers.length) {
+            var m = this.markers.pop();
+            m.setMap(null);
+        }
+    },
+
+    add_marker: function(loc)
+    {
+        var myLatLng = new google.maps.LatLng(loc.lat, loc.lng),
+            marker = new google.maps.Marker({
+                position: myLatLng,
+                map: this.map
+            });
+        this.markers.push(marker);
+        return marker;
     }
 });
