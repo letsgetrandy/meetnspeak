@@ -38,11 +38,8 @@ main {
 <div class="split">
     <div id="map_canvas"></div>
     <div id="listing">
-        <div class="field"><button class="search">Search</button></div>
-        <ul>
-            <li>blah </li>
-            <li>blah </li>
-            <li>blah </li>
+        <div class="field"><button class="search" style="display:none;">Search</button></div>
+        <ul id="results">
         </ul>
     </div>
 </div>
@@ -56,10 +53,18 @@ main {
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true" type="text/javascript"></script>
 {{ block.super }}
 <script>
-$("#listing button.search").click(function(event){
-    do_search({lat:41.877114, lng:-87.643548});
-});
+
+function add_result(user) {
+    var myLatLng = new google.maps.LatLng(user.lat, user.lng);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: mg.map,
+        title: user.name
+    });
+    $('#results').append('<li>' + user.name + '</li>');
+}
 function do_search(position) {
+    $('#results').find('li').remove();
     $.ajax({
         async: true,
         data: {
@@ -69,29 +74,45 @@ function do_search(position) {
         type: 'GET',
         url: '{% url search-ajax %}'
     }).done(function(data) {
-        //
-        console.log(data);
+        for (var i=0; i<data.results.length; i++) {
+            add_result(data.results[i]);
+        }
     }).fail(function(xhr){
         //
         console.log(xhr);
     }).always(function(){
         //
         //console.log('always');
+        $("#listing button.search").hide();
     });
 }
 
-mg = new mns.MapGeo({
-    mapdiv: 'map_canvas',
-    on_geo: function(position) {
-            do_search(position);
-            $('button.search').prop('disabled',false).click(function(event) {
+var loc = {lat:'', lng:''},
+    mg = new mns.MapGeo({
+        mapdiv: 'map_canvas',
+        on_maps_init: function() {
+            {% if profile.location %}
+            var p = '{{ profile.location }}'.split(',');
+            loc.lat = p[0];
+            loc.lng = p[1];
+            mg.center(loc);
+            do_search(loc);
+            {% endif %}
+            $("#listing button.search").show();
+        },
+        on_geo: function(position) {
                 do_search(position);
-            });
-        }
+                $('button.search').prop('disabled',false).click(function(event) {
+                    do_search(position);
+                });
+            }
+    });
+{% if not profile.location %}
+$("#listing button.search").show();
+mg.init_geo();
+{% endif %}
+$("#listing button.search").click(function(event){
+    do_search(loc);
 });
-
-
-//$('button.search').click(do_search);
-
 </script>
 {% endblock %}

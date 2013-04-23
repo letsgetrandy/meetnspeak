@@ -70,26 +70,48 @@ mns.define("MapGeo", {
             lng: position.coords.longitude
         };
         if (self.map_complete) {
-            var pos = new google.maps.LatLng(
-                                position.coords.latitude,
-                                position.coords.longitude);
-
-            self.show_info_window(pos, "Location found using HTML5.");
+            //var pos = new google.maps.LatLng(
+            //                    position.coords.latitude,
+            //                    position.coords.longitude);
+            //
+            //self.show_info_window(pos, "Location found using HTML5.");
+            self.center({
+                lat:position.coords.latitude,
+                lng:position.coords.longitude
+            });
         }
         if (self.config.on_geo) {
             self.config.on_geo(self.geo_position);
         }
     },
 
+    maps_and_geo: function(self)
+    {
+        return (this.maps_complete && this.geo_complete);
+    },
+
     init_maps: function (mapdiv)
     {
-        var mapOptions = {
-            zoom: 6,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+        var self = this,
+            mapOptions = {
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
         this.map = new google.maps.Map(
                         document.getElementById(mapdiv), mapOptions);
+        google.maps.event.addListenerOnce(self.map, "idle",
+                        function(){
+                            self.map_init.apply(self);
+                        });
+
+    },
+
+    map_init: function()
+    {
         this.map_complete = true;
+        if (this.config.on_maps_init) {
+            this.config.on_maps_init();
+        }
     },
 
     show_info_window: function(pos, message)
@@ -100,6 +122,12 @@ mns.define("MapGeo", {
             position: pos,
             content: message
         });
+        this.map.setCenter(pos);
+    },
+
+    center: function(pt)
+    {
+        var pos = new google.maps.LatLng(pt.lat, pt.lng);
         this.map.setCenter(pos);
     },
 

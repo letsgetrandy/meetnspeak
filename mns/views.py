@@ -56,6 +56,7 @@ def login(request):
             backend = api_v1.MNSAPI()
             token = backend.login(email, password)
             request.session['token'] = token
+            request.session['profile'] = backend.get_profile(token)
             context['token'] = token
 
             # get notifications
@@ -103,8 +104,11 @@ def signup(request):
 
 @login_required()
 def search(request):
-    context = {}
+    context = {
+            'profile': request.session.get('profile', '')
+        }
     #token = request.session.get('token')
+    print >> sys.stderr, context
     return render(request, 'search.html', context)
 
 
@@ -162,7 +166,10 @@ def profile(request):
             form['languages'] = ",".join(languages)
         print >> sys.stderr, form
         backend.set_profile(token, **form)
-    context['profile'] = backend.get_profile(token)
+    p = backend.get_profile(token)
+    print >> sys.stderr, p
+    context['profile'] = p
+    request.session['profile'] = p
     context['lang_options'] = api_v1.language_name
     return render(request, 'profile.html', context)
 
