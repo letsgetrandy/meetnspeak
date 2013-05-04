@@ -21,6 +21,7 @@ mns.define("MapGeo", {
         this.overlays = [];
         this.geo_position = null;
         this.markers = [];
+        this.bounds = null;
 
         if (config.mapdiv) {
             this.init_maps(config.mapdiv);
@@ -98,6 +99,7 @@ mns.define("MapGeo", {
                 zoom: 6,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
+        this.bounds = new google.maps.LatLngBounds();
         this.map = new google.maps.Map(
                         document.getElementById(mapdiv), mapOptions);
         google.maps.event.addListenerOnce(self.map, "idle",
@@ -180,6 +182,7 @@ mns.define("MapGeo", {
             var m = this.markers.pop();
             m.setMap(null);
         }
+        this.bounds = new google.maps.LatLngBounds();
     },
 
     add_marker: function(loc)
@@ -189,7 +192,14 @@ mns.define("MapGeo", {
                 position: myLatLng,
                 map: this.map
             });
+        //console.log(marker);
+        this.bounds.extend(marker.position);
         this.markers.push(marker);
         return marker;
+    },
+
+    fit_bounds: function()
+    {
+        this.map.fitBounds(this.bounds);
     }
 });

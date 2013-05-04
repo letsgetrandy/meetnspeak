@@ -93,7 +93,7 @@ ul.languages select {
     <div class="content">My Profile</div>
     <div class="band">
         <div class="left">{% if profile.age %}{{ profile.age }} years old{% endif %}</div>
-        <div class="right location">{{ profile.location }}</div>
+        <div class="right location">{{ profile.location_name }}</div>
     </div>
     <div class="image">
         <img src="{{ STATIC_URL }}images/default_profile.png">
@@ -107,6 +107,7 @@ ul.languages select {
         <form method="post">
             {% csrf_token %}
             <input type="hidden" name="location" id="location" value="{{ profile.location }}">
+            <input type="hidden" name="location_name" id="location_name" value="{{ profile.location_name }}">
         <div class="field">
             <label>Name</label>
             <input type="text" name="name" value="{{ profile.name }}">
@@ -224,6 +225,7 @@ $(function() {
                 lat + ',' + lng;
         $('.mapdiv .map').css('background', 'url('+s+')');
         $('.location').html(position.description);
+        $('#location_name').val(position.description);
         $('#location').val(lat + ',' + lng);
     }
 

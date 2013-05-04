@@ -72,6 +72,7 @@ class Profile:
         self.gender = int(kwargs.get('gender') or 0)
         self.hometown = kwargs['hometown'] or ""
         self.location = kwargs['location'] or ""
+        self.location_name = kwargs.get('location_name') or ""
         langnames = {c: language_name[c] for c in kwargs['languages'].keys()}
         self.lang_keys = sorted(langnames, key=langnames.__getitem__)
         languages = {lang: {

@@ -24,6 +24,18 @@ main {
 #map_canvas {
     height:300px;
 }
+ul.matches {
+    list-style:none;
+    margin:1em;
+    padding:0;
+}
+ul.matches li {
+    font-weight:bold;
+}
+.matched {
+    font-size:.7em;
+    font-weight:normal;
+}
 </style>
 {% endblock %}
 
@@ -40,7 +52,7 @@ main {
     <div id="listing">
         <div class="field"><input type="text" id="loc" value="{{ profile.location }}"></div>
         <div class="field"><button class="search" style="display:none;">Search</button></div>
-        <ul id="results">
+        <ul id="results" class="matches">
         </ul>
     </div>
 </div>
@@ -59,10 +71,13 @@ function make_loc(s) {
     var p = s.split(',');
     return {lat:p[0], lng:p[1]};
 }
+var result_pattern = new mns.Pattern(
+    "<li>[[name]] <span class=\"matched\">([[matched_languages]])</span></li>"
+);
 function add_result(user) {
-    console.log(user);
+    //console.log(user);
     mg.add_marker(user);
-    $('#results').append('<li>' + user.name + '</li>');
+    $('#results').append(result_pattern.render(user));
 }
 function do_search(position) {
     $('#results').find('li').remove();
@@ -70,8 +85,8 @@ function do_search(position) {
     $.ajax({
         async: true,
         data: {
-            pos: position.lat + "," + position.lng,
-            langs:['EN','SP']
+            'location': position.lat + "," + position.lng,
+            'languages':['EN','SP'].join(",")
             },
         type: 'GET',
         url: '{% url search-ajax %}'
@@ -79,6 +94,7 @@ function do_search(position) {
         for (var i=0; i<data.results.length; i++) {
             add_result(data.results[i]);
         }
+        mg.fit_bounds();
     }).fail(function(xhr){
         //
         console.log(xhr);

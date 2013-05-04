@@ -1,4 +1,4 @@
-#from django.conf import settings
+from django.conf import settings
 #from django.contrib import auth
 from django.core.urlresolvers import reverse
 #from django.contrib.auth.decorators import login_required
@@ -115,20 +115,22 @@ def search(request):
 @login_required()
 def search_ajax(request):
     # don't allow my service to get hijacked
-    from urlparse import urlparse
-    u = urlparse(request.META.get('HTTP_REFERER'))
-    if u.hostname not in [
-            'localhost',
-            'www.spikizi.com',
-            'spikizi.herokuapp.com'
-        ]:
-        raise Http404
+    if not settings.DEBUG:
+        from urlparse import urlparse
+        u = urlparse(request.META.get('HTTP_REFERER'))
+        if u.hostname not in [
+                'localhost',
+                'www.spikizi.com',
+                'spikizi.herokuapp.com'
+            ]:
+            raise Http404
 
     #context = {}
     #token = request.session.get('token')
     backend = api_v1.MNSAPI()
     form = {}
-    form['pos'] = request.GET.get('pos')
+    form['location'] = request.GET.get('location')
+    form['languages'] = request.GET.get('languages')
     result = backend.search(**form)
     return HttpResponse(json.dumps(result), mimetype='application/json')
 
@@ -157,6 +159,7 @@ def profile(request):
         form['gender'] = request.POST.get('gender')
         form['hometown'] = request.POST.get('hometown')
         form['location'] = request.POST.get('location')
+        form['location_name'] = request.POST.get('location_name')
         languages = []
         for (key, val) in request.POST.items():
             if key.startswith("lang_"):
@@ -202,7 +205,7 @@ def messages(request, userid):
 
 
 @login_required()
-def settings(request):
+def user_settings(request):
     context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
