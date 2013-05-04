@@ -191,7 +191,7 @@ def user(request, userid):
     context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
-    context['profile'] = backend.get_user(token, 1)
+    context['profile'] = backend.get_user(token, userid)
     return render(request, 'user.html', context)
 
 
@@ -200,7 +200,7 @@ def messages(request, userid):
     context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
-    context['messages'] = backend.get_messages(token, 1)
+    context['messages'] = backend.get_messages(token, userid)
     return render(request, 'messages.html', context)
 
 

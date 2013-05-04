@@ -72,7 +72,7 @@ function make_loc(s) {
     return {lat:p[0], lng:p[1]};
 }
 var result_pattern = new mns.Pattern(
-    "<li>[[name]] <span class=\"matched\">([[matched_languages]])</span></li>"
+    "<li><a href=\"/user/[[id]]/\">[[name]]</a> <span class=\"matched\">([[matched_languages]])</span></li>"
 );
 function add_result(user) {
     //console.log(user);
