@@ -55,7 +55,7 @@ ul.languages li {
     <div class="content">{{ profile.name }}</div>
     <div class="band">
         <div class="left">{{ profile.age }} years old</div>
-        <div class="right">{{ profile.hometown }}</div>
+        <div class="right">{{ profile.location_name }}</div>
     </div>
     <div class="image">
         <img src="{{ STATIC_URL }}images/default_profile.png">
@@ -66,10 +66,12 @@ ul.languages li {
 <main>
 <div class="split">
     <div class="profile">
+        <p><strong>Gender:</strong> {{ profile.gender }}</p>
+
         <strong>Speaks:</strong>
         <ul class="languages">
             {% for l in profile.languages %}
-            <li>{{ l.name }} <em>{{ l.level }}</em></li>
+            <li>{{ l.name }} <em>({{ l.levelname }})</em></li>
             {% endfor %}
         </ul>
     </div>
