@@ -49,7 +49,7 @@ form {
     background:#333;
     background:rgba(255,255,255,.1);
     border-radius:1em;
-    margin:2em;
+    margin:1em 2em;
     padding:2em 1em 1em;
 }
 form input[type=email],
@@ -86,8 +86,10 @@ form input[type=password] {
     }
 }
 .textpad {
-    margin:2em;
-    padding:0 2em;
+    margin:0 2em;
+}
+.errors {
+    margin:2em 2em 0;
 }
 </style>
 {% endblock %}
@@ -107,12 +109,13 @@ form input[type=password] {
     <div>
         <div class="textpad">
             <p>Please enter your email address and password here to sign in.</p>
-            <p>Already signed up? <a href="{% url login %}">Log in</a> now!</p>
-            <p>&nbsp;</p>
+            <p>Not a member yet? <a href="{% url signup %}">Sign up</a> now!</p>
+            {% if error %}
+            <div class="errors">
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
         </div>
-        {% if error %}
-        <p>{{ error }}</p>
-        {% endif %}
         <form method="post" autofill="off" class="loginform">
             {% csrf_token %}
             <div class="field">
