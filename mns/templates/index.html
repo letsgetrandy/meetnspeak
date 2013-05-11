@@ -53,6 +53,9 @@ main {
 
 <main>
 <div class="split loginform">
+    <div style="text-align:center">
+        <img src="/static/images/spikizi.png">
+    </div>
     <div>
         <p>Welcome!</p>
         <p><strong><em>Spikizi</em></strong> (say, "speak easy") is a place for you to
@@ -64,15 +67,46 @@ main {
             <li>Travelers who need a tour guide...</li>
             <li>Anyone who wants to find someone else to speak to!</li>
         </ul>
-        <p>Find foreign language speakers near you!</p>
         <div class="field">
-            <p><button onclick="location='{% url signup %}';">Sign up!</button></p>
+            <button id="install">Install FirefoxOS app!</button>
+            <script>
+            (function(){
+                function install(ev) {
+                    ev.preventDefault();
+                    // define the manifest URL
+                    var manifest_url = "http://localhost:8000/static/manifest.webapp";
+                    // install the app
+                    var myapp = navigator.mozApps.install(manifest_url);
+                    myapp.onsuccess = function(data) {
+                        // App is installed, remove button
+                        this.parentNode.removeChild(this);
+                        alert('success');
+                    };
+                    myapp.onerror = function() {
+                        // App wasn't installed, info is in
+                        // installapp.error.name
+                        alert(this.error.name);
+                    };
+                };
+                // get a reference to the button and call install() on click
+                var button = document.getElementById('install');
+                button.addEventListener('click', install, false);
+            })();
+            </script>
         </div>
-        <p>&nbsp;</p>
+    </div>
+</div>
+<p>&nbsp;</p>
+<div class="split loginform">
+    <div>
+        <div class="field">
+            <p>Find foreign language speakers near you. It's free!</p>
+            <p><button onclick="location='{% url signup %}';">Sign up now!</button></p>
+        </div>
     </div>
     <div>
-        <p>Already a member?</p>
         <div class="field">
+            <p>Already a member?</p>
             <button onclick="location='{% url login %}';">Login</button>
         </div>
         <p>&nbsp;</p>

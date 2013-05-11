@@ -85,9 +85,6 @@ form input[type=password] {
         display:none;
     }
 }
-.split > :first-child + * {
-    text-align:center;
-}
 .textpad {
     margin:2em;
     padding:0 2em;
@@ -103,30 +100,36 @@ form input[type=password] {
 </header>
 
 <main>
-{% if error %}
-<p>{{ error }}</p>
-{% endif %}
-    <div class="textpad">
-        <h3>Spikizi</h3>
-        <p>Please enter your email address and password here to sign in.</p>
-        <p>Not a member yet? <a href="{% url signup %}">Sign up</a> now!</p>
+<div class="split">
+    <div style="text-align:center">
+        <img src="/static/images/spikizi.png">
+    </div>
+    <div>
+        <div class="textpad">
+            <p>Please enter your email address and password here to sign in.</p>
+            <p>Already signed up? <a href="{% url login %}">Log in</a> now!</p>
+            <p>&nbsp;</p>
+        </div>
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+        <form method="post" autofill="off" class="loginform">
+            {% csrf_token %}
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="email" name="email" value="{{ email }}" autocomplete="off" placeholder="email address">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="password" name="password" value="{{ password }}" autocomplete="off" placeholder="password">
+            </div>
+            <div class="field">
+                <button type="submit">Login</button>
+            </div>
+        </form>
         <p>&nbsp;</p>
     </div>
-    <form method="post" autofill="off" class="loginform">
-        {% csrf_token %}
-        <div class="field">
-            <label>Email</label>
-            <input type="email" id="email" name="email" value="{{ email }}" autocomplete="off" placeholder="email address">
-        </div>
-        <div class="field">
-            <label>Password</label>
-            <input type="password" id="password" name="password" value="{{ password }}" autocomplete="off" placeholder="password">
-        </div>
-        <div class="field">
-            <button type="submit">Login</button>
-        </div>
-    </form>
-    <p>&nbsp;</p>
+</div>
 </main>
 
 <footer>

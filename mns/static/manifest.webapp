@@ -1,0 +1,13 @@
+{
+    "name": "Spikizi",
+    "description": "Find foreign language speakers near you!",
+    "launch_path": "http://localhost:8000/user/notifications/",
+    "icons": {
+        "128": "/static/images/webapp.png"
+    },
+    "developer": {
+        "name": "Randy Hunt",
+        "url": "http://www.bbqiguana.com/"
+    },
+    "default_locale": "en"
+}
