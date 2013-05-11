@@ -445,6 +445,11 @@ form ~ .field.alternate {
 .sidenav .navprofile  .image {background-position:0 -36px; }
 .sidenav .navcontacts .image {background-position:-36px 0; }
 .sidenav .navsettings .image {background-position:-36px -36px;}
+.sidenav .navlogo {
+    background:url(../images/navlogo.png) center center no-repeat;
+    height:200px;
+    opacity:0.2;
+}
 
 .body_wrapper {
     margin:0;
