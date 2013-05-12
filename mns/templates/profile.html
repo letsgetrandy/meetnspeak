@@ -217,32 +217,26 @@ $(function() {
         manual.height(h);
     }
 
-    function update_position(position) {
-        var lat = position.lat,
-            lng = position.lng,
-            s = 'http://maps.googleapis.com/maps/api/staticmap?' +
-                'format=jpg&center=' + lat + ',' + lng +
-                '&zoom=12&size=550x550&sensor=false&markers=color:blue%7C' +
-                lat + ',' + lng;
-        $('.mapdiv .map').css('background', 'url('+s+')');
-        $('.location').html(position.description);
-        $('#location_name').val(position.description);
-        $('#location').val(lat + ',' + lng);
-    }
-
     // TODO
     var mg = new mns.MapGeo({
         on_geo: function(position) {
-            //update_position(position);
-            //mg.geocode(position.lat + "," + position.lng);
-            manual_address();
+            mg.geocode(position.lat + "," + position.lng);
+            //manual_address();
         },
         on_geo_fail: function(supported) {
             manual_address();
         },
         on_geocode: function(position) {
-            console.log(position);
-            update_position(position);
+            var lat = position.lat,
+                lng = position.lng,
+                s = 'http://maps.googleapis.com/maps/api/staticmap?' +
+                    'format=jpg&center=' + lat + ',' + lng +
+                    '&zoom=12&size=550x550&sensor=false&markers=color:blue%7C' +
+                    lat + ',' + lng;
+            $('.mapdiv .map').css('background', 'url('+s+')');
+            $('.location').html(position.description);
+            $('#location_name').val(position.description);
+            $('#location').val(lat + ',' + lng);
         }
     });
 
