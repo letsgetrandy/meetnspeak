@@ -84,6 +84,30 @@ window.mns = {
             mns.Exception.call(this, message);
         };
         c.prototype.name = n;
-    },
-
+    }
 }
+
+$(document).on("touchstart", ".switch", function(event) {
+    var self = $(this),
+        startX = event.pageX,
+        endX = event.pageX;
+    self.on("touchmove", function(event) {
+        //if(!event.originalEvent.touches) {
+        //    event.originalEvent.touches = [event];
+        //}
+        var t = event.originalEvent.touches[0];
+        endX = t.pageX;
+    });
+    self.on("touchend", function(event) {
+        self.off("touchmove");
+        self.off("touchend");
+        if (endX - startX > 10) {
+            self.find("input.on").click();
+            //console.log("slide right");
+        } else
+        if (endX - startX < -10) {
+            self.find("input.off").click();
+            //console.log("slide left");
+        }
+    });
+});
