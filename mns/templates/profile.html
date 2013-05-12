@@ -70,7 +70,7 @@ ul.languages select {
 }
 .mapdiv .map {
     {% if profile.location %}
-    background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }});
+    background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }}&key=AIzaSyC7gAuOSYC7_PAj81UNtiB_jIoooGEObII);
     {% endif %}
     background-position:center;
     background-repeat:no-repeat;
@@ -231,8 +231,8 @@ $(function() {
                 lng = position.lng,
                 s = 'http://maps.googleapis.com/maps/api/staticmap?' +
                     'format=jpg&center=' + lat + ',' + lng +
-                    '&zoom=12&size=550x550&sensor=false&markers=color:blue%7C' +
-                    lat + ',' + lng;
+                    '&zoom=12&size=550x550&sensor=true&markers=color:blue%7C' +
+                    lat + ',' + lng + '&key=AIzaSyC7gAuOSYC7_PAj81UNtiB_jIoooGEObII';
             $('.mapdiv .map').css('background', 'url('+s+')');
             $('.location').html(position.description);
             $('#location_name').val(position.description);
