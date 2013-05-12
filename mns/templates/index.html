@@ -67,32 +67,8 @@ main {
             <li>Travelers who need a tour guide...</li>
             <li>Anyone who wants to find someone else to speak to!</li>
         </ul>
-        <div class="field">
-            <button id="install">Install FirefoxOS app!</button>
-            <script>
-            (function(){
-                function install(ev) {
-                    ev.preventDefault();
-                    // define the manifest URL
-                    var manifest_url = "http://localhost:8000/static/manifest.webapp";
-                    // install the app
-                    var myapp = navigator.mozApps.install(manifest_url);
-                    myapp.onsuccess = function(data) {
-                        // App is installed, remove button
-                        this.parentNode.removeChild(this);
-                        alert('success');
-                    };
-                    myapp.onerror = function() {
-                        // App wasn't installed, info is in
-                        // installapp.error.name
-                        alert(this.error.name);
-                    };
-                };
-                // get a reference to the button and call install() on click
-                var button = document.getElementById('install');
-                button.addEventListener('click', install, false);
-            })();
-            </script>
+        <div class="field" class="install b2g">
+            <button class="install b2g">Install FirefoxOS app!</button>
         </div>
     </div>
 </div>

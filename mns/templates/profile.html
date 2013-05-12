@@ -97,7 +97,7 @@ ul.languages select {
     </div>
     <div class="image">
         <img src="{{ STATIC_URL }}images/default_profile.png" id="profile_image">
-        <input type="file" id="take-picture" accept="image/*" style="display:none">
+        <!--<input type="file" id="take-picture" accept="image/*" style="display:none">-->
     </div>
 </div>
 </header>
@@ -179,16 +179,6 @@ ul.languages select {
 {% block scripts %}
 {{ block.super }}
 <script>
-var takePicture = document.querySelector("#take-picture");
-takePicture.onchange = function (event) {
-    // Get a reference to the taken picture or chosen file
-    var files = event.target.files,
-        file;
-    if (files && files.length > 0) {
-        file = files[0];
-    }
-};
-
 $(function() {
     $("ul.languages select").each( function() {
         mns.langOptions(this);
