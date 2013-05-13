@@ -70,9 +70,10 @@ class Profile:
         self.name = kwargs['name'] or ""
         self.age = kwargs['age'] or ""
         self.gender = int(kwargs.get('gender') or 0)
-        self.hometown = kwargs['hometown'] or ""
+        #self.hometown = kwargs['hometown'] or ""
         self.location = kwargs['location'] or ""
         self.location_name = kwargs.get('location_name') or ""
+
         langnames = {c: language_name[c] for c in kwargs['languages'].keys()}
         self.lang_keys = sorted(langnames, key=langnames.__getitem__)
         languages = {lang: {
@@ -82,6 +83,11 @@ class Profile:
                 'levelname': language_level[level],
             } for lang, level in kwargs['languages'].items()}
         self.languages = [languages[key] for key in self.lang_keys]
+
+        profile = kwargs['profile']
+        self.website = profile['website'] or ""
+        self.twitter = profile['twitter'] or ""
+        self.hometown = profile['hometown'] or ""
 
     @property
     def male(self):
