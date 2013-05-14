@@ -131,7 +131,11 @@ class APIBase(object):
         conn.close
         j = json.loads(d)
         if st == 400:
-            raise api.BadRequest(j['error'])
+            #print >> sys.stderr, j
+            if j['token_expired']:
+                raise api.BadRequest(j['error'], True)
+            else:
+                raise api.BadRequest(j['error'])
         elif st == 401:
             raise api.Unauthorized(j['error'])
         elif st == 403:

@@ -10,7 +10,7 @@ import json
 #import re
 import api
 import api_v1
-#import sys
+import sys
 
 
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
@@ -22,7 +22,17 @@ def login_required():
             if not request.session.get('token'):
                 return redirect(reverse('login'))
             else:
-                return fn(request, *args, **kwargs)
+                try:
+                    return fn(request, *args, **kwargs)
+                except api.BadRequest as e:
+                    if e.token_expired:
+                        del request.session['token']
+                        context = {
+                                "error": "Your session has expired."
+                                }
+                        return render(request, "login.html", context)
+                    else:
+                        return render(request, "500.html", {})
         return wraps(fn)(inner_decorator)
     return decorator
 
