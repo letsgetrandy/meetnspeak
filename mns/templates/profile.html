@@ -131,19 +131,6 @@ ul.languages select {
                 </div>
             </div>
         </div>
-        <div class="field">
-            <label>Hometown</label>
-            <input type="text" name="hometown" value="{{ profile.hometown }}">
-        </div>
-        <div class="field">
-            <label>Website</label>
-            <input type="text" name="website" value="{{ profile.website }}">
-        </div>
-        <div class="field">
-            <label>Twitter</label>
-            <input type="text" name="twitter" value="{{ profile.twitter }}">
-        </div>
-
 
         <div class="field">
             <div class="lang_heading">
@@ -163,6 +150,18 @@ ul.languages select {
                 <li id="lang_empty"><label>Please add the languages you speak.</label></li>
                 {% endfor %}
             </ul>
+        </div>
+        <div class="field">
+            <label>Hometown</label>
+            <input type="text" name="hometown" value="{{ profile.hometown }}">
+        </div>
+        <div class="field">
+            <label>Website</label>
+            <input type="text" name="website" value="{{ profile.website }}">
+        </div>
+        <div class="field">
+            <label>Twitter</label>
+            <input type="text" name="twitter" value="{{ profile.twitter }}">
         </div>
         <div class="field">
             <button type="submit">Update</button>
@@ -198,7 +197,7 @@ $(function() {
                     name:self.find("option:selected").text()
                 };
         event.preventDefault();
-        self.selectedIndex = 0;
+        self[0].selectedIndex = 0;
         $("#lang_empty").remove();
         var pattern = new mns.Pattern(
                 '<li><label>[[name]]</label>' +
