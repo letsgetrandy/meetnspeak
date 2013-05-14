@@ -66,7 +66,7 @@ ul.languages li {
 <main>
 <div class="split">
     <div class="profile">
-        <p><strong>Gender:</strong> {{ profile.gender }}</p>
+        <p><strong>Gender:</strong> {% if profile.gender == 1 %}Male{% elif profile.gender == -1 %}Female{% endif %}</p>
 
         <strong>Speaks:</strong>
         <ul class="languages">
@@ -74,6 +74,9 @@ ul.languages li {
             <li>{{ l.name }} <em>({{ l.levelname }})</em></li>
             {% endfor %}
         </ul>
+        <p>{% if profile.hometown %}<strong>Hometown:</strong> {{ profile.hometown }}<br>{% endif %}
+            {% if profile.website %}<strong>Website:</strong> {{ profile.website }}<br>{% endif %}
+            {% if profile.twitter %}<strong>Twitter:</strong> @{{ profile.twitter }}<br>{% endif %}</p>
     </div>
     <div class="mapdiv">
         <span class="map"></span>

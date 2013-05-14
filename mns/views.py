@@ -10,7 +10,7 @@ import json
 #import re
 import api
 import api_v1
-import sys
+#import sys
 
 
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
@@ -108,7 +108,7 @@ def search(request):
             'profile': request.session.get('profile', '')
         }
     #token = request.session.get('token')
-    print >> sys.stderr, context
+    #print >> sys.stderr, context
     return render(request, 'search.html', context)
 
 
@@ -158,6 +158,8 @@ def profile(request):
         form['age'] = request.POST.get('age', '')
         form['gender'] = request.POST.get('gender')
         form['hometown'] = request.POST.get('hometown')
+        form['website'] = request.POST.get('website')
+        form['twitter'] = request.POST.get('twitter')
         form['location'] = request.POST.get('location')
         form['location_name'] = request.POST.get('location_name')
         languages = []
@@ -167,10 +169,10 @@ def profile(request):
                 languages.append("%s=%s" % (code, val))
         if languages:
             form['languages'] = ",".join(languages)
-        print >> sys.stderr, form
+        #print >> sys.stderr, form
         backend.set_profile(token, **form)
     p = backend.get_profile(token)
-    print >> sys.stderr, p
+    #print >> sys.stderr, p
     context['profile'] = p
     request.session['profile'] = p
     context['lang_options'] = api_v1.language_name
