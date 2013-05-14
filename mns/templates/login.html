@@ -48,7 +48,9 @@ ul.languages li {
 form {
     background:#333;
     background:rgba(255,255,255,.1);
+    border:1px solid #222;
     border-radius:1em;
+    box-shadow:inset 1px 1px 8px #111;
     margin:1em 2em;
     padding:2em 1em 1em;
 }
@@ -90,6 +92,9 @@ form input[type=password] {
     .textpad {
         margin:0 1em;
     }
+    .logo {
+        display:none;
+    }
 }
 .errors {
     margin:2em 2em 0;
@@ -107,7 +112,7 @@ form input[type=password] {
 <main>
 <div class="split">
     <div style="text-align:center">
-        <!--<img src="/static/images/spikizi.png">-->
+        <img src="/static/images/spikizi.png" class="logo">
     </div>
     <div>
         <div class="textpad">
