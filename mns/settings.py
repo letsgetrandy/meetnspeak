@@ -4,6 +4,7 @@ import dj_database_url
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
+GMAPS_KEY = os.environ.get('GMAPS_KEY', '')
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -148,6 +149,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'mns.context_processors.request_session',
+    'mns.context_processors.site_settings',
 )
 
 INSTALLED_APPS = (

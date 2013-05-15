@@ -66,7 +66,7 @@ class Message:
 class Profile:
 
     def __init__(self, *args, **kwargs):
-        #self.id = kwargs['id']
+        self.id = kwargs['id']
         self.name = kwargs['name'] or ""
         self.age = kwargs['age'] or ""
         self.gender = int(kwargs.get('gender') or 0)
