@@ -30,9 +30,30 @@ ul.matches {
     padding:0;
 }
 ul.matches li {
-    font-weight:bold;
+    /*font-weight:bold;*/
 }
-.matched {
+ul.matches a {
+    border:1px solid #999;
+    border-top:none;
+    color:#bbb;
+    display:block;
+    font-size:16px;
+    padding:10px 5px;
+    text-decoration:none;
+}
+ul.matches a:hover {
+    background:#222;
+}
+/*
+ul.matches a:active {
+    background:#666;
+}
+*/
+ul.matches li:first-child a {
+    border-top:1px solid #999;
+}
+ul.matches a .matched {
+    color:#999;
     font-size:.7em;
     font-weight:normal;
 }
@@ -50,10 +71,9 @@ ul.matches li {
 <div class="split">
     <div id="map_canvas"></div>
     <div id="listing">
-        <div class="field"><input type="text" id="loc" value="{{ profile.location }}"></div>
-        <div class="field"><button class="search" style="display:none;">Search</button></div>
-        <ul id="results" class="matches">
-        </ul>
+        <!--<div class="field"><input type="text" id="loc" value="{{ profile.location }}"></div>-->
+        <!--<div class="field"><button class="search" style="display:none;">Search</button></div>-->
+        <ul id="results" class="matches"></ul>
     </div>
 </div>
 </main>
@@ -73,11 +93,21 @@ function make_loc(s) {
     return {lat:p[0], lng:p[1]};
 }
 var result_pattern = new mns.Pattern(
-    "<li><a href=\"/user/[[id]]/\">[[name]]</a> <span class=\"matched\">([[matched_languages]])</span></li>"
+"<li><a href=\"/user/[[id]]/\">[[name]] <span class=\"matched\">[[gender]] [[age]] ([[matched_languages]])</span></a></li>"
 );
 function add_result(user) {
     //console.log(user);
     mg.add_marker(user);
+    switch (user.gender) {
+        case 1:
+            user.gender = "M";
+            break;
+        case -1:
+            user.gender = "F";
+            break;
+        default:
+            user.gender = "";
+    }
     $('#results').append(result_pattern.render(user));
 }
 function do_search(position) {
