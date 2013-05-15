@@ -66,6 +66,7 @@ ul.matches li {
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true" type="text/javascript"></script>
 {{ block.super }}
 <script>
+    var mylangs = {{ mylangs|safe }};
 
 function make_loc(s) {
     var p = s.split(',');
@@ -86,7 +87,7 @@ function do_search(position) {
         async: true,
         data: {
             'location': position.lat + "," + position.lng,
-            'languages':['EN','SP'].join(",")
+            'languages':mylangs.join(",")
             },
         type: 'GET',
         url: '{% url search-ajax %}'

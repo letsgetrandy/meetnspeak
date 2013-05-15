@@ -114,9 +114,13 @@ def signup(request):
 
 @login_required()
 def search(request):
+    profile = request.session.get("profile", "")
     context = {
-            'profile': request.session.get('profile', '')
+            'profile': profile
         }
+    if profile:
+        mylangs = [l["code"] for l in profile.languages]
+        context["mylangs"] = json.dumps(mylangs)
     #token = request.session.get('token')
     #print >> sys.stderr, context
     return render(request, 'search.html', context)
@@ -136,11 +140,13 @@ def search_ajax(request):
             raise Http404
 
     #context = {}
-    #token = request.session.get('token')
+    token = request.session.get('token')
     backend = api_v1.MNSAPI()
     form = {}
     form['location'] = request.GET.get('location')
     form['languages'] = request.GET.get('languages')
+    if token:
+        form['token'] = token
     result = backend.search(**form)
     return HttpResponse(json.dumps(result), mimetype='application/json')
 

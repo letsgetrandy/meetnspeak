@@ -223,5 +223,8 @@ class MNSAPI(APIBase):
         return data['success']
 
     def search(self, **form):
-        data = self.get('/api/1.0/search/', data=form)
+        head = {}
+        if form['token']:
+            head['token'] = form['token']
+        data = self.get('/api/1.0/search/', head=head, data=form)
         return data
