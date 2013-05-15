@@ -1,0 +1,17 @@
+/* polyfill */
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section { display:block; }
+mark { background:yellow; color:#000; }
+
+
+.sidenav + .body_wrapper {
+    margin-left:260px;
+}
+.loginform button {
+    color:#fff;
+    width:100%;
+    -ms-filter:"progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#2c2c2c, endColorstr=#0b0b0b)";
+}
+.loginform input[type=email],
+.loginform input[type=password] {
+    width:100%;
+}

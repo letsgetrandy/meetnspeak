@@ -1,12 +1,18 @@
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <title>{% block title% %}Spikizi!{% endblock %}</title>
+
 {% block styles %}
 {% load compressed %}
 {% compressed_css 'main' %}
+<!--[if lte IE 9]>{% compressed_css 'ie' %}<![endif]-->
 {% endblock %}
+<!--[if lte IE 8]><script>
+(function () { var e = document.createElement; e('article'); e('aside'); e('figcaption'); e('figure'); e('footer'); e('header'); e('hgroup'); e('mark'); e('main'); e('nav'); e('section'); })();
+</script><![endif]-->
 <script type="text/javascript" src="{{ STATIC_URL }}scripts/lib/jquery-1.9.1.min.js"></script>
 </head>
 

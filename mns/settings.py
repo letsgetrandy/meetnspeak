@@ -94,12 +94,18 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_CSS = {
     'main': {
         'source_filenames': (
-            'styles/*.css',
+            'styles/mns.css',
         ),
         'output_filename': 'mns.css',
         'extra_context': {
             'media': 'screen,projection',
         },
+    },
+    'ie': {
+        'source_filenames': (
+            'styles/ie.css',
+        ),
+        'output_filename': 'ie.css',
     },
 }
 PIPELINE_JS = {
