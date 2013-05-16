@@ -2,6 +2,7 @@
 import os
 import dj_database_url
 
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 GMAPS_KEY = os.environ.get('GMAPS_KEY', '')
@@ -55,10 +56,23 @@ USE_TZ = True
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+
+AWS_ACCESS_KEY_ID = os.environ.get('S3_KEY')
+AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET')
+AWS_STORAGE_BUCKET_NAME = 'spikizi'
+
+if DEBUG:
+    STATIC_URL = '/static/'
+    MEDIA_URL = ''
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+if not DEBUG:
+    STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+    MEDIA_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/media/'
+    STATICFILES_STORAGE = 'mns.storage.S3PipelineStorage'
+
+#ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -66,9 +80,6 @@ MEDIA_URL = ''
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'collected_static/')
 
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -85,8 +96,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 
 #PIPELINE = False
@@ -197,4 +206,3 @@ LOGGING = {
         },
     }
 }
-

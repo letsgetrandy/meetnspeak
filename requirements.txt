@@ -2,6 +2,8 @@ Django
 distribute
 dj-database-url
 django-pipeline
+django-storages
+boto
 futures
 psycopg2
 wsgiref
