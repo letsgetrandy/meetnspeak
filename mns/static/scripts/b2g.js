@@ -5,7 +5,7 @@ function check_b2g(){
         return;
     }
     b2g = {
-        manifest_url: "http://localhost:8000/static/manifest.webapp",
+        manifest_url: "http://https://s3.amazonaws.com/spikizi/manifest.webapp",
 
         install: function(event)
         {
