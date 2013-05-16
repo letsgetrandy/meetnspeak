@@ -9,6 +9,10 @@
 main {
     padding:10px;
 }
+.image_form {
+    display:none;
+    overflow:hidden;
+}
 #age {
     max-width:50px;
 }
@@ -96,8 +100,8 @@ ul.languages select {
         <div class="right location">{{ profile.location_name }}</div>
     </div>
     <div class="image">
-        <img src="{{ STATIC_URL }}images/default_profile.png" id="profile_image">
-        <!--<input type="file" id="take-picture" accept="image/*" style="display:none">-->
+        <a id="profile_image" href="#"><span>Change Photo</span></a>
+        <!--<img src="{{ STATIC_URL }}images/default_profile.png" id="profile_image">-->
     </div>
 </div>
 </header>
@@ -105,6 +109,13 @@ ul.languages select {
 <main>
 <div class="split">
     <div>
+        <form class="image_form" method="post" enctype="multipart/form-data">
+            <div class="field">
+                <label>Photo</label>
+                <input type="file" id="take-picture" accept="image/*">
+                <button>Upload</button>
+            </div>
+        </form>
         <form method="post">
             {% csrf_token %}
             <input type="hidden" name="location" id="location" value="{{ profile.location }}">
@@ -187,6 +198,48 @@ ul.languages select {
 {{ block.super }}
 <script>
 $(function() {
+    $(".head .image a").click( function(event) {
+        event.preventDefault();
+        $(".image_form").slideDown();
+    });
+    $(".image_form input").on("change", function(event) {
+        if (window.FileReader) {
+            var file = event.target.files[0];
+            reader = new FileReader();
+            reader.onerror = function(e) {
+                console.log('error');
+                console.log(e);
+            };
+            reader.onloadend = function (e) {
+                $("header.profile .head .image").css(
+                    "background-image", "url(" + e.target.result + ")");
+
+                if (formdata) {
+                    formdata.append("images[]", file);
+                    $.ajax({
+                        url: "/user/image-upload/",
+                        type: "POST",
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            //document.getElementById("response").innerHTML = res;
+                            console.log(res);
+                        }
+                    });
+                }
+
+            };
+            reader.readAsDataURL(file);
+        }
+        //$(this).submit();
+    });
+    var formdata = false;
+    if (window.FormData) {
+        formdata = new FormData();
+        $(".image_form button").hide();
+    }
+
     $("ul.languages select").each( function() {
         mns.langOptions(this);
     });

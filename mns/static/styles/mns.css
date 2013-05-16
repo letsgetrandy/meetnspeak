@@ -113,7 +113,9 @@ header.profile .head .content {
 }
 header.profile .head .image {
     background:rgb(255,255,255);
-    background:rgba(255,255,255,.5);
+    background:rgba(255,255,255,.4);
+    background-image:url(../images/default_profile.png);
+    background-repeat:no-repeat;
     border:1px solid #000;
     border-radius:50%;
     box-shadow:0 0 10px #333;
@@ -124,10 +126,26 @@ header.profile .head .image {
     top:2em;
     width:100px;
 }
-header.profile .head .image img {
-    border-radius:50%;
-    height:100px;
-    width:100px;
+header.profile .head .image a {
+    color:#333;
+    cursor:pointer;
+    display:block;
+    height:100%;
+    line-height:95px;
+    padding:2px;
+    text-align:center;
+    text-decoration:none;
+    text-shadow:1px 1px 2px #fff;
+    width:100%;
+}
+header.profile .head .image a span {
+    background:#fff;
+    background:rgba(255,255,255,.5);
+    display:none;
+    font-size:12px;
+}
+header.profile .head .image a:hover span {
+    display:inline;
 }
 header.profile .head .band {
     background:rgb(0,0,0);

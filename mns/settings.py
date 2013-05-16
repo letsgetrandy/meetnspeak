@@ -60,6 +60,7 @@ MEDIA_ROOT = ''
 AWS_ACCESS_KEY_ID = os.environ.get('S3_KEY')
 AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET')
 AWS_STORAGE_BUCKET_NAME = 'spikizi'
+AWS_QUERYSTRING_AUTH = False
 
 if DEBUG:
     STATIC_URL = '/static/'
