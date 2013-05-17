@@ -60,8 +60,10 @@ def square_crop(img):
 def save_thumbnail(name, img, size):
     img.thumbnail([size, size], Image.ANTIALIAS)
     filename = "%s-%s.jpg" % (name, size)
-    pathname = os.path.join(settings.PROJECT_ROOT, "static",
-            "images", "users", filename)
+    directory = os.path.join(settings.PROJECT_ROOT, "static", "images", "users")
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    pathname = os.path.join(directory, filename)
     imagefile = open(pathname, "w")
     img.save(imagefile, "JPEG", quality=60)
     if not settings.DEBUG:
