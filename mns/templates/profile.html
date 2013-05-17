@@ -110,6 +110,7 @@ ul.languages select {
 <div class="split">
     <div>
         <form class="image_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="field">
                 <label>Photo</label>
                 <input type="file" id="take-picture" accept="image/*">
@@ -216,6 +217,7 @@ $(function() {
 
                 if (formdata) {
                     formdata.append("images[]", file);
+                    formdata.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
                     $.ajax({
                         url: "/user/image-upload/",
                         type: "POST",

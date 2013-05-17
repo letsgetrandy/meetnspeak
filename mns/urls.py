@@ -1,24 +1,26 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+from mns import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'mns.views.index', name='index'),
-    url(r'(?i)login/$', 'mns.views.login', name='login'),
-    url(r'(?i)logout/$', 'mns.views.logout', name='logout'),
-    url(r'(?i)signup/$', 'mns.views.signup', name='signup'),
-    url(r'(?i)search/$', 'mns.views.search', name='search'),
-    url(r'(?i)search.ajax$', 'mns.views.search_ajax', name='search-ajax'),
-    url(r'(?i)user/$', 'mns.views.profile', name='profile'),
-    url(r'(?i)user/notifications/$', 'mns.views.notifications', name='notifications'),
-    url(r'(?i)user/contacts/$', 'mns.views.contacts', name='contacts'),
-    url(r'(?i)user/settings/$', 'mns.views.user_settings', name='settings'),
-    url(r'(?i)user/(?P<userid>\d+)/$', 'mns.views.user', name='user'),
-    url(r'(?i)user/(?P<userid>\d+)/messages/$', 'mns.views.messages',
+    url(r'^$', views.index, name='index'),
+    url(r'(?i)login/$', views.login, name='login'),
+    url(r'(?i)logout/$', views.logout, name='logout'),
+    url(r'(?i)signup/$', views.signup, name='signup'),
+    url(r'(?i)search/$', views.search, name='search'),
+    url(r'(?i)search.ajax$', views.search_ajax, name='search-ajax'),
+    url(r'(?i)user/$', views.profile, name='profile'),
+    url(r'(?i)user/notifications/$', views.notifications, name='notifications'),
+    url(r'(?i)user/contacts/$', views.contacts, name='contacts'),
+    url(r'(?i)user/settings/$', views.user_settings, name='settings'),
+    url(r'(?i)user/(?P<userid>\d+)/$', views.user, name='user'),
+    url(r'(?i)user/(?P<userid>\d+)/messages/$', views.messages,
         name='messages'),
+    url(r'(?i)user/image-upload/$', views.image, name='image-ajax'),
 
     # Examples:
     # url(r'^$', 'mns.views.home', name='home'),

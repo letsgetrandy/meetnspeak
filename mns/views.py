@@ -196,6 +196,12 @@ def profile(request):
 
 
 @login_required()
+def image(request):
+    data = json.dumps({"foo": "bar"})
+    return HttpResponse(data, mimetype='application/json')
+
+
+@login_required()
 def contacts(request):
     context = {}
     token = request.session.get('token')
