@@ -1,6 +1,10 @@
 from django.conf import settings
 from PIL import Image
+import logging
 import os
+
+import boto
+from boto.s3.key import Key
 
 
 def prepare(data):
@@ -47,11 +51,19 @@ def square_crop(img):
 def save_thumbnail(name, img, size):
     img.thumbnail([size, size], Image.ANTIALIAS)
     filename = "%s-%s.jpg" % (name, size)
-    if settings.DEBUG:
-        pathname = os.path.join(settings.PROJECT_ROOT, "static",
-                "images", "users", filename)
-        imagefile = open(pathname, "w")
-        img.save(imagefile, "JPEG", quality=60)
-    else:
-        pass
+    pathname = os.path.join(settings.PROJECT_ROOT, "static",
+            "images", "users", filename)
+    imagefile = open(pathname, "w")
+    img.save(imagefile, "JPEG", quality=60)
+    if not settings.DEBUG:
+        logging.getLogger('boto').setLevel(logging.CRITICAL)
+        conn = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,
+                    settings.AWS_SECRET_ACCESS_KEY)
+        bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
+        k = Key(bucket)
+        k.key = filename
+        k.set_contents_from_filename(pathname)
+        k.make_public()
+        os.remove(pathname)
+
     return "images/users/%s" % filename

@@ -210,10 +210,8 @@ $(function() {
             processData: false,
             contentType: false,
             success: function (res) {
-                //document.getElementById("response").innerHTML = res;
                 $(".image_form").slideUp();
-                $(".image_form input").remove();
-                //console.log(res);
+                $(".image_form input").replaceWith($(".image_form.input").clone(true));
                 $("header.profile .head .image").css({
                     "background-image": "url({{ STATIC_URL }}" + res.image + ")",
                     "background-size": "cover"
