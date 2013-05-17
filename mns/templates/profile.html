@@ -199,8 +199,34 @@ ul.languages select {
 {{ block.super }}
 <script>
 $(function() {
+    var formdata = false;
+    function upload_image(file) {
+        formdata.append("image", file);
+        formdata.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
+        $.ajax({
+            url: "{% url image-ajax %}",
+            type: "POST",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                //document.getElementById("response").innerHTML = res;
+                $(".image_form").slideUp();
+                $(".image_form input").remove();
+                //console.log(res);
+                $("header.profile .head .image").css({
+                    "background-image": "url({{ STATIC_URL }}" + res.image + ")",
+                    "background-size": "cover"
+                });
+            }
+        });
+    }
     $(".head .image a").click( function(event) {
         event.preventDefault();
+        if (window.FormData) {
+            formdata = new FormData();
+            $(".image_form button").hide();
+        }
         $(".image_form").slideDown();
     });
     $(".image_form input").on("change", function(event) {
@@ -212,23 +238,9 @@ $(function() {
                 console.log(e);
             };
             reader.onloadend = function (e) {
-                $("header.profile .head .image").css(
-                    "background-image", "url(" + e.target.result + ")");
-
+                // e.target.result
                 if (formdata) {
-                    formdata.append("images[]", file);
-                    formdata.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
-                    $.ajax({
-                        url: "/user/image-upload/",
-                        type: "POST",
-                        data: formdata,
-                        processData: false,
-                        contentType: false,
-                        success: function (res) {
-                            //document.getElementById("response").innerHTML = res;
-                            console.log(res);
-                        }
-                    });
+                    upload_image(file);
                 }
 
             };
@@ -236,11 +248,6 @@ $(function() {
         }
         //$(this).submit();
     });
-    var formdata = false;
-    if (window.FormData) {
-        formdata = new FormData();
-        $(".image_form button").hide();
-    }
 
     $("ul.languages select").each( function() {
         mns.langOptions(this);

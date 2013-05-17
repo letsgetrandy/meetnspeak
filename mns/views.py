@@ -6,11 +6,13 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 #from mns.models import APISession
 from functools import wraps
+from mns import img_helper
 import json
 #import re
 import api
 import api_v1
-import sys
+import StringIO
+#import sys
 
 
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
@@ -197,7 +199,15 @@ def profile(request):
 
 @login_required()
 def image(request):
-    data = json.dumps({"foo": "bar"})
+    i = request.FILES['image']
+    imagefile = StringIO.StringIO(i.read())
+    img = img_helper.prepare(imagefile)
+
+    #filename = hashlib.md5(imagefile.getvalue()).hexdigest() + ".jpg"
+    name = request.session['profile'].id
+    filename = img_helper.save_thumbnail(name, img, 100)
+
+    data = json.dumps({"image": filename})
     return HttpResponse(data, mimetype='application/json')
 
 
