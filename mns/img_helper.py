@@ -8,6 +8,14 @@ import boto
 from boto.s3.key import Key
 
 
+import logging
+import traceback
+
+def handleError(self, record):
+    traceback.print_stack()
+logging.Handler.handleError = handleError
+
+
 def prepare(data):
     img = Image.open(data)
     return square_crop(img)
