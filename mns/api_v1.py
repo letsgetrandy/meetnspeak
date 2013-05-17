@@ -73,6 +73,7 @@ class Profile:
         #self.hometown = kwargs['hometown'] or ""
         self.location = kwargs['location'] or ""
         self.location_name = kwargs.get('location_name') or ""
+        self.photo = kwargs.get('photo') or "default"
 
         langnames = {c: language_name[c] for c in kwargs['languages'].keys()}
         self.lang_keys = sorted(langnames, key=langnames.__getitem__)
@@ -220,6 +221,15 @@ class MNSAPI(APIBase):
 
     def set_profile(self, token, **form):
         data = self.post('/api/1.0/profile/', head={'token': token}, data=form)
+        return data['success']
+
+    def get_photo(self, token):
+        data = self.get('/api/1.0/profile/photo/', head={'token': token})
+        return data['success']
+
+    def set_photo(self, token, photo):
+        form = {'photo': photo}
+        data = self.post('/api/1.0/profile/photo/', head={'token': token}, data=form)
         return data['success']
 
     def search(self, **form):

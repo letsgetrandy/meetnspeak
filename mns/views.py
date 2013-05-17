@@ -144,9 +144,12 @@ def search_ajax(request):
     #context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
-    form = {}
-    form['location'] = request.GET.get('location')
-    form['languages'] = request.GET.get('languages')
+    form = {
+            'location': request.GET.get('location'),
+            'languages': request.GET.get('languages'),
+        }
+    #form['location'] = request.GET.get('location')
+    #form['languages'] = request.GET.get('languages')
     if token:
         form['token'] = token
     result = backend.search(**form)
@@ -206,6 +209,11 @@ def image(request):
     #filename = hashlib.md5(imagefile.getvalue()).hexdigest() + ".jpg"
     name = request.session['profile'].id
     filename = img_helper.save_thumbnail(name, img, 100)
+
+    token = request.session.get('token')
+    backend = api_v1.MNSAPI()
+    #TODO: check for success
+    backend.set_photo(token, name)
 
     data = json.dumps({"image": filename})
     return HttpResponse(data, mimetype='application/json')
