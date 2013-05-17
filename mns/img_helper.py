@@ -2,18 +2,9 @@ from django.conf import settings
 from PIL import Image
 #import logging
 import os
-import sys
 
 import boto
 from boto.s3.key import Key
-
-
-#import logging
-#import traceback
-
-#def handleError(self, record):
-#    traceback.print_stack()
-#logging.Handler.handleError = handleError
 
 
 def prepare(data):
@@ -70,17 +61,10 @@ def save_thumbnail(name, img, size):
         #logging.getLogger('boto').setLevel(logging.CRITICAL)
         conn = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,
                     settings.AWS_SECRET_ACCESS_KEY)
-        print >> sys.stderr, 1
         bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
-        print >> sys.stderr, 2
         k = Key(bucket)
-        print >> sys.stderr, 3
         k.key = "images/users/%s" % filename
-        print >> sys.stderr, 4
         k.set_contents_from_filename(pathname)
-        print >> sys.stderr, 5
         k.make_public()
-        print >> sys.stderr, k
         os.remove(pathname)
-
     return "images/users/%s" % filename
