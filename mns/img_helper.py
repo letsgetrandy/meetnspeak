@@ -1,5 +1,5 @@
 from django.conf import settings
-from PIL import Image
+from PIL import Image, ExifTags
 #import logging
 import os
 
@@ -8,7 +8,7 @@ from boto.s3.key import Key
 
 
 def prepare(data):
-    img = Image.open(data)
+    img = autorotate(Image.open(data))
     return square_crop(img)
     pass
 
@@ -46,6 +46,30 @@ def square_crop(img):
     cropBox = (originX, originY, originX + output_width, originY + output_height)
     img = img.crop(cropBox)
     return img
+
+
+def autorotate(image):
+    try:
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == 'Orientation':
+                break
+        exif = dict(image._getexif().items())
+
+        if exif[orientation] == 3:
+            image = image.rotate(180, expand=True)
+        elif exif[orientation] == 6:
+            image = image.rotate(270, expand=True)
+        elif exif[orientation] == 8:
+            image = image.rotate(90, expand=True)
+
+        return image
+
+        #image.thumbnail((THUMB_WIDTH, THUMB_HIGHT), Image.ANTIALIAS)
+        #image.save(os.path.join(path, fileName))
+
+    except:
+        #traceback.print_exc()
+        return image
 
 
 def save_thumbnail(name, img, size):
