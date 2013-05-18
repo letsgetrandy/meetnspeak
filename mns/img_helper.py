@@ -56,11 +56,11 @@ def autorotate(image):
         exif = dict(image._getexif().items())
 
         if exif[orientation] == 3:
-            image = image.rotate(180, expand=True)
+            image = image.rotate(180)
         elif exif[orientation] == 6:
-            image = image.rotate(270, expand=True)
+            image = image.rotate(270)
         elif exif[orientation] == 8:
-            image = image.rotate(90, expand=True)
+            image = image.rotate(90)
 
         return image
 
