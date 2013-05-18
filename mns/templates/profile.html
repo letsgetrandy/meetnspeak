@@ -54,7 +54,6 @@ ul.languages select {
     margin-bottom:2px;
 }
 .mapdiv {
-    padding:10px;
     position:relative;
 }
 .mapdiv .manual {
@@ -84,6 +83,19 @@ ul.languages select {
     display:block;
     height:400px;
 }
+@media screen and (max-width:640px) {
+    .mapdiv {
+        max-height:0px;
+        overflow:hidden;
+    }
+    .mapdiv.reveal {
+        max-height:200px;
+    }
+    .mapdiv .map {
+        height:150px;
+        width:auto;
+    }
+}
 @media screen and (min-width:900px){
     .mapdiv {
         text-align:right;
@@ -98,9 +110,9 @@ ul.languages select {
     <div class="blur">
     </div>
     <div class="content">My Profile</div>
-    <div class="band">
+    <div class="band split">
         <div class="left">{% if profile.age %}{{ profile.age }} years old{% endif %}</div>
-        <div class="right location">{{ profile.location_name }}</div>
+        <a href="#" class="right location">{{ profile.location_name }}</a>
     </div>
     <div class="image">
         <a id="profile_image" href="#"><span>Change Photo</span></a>
@@ -110,7 +122,16 @@ ul.languages select {
 </header>
 
 <main>
-<div class="split">
+<div class="split flip">
+    <div class="mapdiv loginform">
+        Location: {{ profile.location }}
+        <div class="manual">
+            <input type="text" id="manual" placeholder="Enter a location">
+            <button>Update</button>
+        </div>
+        <button>Update location</button>
+        <a href="#" class="map"></a>
+    </div>
     <div>
         <form class="image_form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -183,14 +204,6 @@ ul.languages select {
         </div>
         </form>
     </div>
-    <div class="mapdiv">
-        Update location:
-        <div class="manual">
-            <input type="text" id="manual" placeholder="Enter a location">
-            <button>Update</button>
-        </div>
-        <a href="#" class="map"></a>
-    </div>
 </div>
 </main>
 
@@ -252,6 +265,10 @@ $(function() {
             reader.readAsDataURL(file);
         }
         //$(this).submit();
+    });
+    $("header .head .band .right").click(function(event){
+        event.preventDefault();
+        $(".mapdiv").toggleClass("reveal");
     });
 
     $("ul.languages select").each( function() {
@@ -315,7 +332,7 @@ $(function() {
         }
     });
 
-    $('.mapdiv .map').click(function(event) {
+    $('.mapdiv .map, .mapdiv button').click(function(event) {
         event.preventDefault();
         $(".updating").show();
         mg.init_geo();

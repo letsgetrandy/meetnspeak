@@ -159,12 +159,19 @@ header.profile .head .band {
     text-align:center;
     width:100%;
 }
+header.profile .head .band > * {
+    color:#aaa;
+    display:block;
+    text-decoration:none;
+}
 header.profile .head .band .left {
     float:left;
     padding:5px;
     text-align:left;
+    width:50%;
 }
 header.profile .head .band .right {
+    display:block;
     padding:5px;
     text-align:right;
 }
@@ -354,9 +361,9 @@ form ~ .field.alternate {
 }
 .split > :first-child {
     float:left;
-    -webkit-transition:width 400ms;
-    -moz-transition:width 400ms;
-    transition:width 400ms;
+    -webkit-transition:all 400ms;
+    -moz-transition:all 400ms;
+    transition:all 400ms;
     width:50%;
 }
 .split.flip > :first-child {
@@ -378,7 +385,7 @@ form ~ .field.alternate {
     .split > :first-child,
     .split.flip > :first-child {
         float:none;
-        width:100%;
+        width:auto;
     }
     .split .field + .caption {
         padding:0 10px 25px;

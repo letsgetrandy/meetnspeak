@@ -80,7 +80,7 @@ def save_thumbnail(name, img, size):
         os.makedirs(directory)
     pathname = os.path.join(directory, filename)
     imagefile = open(pathname, "w")
-    img.save(imagefile, "JPEG", quality=60)
+    img.save(imagefile, "JPEG", quality=80)
     if not settings.DEBUG:
         #logging.getLogger('boto').setLevel(logging.CRITICAL)
         conn = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,
