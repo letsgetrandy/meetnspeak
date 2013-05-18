@@ -118,9 +118,9 @@ def signup(request):
 @login_required()
 def search(request):
     profile = request.session.get("profile", "")
-    context = {
-            'profile': profile
-        }
+    context = {}
+    #        'profile': profile
+    #    }
     if profile:
         mylangs = [l["code"] for l in profile.languages]
         context["mylangs"] = json.dumps(mylangs)
@@ -195,7 +195,7 @@ def profile(request):
         backend.set_profile(token, **form)
     p = backend.get_profile(token)
     #print >> sys.stderr, p
-    context['profile'] = p
+    #context['profile'] = p
     request.session['profile'] = p
     context['lang_options'] = api_v1.language_name
     return render(request, 'profile.html', context)
@@ -233,7 +233,7 @@ def user(request, userid):
     context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
-    context['profile'] = backend.get_user(token, userid)
+    context['user'] = backend.get_user(token, userid)
     return render(request, 'user.html', context)
 
 
@@ -242,6 +242,7 @@ def messages(request, userid):
     context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
+    context['user'] = backend.get_user(token, userid)
     context['messages'] = backend.get_messages(token, userid)
     return render(request, 'messages.html', context)
 

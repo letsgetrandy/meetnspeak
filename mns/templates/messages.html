@@ -17,25 +17,25 @@
 <main>
 <ul class="message_list">
     {% for m in messages %}
-    <li class="message">
-        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+    <li class="message me">
+        <div class="image"><img src="{{ STATIC_URL }}images/users/{{ profile.photo }}-100.jpg"></div>
         <p>{{ m.text }}</p>
     </li>
     {% endfor %}
 
     <li class="message">
-        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <div class="image"><img src="{{ STATIC_URL }}images/users/{{ user.photo }}-100.jpg"></div>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
     </li>
     <li class="message me">
-        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <div class="image"><img src="{{ STATIC_URL }}images/users/{{ profile.photo }}-100.jpg"></div>
         <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat</p>
     </li>
     <li class="message">
-        <div class="image"><img src="{{ STATIC_URL }}trump.jpg"></div>
+        <div class="image"><img src="{{ STATIC_URL }}images/users/{{ user.photo }}-100.jpg"></div>
         <p>non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </li>
 </ul>

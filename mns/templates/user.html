@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}{{ profile.name }} - Spikizi!{% endblock %}
+{% block title %}{{ user.name }} - Spikizi!{% endblock %}
 
 {% block styles %}
 {{ block.super }}
 <style>
+header.profile .head .image {
+    background-image:url({{ STATIC_URL }}images/users/{{ user.photo }}-100.jpg);
+}
 main {
     padding:10px;
 }
@@ -24,8 +27,8 @@ ul.languages li {
     padding:10px;
 }
 .mapdiv .map {
-    {% if profile.location %}
-    background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ profile.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ profile.location }}&key={{ settings.GMAPS_KEY }});
+    {% if user.location %}
+    background:url(http://maps.googleapis.com/maps/api/staticmap?format=jpg&center={{ user.location }}&zoom=13&size=450x450&sensor=false&markers=color:blue%7C{{ user.location }}&key={{ settings.GMAPS_KEY }});
     {% endif %}
     background-position:center;
     background-repeat:no-repeat;
@@ -59,38 +62,36 @@ ul.languages li {
 {% endblock %}
 
 {% block body %}
-<a id="messages" class="title_link" href="{% url messages profile.id %}">Messages</a>
+<a id="messages" class="title_link" href="{% url messages user.id %}">Messages</a>
 <header class="profile">
 <div class="head">
     <div class="blur">
     </div>
-    <div class="content">{{ profile.name }}</div>
+    <div class="content">{{ user.name }}</div>
     <div class="band">
-        <div class="left">{{ profile.age }} years old</div>
-        <div class="right">{{ profile.location_name }}</div>
+        <div class="left">{{ user.age }} years old</div>
+        <div class="right">{{ user.location_name }}</div>
     </div>
-    <div class="image">
-        <img src="{{ STATIC_URL }}images/default_profile.png">
-    </div>
+    <div class="image"></div>
 </div>
 </header>
 
 <main>
 <div class="split">
     <div class="profile">
-        <p><strong>Gender:</strong> {% if profile.gender == 1 %}Male{% elif profile.gender == -1 %}Female{% endif %}</p>
+        <p><strong>Gender:</strong> {% if user.gender == 1 %}Male{% elif user.gender == -1 %}Female{% endif %}</p>
 
         <strong>Speaks:</strong>
         <ul class="languages">
-            {% for l in profile.languages %}
+            {% for l in user.languages %}
             <li>{{ l.name }} <em>({{ l.levelname }})</em></li>
             {% endfor %}
         </ul>
-        <p>{% if profile.hometown %}<strong>Hometown:</strong> {{ profile.hometown }}<br>{% endif %}
-            {% if profile.website %}<strong>Website:</strong> {{ profile.website }}<br>{% endif %}
-            {% if profile.twitter %}<strong>Twitter:</strong> @{{ profile.twitter }}<br>{% endif %}</p>
+        <p>{% if user.hometown %}<strong>Hometown:</strong> {{ user.hometown }}<br>{% endif %}
+            {% if user.website %}<strong>Website:</strong> {{ user.website }}<br>{% endif %}
+            {% if user.twitter %}<strong>Twitter:</strong> @{{ user.twitter }}<br>{% endif %}</p>
         <div class="sendmsg loginform">
-            <p>Want to contact {{ profile.name }}?</p>
+            <p>Want to contact {{ user.name }}?</p>
             <button class="contact">Send a message</button>
         </div>
     </div>
@@ -109,7 +110,7 @@ ul.languages li {
 <script>
 $("button.contact").click(function(event){
     event.preventDefault();
-    location.href = "{% url messages profile.id %}";
+    location.href = "{% url messages user.id %}";
 });
 </script>
 {% endblock %}
