@@ -13,6 +13,7 @@ import api
 import api_v1
 import StringIO
 #import sys
+import time
 
 
 EMAIL_REGEX = r"^[\w\.\-\+]+@[\w\-\.]+\.[a-z]{2,3}$"
@@ -206,8 +207,7 @@ def image(request):
     imagefile = StringIO.StringIO(i.read())
     img = img_helper.prepare(imagefile)
 
-    #filename = hashlib.md5(imagefile.getvalue()).hexdigest() + ".jpg"
-    name = request.session['profile'].id
+    name = "%s_%s" % (request.session['profile'].id, int(time.time()))
     filename = img_helper.save_thumbnail(name, img, 100)
 
     token = request.session.get('token')

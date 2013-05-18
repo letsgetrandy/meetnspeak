@@ -64,6 +64,8 @@ def save_thumbnail(name, img, size):
         bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
         k = Key(bucket)
         k.key = "images/users/%s" % filename
+        #if k.exists():
+        #    k.delete()
         k.set_contents_from_filename(pathname)
         k.make_public()
         os.remove(pathname)
