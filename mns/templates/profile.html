@@ -196,6 +196,8 @@ ul.languages select {
 
 <footer>
 </footer>
+
+<div class="updating"></div>
 {% endblock %}
 
 {% block scripts %}
@@ -219,6 +221,7 @@ $(function() {
                     "background-image": "url({{ STATIC_URL }}" + res.image + ")",
                     "background-size": "cover"
                 });
+                $(".updating").hide();
             }
         });
     }
@@ -232,6 +235,7 @@ $(function() {
     });
     $(".image_form input").on("change", function(event) {
         if (window.FileReader) {
+            $(".updating").show();
             var file = event.target.files[0];
             reader = new FileReader();
             reader.onerror = function(e) {
@@ -307,11 +311,13 @@ $(function() {
             $('.location').html(position.description);
             $('#location_name').val(position.description);
             $('#location').val(lat + ',' + lng);
+            $(".updating").hide();
         }
     });
 
     $('.mapdiv .map').click(function(event) {
         event.preventDefault();
+        $(".updating").hide();
         mg.init_geo();
     });
 });

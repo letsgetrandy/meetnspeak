@@ -543,6 +543,25 @@ ul.notifications a {
 }
 
 
+.updating {
+    background:#fff;
+    background:rgba(255,255,255,.8);
+    background-image:url(../images/updating.gif);
+    background-position:center center;
+    background-repeat:no-repeat;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.4);
+    display:none;
+    height:140px;
+    left:50%;
+    margin:-70px;
+    position:fixed;
+    top:50%;
+    width:140px;
+    z-index:2;
+}
+
+
 /* message list */
 
 ul.message_list {
