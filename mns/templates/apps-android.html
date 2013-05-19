@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Android App{% endblock %}
+{% block bodyclass %}wide{% endblock %}
+
+{% block styles %}
+{{ block.super }}
+<style>
+.head {
+    border-radius:10px;
+    height:2em;
+    overflow:hidden;
+    position:relative;
+}
+.head .content {
+    color:#ccc;
+    left:0px;
+    line-height:2em;
+    position:absolute;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+    width:100%;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<header>
+<div class="head">
+    <div class="content">Android App</div>
+</div>
+</header>
+
+<main>
+<div style="text-align:center">
+    <h3>Coming soon...</h3>
+    <img src="{{ STATIC_URL }}images/spikizi-android.png">
+</div>
+</main>
+
+<footer>
+</footer>
+{% endblock %}

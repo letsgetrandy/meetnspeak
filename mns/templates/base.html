@@ -11,13 +11,14 @@
 <!--[if lte IE 9]>{% compressed_css 'ie' %}<![endif]-->
 {% endblock %}
 <!--[if lte IE 8]><script>
-(function () { var e = document.createElement; e('article'); e('aside'); e('figcaption'); e('figure'); e('footer'); e('header'); e('hgroup'); e('mark'); e('main'); e('nav'); e('section'); })();
+(function () { for (e in 'article aside figcaption figure footer header hgroup mark main nav section'.split()) {document.createElement(e)} })();
 </script><![endif]-->
 <script type="text/javascript" src="{{ STATIC_URL }}scripts/lib/jquery-1.9.1.min.js"></script>
 </head>
 
 <body class="{% block bodyclass %}{% endblock %}">
 {% block sidenav %}
+{% if profile %}
 <div class="sidenav">
     <nav>
     <a class="nav navsearch" href="{% url search %}"><span class="uisprite image"></span><span class="label">Search</span></a>
@@ -33,6 +34,7 @@
     </ul>
     <div class="navlogo"></div>
 </div>
+{% endif %}
 {% endblock %}
 <div class="body_wrapper">
     <a id="draghandle" class="uisprite draghandle" style="display:none" href="#"></a>

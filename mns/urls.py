@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+from django.views.generic.simple import direct_to_template, redirect_to
 from mns import views
 
 # Uncomment the next two lines to enable the admin:
@@ -23,6 +24,23 @@ urlpatterns = patterns('',
     url(r'(?i)user/image-upload/$', views.image, name='image-ajax'),
 
     url(r'(?i)feedback/$', views.feedback, name="feedback"),
+
+    #landing pages
+    url(r'(?i)apps/$', direct_to_template,
+        {'template': 'apps.html'}, name='apps'),
+    url(r'(?i)apps/iphone/$', direct_to_template,
+        {'template': 'apps-iphone.html'}, name='ios-app'),
+    url(r'(?i)apps/android/$', direct_to_template,
+        {'template': 'apps-android.html'}, name='droid-app'),
+    url(r'(?i)apps/firefox-os/$', direct_to_template,
+        {'template': 'apps-firefoxos.html'}, name='b2g-app'),
+
+    #redirects
+    url(r'(?i)iphone/$', redirect_to, {'url': '/apps/iphone/'}),
+    url(r'(?i)droid/$', redirect_to, {'url': '/apps/android/'}),
+    url(r'(?i)android/$', redirect_to, {'url': '/apps/android/'}),
+    url(r'(?i)firefoxos/$', redirect_to, {'url': '/apps/firefox-os/'}),
+    url(r'(?i)firefox-os/$', redirect_to, {'url': '/apps/firefox-os/'}),
 
     # Examples:
     # url(r'^$', 'mns.views.home', name='home'),
