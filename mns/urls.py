@@ -22,6 +22,8 @@ urlpatterns = patterns('',
         name='messages'),
     url(r'(?i)user/image-upload/$', views.image, name='image-ajax'),
 
+    url(r'(?i)feedback/$', views.feedback, name="feedback"),
+
     # Examples:
     # url(r'^$', 'mns.views.home', name='home'),
     # url(r'^mns/', include('mns.foo.urls')),

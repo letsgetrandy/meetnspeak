@@ -269,3 +269,8 @@ def logout(request):
         del request.session['token']
     return redirect(reverse('login'))
     #return render(request, 'login.html', {})
+
+
+def feedback(request):
+    context = {}
+    return render(request, 'feedback.html', context)
