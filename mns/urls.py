@@ -25,6 +25,9 @@ urlpatterns = patterns('',
 
     url(r'(?i)feedback/$', views.feedback, name="feedback"),
 
+    url(r'(?i)about/$', direct_to_template,
+        {'template': 'about.html'}, name='about'),
+
     #landing pages
     url(r'(?i)apps/$', direct_to_template,
         {'template': 'apps.html'}, name='apps'),

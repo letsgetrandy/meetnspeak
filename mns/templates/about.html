@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}About Spikizi{% endblock %}
+
+{% block styles %}
+{{ block.super }}
+<style>
+.head {
+    border-radius:10px;
+    height:2em;
+    overflow:hidden;
+    position:relative;
+}
+.head .content {
+    color:#ccc;
+    left:0px;
+    line-height:2em;
+    position:absolute;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+    width:100%;
+}
+.wrap {
+    padding:10px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<header>
+<div class="head">
+    <div class="content">About Spikizi</div>
+</div>
+</header>
+
+<main>
+    <div class="wrap">
+        <p><strong><em>Spikizi</em></strong> (say, "speak easy") is a place for you to
+        find people who speak the same languages you do.</p>
+        <p>Who it's for:</p>
+        <ul>
+            <li>Expats and immigrants who miss the sound of their homeland...</li>
+            <li>Language learners looking for people to practice with...</li>
+            <li>Travelers who need a tour guide...</li>
+            <li>Anyone who wants to find someone else to speak to!</li>
+        </ul>
+    </div>
+</main>
+
+<footer>
+</footer>
+{% endblock %}
