@@ -89,7 +89,10 @@ ul.languages select {
         overflow:hidden;
     }
     .mapdiv.reveal {
-        max-height:200px;
+        max-height:300px;
+    }
+    .mapdiv .wrap {
+        padding:10px 10px 40px;
     }
     .mapdiv .map {
         height:150px;
@@ -123,14 +126,16 @@ ul.languages select {
 
 <main>
 <div class="split flip">
-    <div class="mapdiv loginform">
-        Location: {{ profile.location }}
-        <div class="manual">
-            <input type="text" id="manual" placeholder="Enter a location">
-            <button>Update</button>
+    <div class="mapdiv">
+        <div class="wrap">
+            Location: {{ profile.location }}
+            <div class="manual">
+                <input type="text" id="manual" placeholder="Enter a location">
+                <button>Update</button>
+            </div>
+            <a href="#" class="map"></a>
+            <button>Update location</button>
         </div>
-        <button>Update location</button>
-        <a href="#" class="map"></a>
     </div>
     <div>
         <form class="image_form" method="post" enctype="multipart/form-data">
@@ -200,7 +205,7 @@ ul.languages select {
             <input type="text" name="twitter" value="{{ profile.twitter }}">
         </div>
         <div class="field">
-            <button type="submit">Update</button>
+            <button class="action" type="submit">Update</button>
         </div>
         </form>
     </div>

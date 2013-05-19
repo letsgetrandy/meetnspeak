@@ -52,7 +52,7 @@ main {
 </header>
 
 <main>
-<div class="split loginform">
+<div class="split">
     <div style="text-align:center">
         <img src="{{ STATIC_URL }}images/spikizi.png">
     </div>
@@ -67,23 +67,23 @@ main {
             <li>Travelers who need a tour guide...</li>
             <li>Anyone who wants to find someone else to speak to!</li>
         </ul>
-        <div class="field" class="install b2g">
-            <button class="install b2g">Install FirefoxOS app!</button>
+        <div class="install b2g">
+            <button class="action install b2g">Install FirefoxOS app!</button>
         </div>
     </div>
 </div>
 <p>&nbsp;</p>
-<div class="split loginform">
+<div class="split">
     <div>
         <div class="field">
             <p>Find foreign language speakers near you. It's free!</p>
-            <p><button onclick="location='{% url signup %}';">Sign up now!</button></p>
+            <p><button class="action" onclick="location='{% url signup %}';">Sign up now!</button></p>
         </div>
     </div>
     <div>
         <div class="field">
             <p>Already a member?</p>
-            <button onclick="location='{% url login %}';">Login</button>
+            <button class="action" onclick="location='{% url login %}';">Login</button>
         </div>
         <p>&nbsp;</p>
     </div>

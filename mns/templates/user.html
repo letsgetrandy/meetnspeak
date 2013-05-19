@@ -41,7 +41,6 @@ ul.languages li {
     width:100%;
 }
 */
-/* TODO: change name. loginform is no longer meaningful */
 .sendmsg {
     border:1px dashed #222;
     margin:1em 0;
@@ -90,9 +89,9 @@ ul.languages li {
         <p>{% if user.hometown %}<strong>Hometown:</strong> {{ user.hometown }}<br>{% endif %}
             {% if user.website %}<strong>Website:</strong> {{ user.website }}<br>{% endif %}
             {% if user.twitter %}<strong>Twitter:</strong> @{{ user.twitter }}<br>{% endif %}</p>
-        <div class="sendmsg loginform">
+        <div class="sendmsg">
             <p>Want to contact {{ user.name }}?</p>
-            <button class="contact">Send a message</button>
+            <button class="action contact">Send a message</button>
         </div>
     </div>
     <div class="mapdiv">
