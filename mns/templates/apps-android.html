@@ -22,6 +22,11 @@
     top:0px;
     width:100%;
 }
+.wrap {
+    max-width:500px;
+    margin:0 auto;
+    text-align:center;
+}
 </style>
 {% endblock %}
 
@@ -33,9 +38,9 @@
 </header>
 
 <main>
-<div style="text-align:center">
+<div class="wrap">
     <h3>Coming soon...</h3>
-    <img src="{{ STATIC_URL }}images/spikizi-android.png">
+    <img src="{{ STATIC_URL }}images/spikizi-android.png" class="resize">
     <br>
     <p>
     <a href="https://twitter.com/share" class="twitter-share-button" data-text="Spikizi for Android - find foreign language speakers near you!" data-via="yearlyglot" data-hashtags="spikizi">Tweet</a>
