@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Not Found - Spikizi!{% endblock %}
+
+{% block styles %}
+{{ block.super }}
+<style>
+.head {
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
+.head .content {
+    color:#999;
+    left:0px;
+    line-height:2em;
+    text-align:center;
+    text-shadow:1px 1px 6px #000;
+    top:0px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<header>
+<div class="head">
+    <div class="content">Not Found</div>
+</div>
+</header>
+
+<main>
+<p>The requested resource was not found.</p>
+<p>Please try something else.</p>
+</main>
+
+<footer>
+</footer>
+{% endblock %}
