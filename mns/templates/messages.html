@@ -5,12 +5,12 @@
 {% block styles %}
 {{ block.super }}
 <style>
-.image {
+.message .image {
     background-color:#fff;
     background-image:url({{ STATIC_URL }}images/users/{{ user.photo }}-100.jpg);
     background-repeat:no-repeat;
 }
-.me .image {
+.message.me .image {
     background-image:url({{ STATIC_URL }}images/users/{{ profile.photo }}-100.jpg);
 }
 .msgform {
