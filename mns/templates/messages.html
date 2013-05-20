@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block body %}
-<a id="profile" class="title_link" href="{% url user 4 %}">Profile</a>
+<a id="profile" class="title_link" href="{% url user user.id %}">Profile</a>
 <header class="min">
 <div class="head">
     <div class="content">Messages</div>
