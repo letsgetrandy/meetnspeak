@@ -61,6 +61,10 @@ class Message:
 
     def __init__(self, *args, **kwargs):
         self.text = kwargs['text']
+        self.read = kwargs['read']
+        self.sent = kwargs['sent']
+        self.sender = kwargs['from']
+        self.recipient = kwargs['to']
 
 
 class Profile:
