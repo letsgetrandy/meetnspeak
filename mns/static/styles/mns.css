@@ -605,6 +605,9 @@ ul.message_list {
     height:100px;
     width:100px;
 }
+.message_form {
+    padding:10px 10px 10px 110px;
+}
 @media screen and (max-width:640px){
     .message_list .message {
         min-height:50px;
@@ -622,5 +625,10 @@ ul.message_list {
     .message_list .message .image img {
         height:50px;
         width:50px;
+    }
+}
+@media screen and (max-width:900px){
+    .message_form {
+        padding:10px;
     }
 }

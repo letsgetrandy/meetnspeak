@@ -13,11 +13,12 @@
 .message.me .image {
     background-image:url({{ STATIC_URL }}images/users/{{ profile.photo }}-100.jpg);
 }
-.msgform {
-    padding-left:110px;
+.wrap {
+    position:relative;
 }
-.msgform textarea {
-    min-width:200px
+.message_form textarea {
+
+    width:100%;
 }
 </style>
 {% endblock %}
@@ -39,14 +40,17 @@
     </li>
     {% endfor %}
 </ul>
-<form method="post" class="msgform">
+<form method="post" class="message_form">
     {% csrf_token %}
-    <div>Message</div>
-    <textarea name="message" rows="10" cols="80"></textarea>
-    <div>
-        <button class="action">Send Message</button>
+    <div class="wrap">
+        <div>Send message:</div>
+        <textarea name="message" rows="10" cols="80"></textarea>
+        <div>
+            <button class="action">Send Message</button>
+        </div>
     </div>
 </form>
+<br><br>
 </main>
 
 <footer>
