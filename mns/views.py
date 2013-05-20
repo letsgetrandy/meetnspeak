@@ -242,6 +242,11 @@ def messages(request, userid):
     context = {}
     token = request.session.get('token')
     backend = api_v1.MNSAPI()
+    if request.method == 'POST':
+        form = {
+                'message': request.POST.get('message')
+            }
+        backend.send_message(token, userid, **form)
     context['user'] = backend.get_user(token, userid)
     context['messages'] = backend.get_messages(token, userid)
     return render(request, 'messages.html', context)

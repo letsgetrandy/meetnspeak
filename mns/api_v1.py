@@ -211,6 +211,11 @@ class MNSAPI(APIBase):
             result.append(Message(**m))
         return result
 
+    def send_message(self, token, userid, **form):
+        data = self.post('/api/1.0/person/%s/messages/' % userid,
+                head={'token': token}, data=form)
+        return data['success']
+
     def get_user(self, token, userid):
         data = self.get('/api/1.0/person/%s/' % userid, head={'token': token})
         return Profile(**data['person'])
