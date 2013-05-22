@@ -120,7 +120,10 @@ class APIBase(object):
             headers.update(head)
         conn = httplib.HTTPConnection(settings.APIHOST)
         if data:
-            encdata = urllib.urlencode(data)
+            utf8_data = {}
+            for k, v in data.iteritems():
+                utf8_data[k] = unicode(v).encode('utf-8')
+            encdata = urllib.urlencode(utf8_data)
             if method == 'GET':
                 endpoint = '%s?%s' % (endpoint, encdata)
                 encdata = None
