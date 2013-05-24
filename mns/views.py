@@ -249,6 +249,10 @@ def messages(request, userid):
         backend.send_message(token, userid, **form)
     context['user'] = backend.get_user(token, userid)
     context['messages'] = backend.get_messages(token, userid)
+    # remove notifications for viewed messages
+    for k, v in enumerate(request.session['notifications']):
+        if str(v.get('message_from')) == str(userid):
+            del request.session['notifications'][k]
     return render(request, 'messages.html', context)
 
 

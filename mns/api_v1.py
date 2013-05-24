@@ -34,22 +34,6 @@ language_level = [
     ]
 
 
-class Notification(object):
-
-    def __init__(self, *args, **kwargs):
-        self.text = kwargs['message']
-        self.target = kwargs['target']
-        self.sender = kwargs['sender']
-        self.readdate = kwargs['readdate']
-
-    @property
-    def target_url(self):
-        if self.target == 1:
-            return reverse("profile")
-        else:
-            return "#"
-
-
 class Contact:
 
     def __init__(self, *args, **kwargs):
@@ -187,10 +171,11 @@ class MNSAPI(APIBase):
     def get_notifications(self, token):
         data = self.get('/api/1.0/notifications/',
                 head={'token': token})
-        result = []
-        for n in data['notifications']:
-            result.append(Notification(**n))
-        return result
+        #result = []
+        #for n in data['notifications']:
+        #    result.append(Notification(**n))
+        #return result
+        return data['notifications']
 
     def get_settings(self, token):
         data = self.get('/api/1.0/settings/', head={'token': token})

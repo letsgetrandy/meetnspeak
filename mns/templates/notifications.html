@@ -16,7 +16,11 @@
 <main>
 <ul class="listing">
     {% for n in notifications %}
-    <li><a href="{{ n.target_url }}">{{ n.text }}</a></li>
+        {% if n.message_from %}
+        <li><a href="/user/{{ n.message_from }}/messages">New message from {{ n.sender_name }}</a></li>
+        {% else %}
+        <li><a href="/user/">{{ n.message }}</a></li>
+        {% endif %}
     {% endfor %}
 </ul>
 </main>
