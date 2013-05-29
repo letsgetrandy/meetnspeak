@@ -45,37 +45,6 @@ button {
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-
-    background: rgba(255,255,255,0.05);
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
-        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
-        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
-        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
-        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
-
-    -o-box-shadow:
-        0 2px 8px rgba(0,0,0,0.5),
-        inset 0 1px rgba(255,255,255,0.3),
-        inset 0 10px rgba(255,255,255,0.2),
-        inset 0 10px 20px rgba(255,255,255,0.25),
-        inset 0 -15px 30px rgba(0,0,0,0.3);
-
-    -webkit-box-shadow:
-        0 2px 8px rgba(0,0,0,0.5),
-        inset 0 1px rgba(255,255,255,0.3),
-        inset 0 10px rgba(255,255,255,0.2),
-        inset 0 10px 20px rgba(255,255,255,0.25),
-        inset 0 -15px 30px rgba(0,0,0,0.3);
-
-    -moz-box-shadow:
-        0 2px 8px rgba(0,0,0,0.5),
-        inset 0 1px rgba(255,255,255,0.3),
-        inset 0 10px rgba(255,255,255,0.2),
-        inset 0 10px 20px rgba(255,255,255,0.25),
-        inset 0 -15px 30px rgba(0,0,0,0.3);
-
 }
 a {
     color:#ccc;
@@ -245,6 +214,44 @@ body > footer {
     text-align:right;
 }
 
+.glass,
+button,
+textarea,
+.title_link,
+.field input[type=tel],
+.field input[type=text],
+.field input[type=email],
+.field input[type=password] {
+    background: rgba(255,255,255,0.05);
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
+
+    -o-box-shadow:
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+
+    -webkit-box-shadow:
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+
+    -moz-box-shadow:
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+}
 
 
 ul.listing {
@@ -295,6 +302,9 @@ ul.listing a:active {
 .field input[type=text],
 .field input[type=email],
 .field input[type=password] {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius:10px;
@@ -302,35 +312,7 @@ ul.listing a:active {
     padding:3px;
     width:100%;
 
-
     background:#eee;
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
-        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
-        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
-        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
-        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
-
-    -o-box-shadow:
-        0 2px 8px rgba(0,0,0,0.5),
-        inset 0 1px rgba(255,255,255,0.3),
-        inset 0 10px rgba(255,255,255,0.2),
-        inset 0 10px 20px rgba(255,255,255,0.25),
-        inset 0 -15px 30px rgba(0,0,0,0.3);
-
-    -webkit-box-shadow:
-        0 2px 8px rgba(0,0,0,0.5),
-        inset 0 1px rgba(255,255,255,0.3),
-        inset 0 10px rgba(255,255,255,0.2),
-        inset 0 10px 20px rgba(255,255,255,0.25),
-        inset 0 -15px 30px rgba(0,0,0,0.3);
-
-    -moz-box-shadow:
-        0 2px 8px rgba(0,0,0,0.5),
-        inset 0 1px rgba(255,255,255,0.3),
-        inset 0 10px rgba(255,255,255,0.2),
-        inset 0 10px 20px rgba(255,255,255,0.25),
-        inset 0 -15px 30px rgba(0,0,0,0.3);
 }
 .loginform input[type=email],
 .loginform input[type=password] {
@@ -348,20 +330,9 @@ ul.listing a:active {
 }
 @media screen and (max-width:640px){
     button.action {
-        /*
-        background: rgb(33,33,33);
-        background: -moz-linear-gradient(top, #333, #212121 50%, #0b0b0b);
-        background: -webkit-linear-gradient(top, #333, #212121 50%, #0b0b0b);
-        background: -ms-linear-gradient(top, #333, #212121 50%, #0b0b0b);
-        background: linear-gradient(to bottom, #333, #212121 50%, #0b0b0b);
-        border:#111;
-        box-shadow:1px 1px 3px #333, inset 1px 0 4px #222;
-        color:#fff;
-        margin-top:.6em;
-        padding:12px;
-
-        */
-
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        box-sizing:border-box;
         font-size:24px;
         width:100%;
     }
@@ -503,6 +474,7 @@ form ~ .field.alternate {
 .title_link {
     color:#ccc;
     font-weight:100;
+    padding:4px 8px;
     position:absolute;
     right:10px;
     text-decoration:none;
