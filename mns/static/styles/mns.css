@@ -42,9 +42,9 @@ button {
     border: 1px solid rgba(0,0,0,0.5);
     border-bottom: 3px solid rgba(0,0,0,0.5);
 
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 a {
     color:#ccc;
@@ -217,19 +217,13 @@ body > footer {
 .glass,
 button,
 textarea,
+.switch,
 .title_link,
 .field input[type=tel],
 .field input[type=text],
 .field input[type=email],
 .field input[type=password] {
     background: rgba(255,255,255,0.05);
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
-        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
-        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
-        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
-        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
 
     -o-box-shadow:
         0 2px 8px rgba(0,0,0,0.5),
@@ -251,6 +245,13 @@ textarea,
         inset 0 10px rgba(255,255,255,0.2),
         inset 0 10px 20px rgba(255,255,255,0.25),
         inset 0 -15px 30px rgba(0,0,0,0.3);
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
 }
 
 
@@ -366,25 +367,25 @@ ul.listing a:active {
     color:#333;
     cursor:pointer;
     display:inline-block;
-    font-size:12px;
+    font-size:14px;
     height:30px;
     left:0;
     line-height:24px;
     padding-right:15px;
     position:absolute;
     text-align:center;
-    text-shadow:0 1px 0 #fff;
+    /*text-shadow:0 1px 0 #fff;*/
     text-transform:uppercase;
     top:0;
     width:36px;
 }
 .switch .slide .indicator + label {
-    background:#fdd;
+    color:#fdd;
     left:50px;
     padding-left:10px;
 }
 .switch label:first-child {
-    background:#ddf;
+    color:#ddf;
 }
 .switch .indicator {
     background:#ccc;
