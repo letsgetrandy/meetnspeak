@@ -11,7 +11,7 @@
 <!--[if lte IE 9]>{% compressed_css 'ie' %}<![endif]-->
 {% endblock %}
 <!--[if lte IE 8]><script>
-(function () { for (e in 'article aside figcaption figure footer header hgroup mark main nav section'.split()) {document.createElement(e)} })();
+(function () { var a = 'article aside figcaption figure footer header hgroup mark main nav section'.split(' '); for (e in a) {document.createElement(a[e])} })();
 </script><![endif]-->
 <script type="text/javascript" src="{{ STATIC_URL }}scripts/lib/jquery-1.9.1.min.js"></script>
 </head>
