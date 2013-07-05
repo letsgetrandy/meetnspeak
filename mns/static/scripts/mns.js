@@ -1,10 +1,10 @@
-/* global google:false, mns:true */
+/*global google:false, mns:true */
 
 window.mns = {
 
     render: function(obj, template)
     {
-        var re, v;
+        var re, v, match;
         re = new RegExp("\\[\\[([^\\]]+)\\]\\]");
         while (match = re.exec(template)) {
             val = obj[match[1]] || '';
@@ -55,37 +55,91 @@ window.mns = {
     {
         "use strict";
         var c, n;
-        //if (mns[name]) {
-        //    throw new Error("[object " + name + "] already exists.");
-        //}
-        // constructor
+
+        //constructor
         c = mns[name] = function() {
-            this.constructor.count += 1;
-            var fn = this.__init__;
+            var count,
+                fn;
+
+            count = this.constructor.__count__ += 1;
+            this.constructor.prototype.__count__ = count;
+
+            fn = this.__init__;
             if (fn) {
                 fn.apply(this, [].slice.call(arguments));
             }
         };
-        // prototype
+
+        //class attributes
+        c.__alias__ = name;
+        c.__count__ = 0;
+        c.__class__ = {};
+
+        //prototype attributes
         c.prototype = proto || {};
         c.prototype.constructor = c;
-        c.prototype.raise = function(message) {
-            throw new mns[this.constructor.alias + "Exception"](message);
-        };
+        c.prototype.__alias__ = c.__alias__;
+        c.prototype.__count__ = c.__count__;
+        c.prototype.__class__ = c.__class__;
         c.prototype.toString = function() {
-            return "[object " + this.constructor.alias + "]";
+            return "[object " + this.__alias__ + "]";
         };
-        c.alias = name;
-        c.count = 0;
+        c.prototype.raise = function(message) {
+            throw new mns[this.__alias__ + "Exception"](message);
+        };
+        // poor man's multiple inheritance
+        c.prototype.mixin = function(mixins) {
+            if (typeof mixins == "string") {
+                mixins = [mixins];
+            }
+            for (var i in mixins) {
+                var mxn = mns.mixins[mixins[i]];
+                if (mxn) {
+                    for (var fn in mxn) {
+                        mns[name].prototype[fn] = mxn[fn];
+                    }
+                }
+            }
+        };
 
-        // exception class
+        //exception class
         n = name + "Exception";
         c = mns[n] = function(message) {
             mns.Exception.call(this, message);
         };
         c.prototype.name = n;
+    },
+
+    mixins: {
+        // common prototype for event handling
+        "events": {
+            // object events
+            "listeners": {},
+            // cache a handle to an event wrapper
+            "attachEvent": function(evt, target) {
+                var self = this;
+                self.removeEvent(evt);
+                self.listeners[evt] = function(event) {
+                    self[evt](event);
+                };
+                $("body").on(evt, target || null, this.listeners[evt]);
+            },
+            // remove listener for the given event
+            "removeEvent": function(events) {
+                if (typeof events == 'string') {
+                    events = [events];
+                }
+                while (events.length) {
+                    var evt = events.shift();
+                    if (this.listeners[evt]) {
+                        $("body").off(evt, this.listeners[evt]);
+                        delete this.listeners[evt];
+                    }
+                }
+            }
+        }
     }
-}
+};
 
 $(document).on("touchstart", ".switch", function(event) {
     var self = $(this),

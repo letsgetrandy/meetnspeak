@@ -4,23 +4,28 @@
 <head>
   <title>Jasmine Test Runner</title>
 
-  <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.3.1/jasmine_favicon.png">
-  <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
-  <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
-  <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
-  <script type="text/javascript" src="lib/jasmine.terminal_reporter.js"></script>
-  <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
+    <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.3.1/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
+    <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
+    <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
+    <script type="text/javascript" src="lib/jasmine.terminal_reporter.js"></script>
+    <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
+    <script type="text/javascript" src="lib/blanket.min.js"></script>
+    <script type="text/javascript" src="lib/jasmine-blanket.js" data-cover-adapter></script>
 
-  <!-- core libraries -->
-  <script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" src="lib/json2.js"></script>
-  <script type="text/javascript" src="lib/jquery.mockjax.js"></script>
+    <!-- core libraries -->
+    <script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="lib/json2.js"></script>
+    <script type="text/javascript" src="lib/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="lib/jasmine-fixture.js"></script>
 
-  <!-- source files -->
-  <script type="text/javascript" src="mns.js"></script>
+    <!-- source files -->
+    <script type="text/javascript" src="mns.js" data-cover></script>
+    <script type="text/javascript" src="touchmenu.js" data-cover></script>
 
-  <!-- test files -->
-  <script type="text/javascript" src="spec/mns_spec.js"></script>
+    <!-- test files -->
+    <script type="text/javascript" src="spec/mns_spec.js"></script>
+    <script type="text/javascript" src="spec/touchmenu_spec.js"></script>
 
 </head>
 <body>
@@ -29,9 +34,9 @@
 <!-- console runner code -->
 <script type="text/javascript">
 if (/PhantomJS/.test(navigator.userAgent)) {
+    jasmine.getEnv().addReporter(new jasmine.TerminalReporter());
     jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
     //jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter('reports/'));
-    jasmine.getEnv().addReporter(new jasmine.TerminalReporter());
 } else {
     jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
 }

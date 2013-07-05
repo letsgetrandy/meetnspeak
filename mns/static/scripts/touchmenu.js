@@ -51,7 +51,7 @@ mns.define("TouchMenu", {
         }
     },
 
-    // cash a handle to an event wrapper
+    // cache a handle to an event wrapper
     attachEvent: function(evt, target) {
         var self = this;
         self.removeEvent(evt);
