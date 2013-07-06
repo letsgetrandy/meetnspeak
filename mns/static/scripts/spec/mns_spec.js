@@ -91,7 +91,13 @@ describe("mns.mixins", function() {
     });
 
     it("should support 'events' mixin", function(){
-        mns.define("MixinTest", {});
+        affix(".clickdiv");
+        var clicked = false;
+        mns.define("MixinTest", {
+                "click": function() {
+                    clicked = true;
+                }
+            });
         var obj = new mns.MixinTest();
         // ensure mixin methods are not applied
         expect(obj.attachEvent).not.toBeDefined();
@@ -103,5 +109,15 @@ describe("mns.mixins", function() {
         // check that mixin methods are applied
         expect(obj.attachEvent).toBeDefined();
         expect(obj.removeEvent).toBeDefined();
+        // attach click listener
+        expect(clicked).toBe(false);
+        obj.attachEvent("click", ".clickdiv");
+        expect(obj.listeners.click).toBeDefined();
+        // expect click listener to fire
+        $(".clickdiv").click();
+        expect(clicked).toBe(true);
+        // remove click listener
+        obj.removeEvent("click");
+        expect(obj.listeners.click).not.toBeDefined();
     });
 });
