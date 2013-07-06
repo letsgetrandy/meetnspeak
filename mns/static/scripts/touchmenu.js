@@ -9,34 +9,21 @@ mns.define("TouchMenu", {
 
     __init__: function(conf) {
         var defaults = {
-            handle: "#draghandle",
+            handle : "#draghandle",
             wrapper: ".body_wrapper",
-            openClass: "navopen",
-            menu: ".sidenav",
-            ua: navigator.userAgent
+            menu   : ".sidenav",
+            openClass: "navopen"
         };
         this.conf = $.extend(defaults, conf);
-        //if (this.checkUserAgent()) {
-            this.init();
-        //} else {
-        //    $(this.conf.handle).hide();
-        //}
-    },
-
-    checkUserAgent: function() {
-        var rx = /android|iphone|ipod|ipad|blackberry|touch|tablet|mobile safari|iemobile|windows phone/i;
-        return !!rx.test(this.conf.ua);
-    },
-
-    init: function() {
         var self = this;
 
         // enable the touchnav handle
-        $(this.conf.handle).css("display", "");  // show();
+        $(this.conf.handle).css("display", "");
 
         // animate closed when a nav link is tapped
-        $(self.conf.menu + " a").click(function() {
+        $(self.conf.menu).find("a").click(function() {
             $("body").removeClass(self.conf.openClass);
+            $(self.conf.wrapper).css("margin-left", "0px");
         });
         // add listeners
         this.attachEvent("touchstart", self.conf.wrapper);
@@ -71,17 +58,18 @@ mns.define("TouchMenu", {
 
     touchstart: function(event) {
         var self = this,
+            conf = this.conf,
             touches = event.originalEvent.touches;
         if (touches.length == 1) {
-            if ($(event.target).attr("id") != self.conf.handle.substring(1) &&
-                    !$("body").hasClass(self.conf.openClass))
+            if (!$(event.target).is(conf.handle) &&
+                    !$("body").hasClass(conf.openClass))
             {
                 return;
             }
-            self.openX = parseInt($(self.conf.wrapper).css("margin-left"), 10);
+            self.openX = parseInt($(conf.wrapper).css("margin-left"), 10);
             self.startX = touches[0].pageX;
-            $(self.conf.wrapper).css("margin-left", self.openX + "px");
-            $("body").addClass(self.conf.openClass);
+            $(conf.wrapper).css("margin-left", self.openX + "px");
+            $("body").addClass(conf.openClass);
 
             event.preventDefault();
             self.attachEvent("touchmove");
@@ -94,8 +82,8 @@ mns.define("TouchMenu", {
         var self = this,
             touches = event.originalEvent.touches;
         var offset = self.openX - (self.startX - touches[0].pageX);
-        if (offset > 240) {
-            offset = 240;
+        if (offset > self.conf.openWidth) {
+            offset = self.conf.openWidth;
         }
         if (offset < 0) {
             offset = 0;

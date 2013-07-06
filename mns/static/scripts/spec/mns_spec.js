@@ -19,6 +19,13 @@ describe("mns namespace", function() {
         expect(s.find("option").length).toBe(5);
         expect(s.val()).toBe("3");
     });
+    it ("should extend one object with another", function() {
+        var a = { cat: "garfield" },
+            b = { dog: "odie" };
+        expect(a.dog).not.toBeDefined();
+        mns.extend(a, b);
+        expect(a.dog).toBe("odie");
+    });
 });
 
 
