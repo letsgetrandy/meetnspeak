@@ -33,3 +33,14 @@ to [use the app](http://www.spikizi.com/) and provide feedback: bug reports,
 feature requests, etc.
 
 Again, *any* help is appreciated!
+
+
+Roadmap
+-------
+
+Django proves to be far too heavy of a framework for this lightweight app. I'm
+currently working to move all the logic away to either Node.js or Flask.
+
+Javascript has grown to a point where it needs MVC. I'm currently moving all
+JS code toward a simple MVC based on Riot.js, though I'm willing to consider
+Backbone.
